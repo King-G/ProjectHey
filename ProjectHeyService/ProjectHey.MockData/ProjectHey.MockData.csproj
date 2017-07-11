@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NBuilder" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectHey.BLL\ProjectHey.BLL.csproj" />
+    <ProjectReference Include="..\ProjectHey.DOMAIN\ProjectHey.DOMAIN.csproj" />
+  </ItemGroup>
+
+</Project>

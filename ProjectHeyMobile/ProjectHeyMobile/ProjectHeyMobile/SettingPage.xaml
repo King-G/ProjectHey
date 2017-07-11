@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectHeyMobile.SettingPage">
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout 
+                Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" 
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Button 
+                    Text="&#xf2bd;" 
+                    FontSize="75"
+                    FontFamily="FontAwesome"
+                    TextColor="Brown" 
+                    BackgroundColor="White"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+                <Label 
+                    Text="Picture"      
+                    TextColor="Brown"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout 
+                Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" 
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Button 
+                    Text="&#xf085;" 
+                    FontSize="75"
+                    FontFamily="FontAwesome"
+                    TextColor="Brown" 
+                    BackgroundColor="White"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+                <Label 
+                    Text="Settings"      
+                    TextColor="Brown"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout 
+                Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" 
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Button 
+                    Text="&#xf007;" 
+                    FontSize="75"
+                    FontFamily="FontAwesome"
+                    TextColor="Brown" 
+                    BackgroundColor="White"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+                <Label 
+                    Text="Edit Profile"      
+                    TextColor="Brown"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout 
+                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Button 
+                    Text="&#xf05a;" 
+                    FontSize="75"
+                    FontFamily="FontAwesome"
+                    TextColor="Brown" 
+                    BackgroundColor="White"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+                <Label 
+                    Text="About Hey."      
+                    TextColor="Brown"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout 
+                Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" 
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Button 
+                    Text="&#xf005;" 
+                    FontSize="75"
+                    FontFamily="FontAwesome"
+                    TextColor="Brown" 
+                    BackgroundColor="White"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+                <Label 
+                    Text="Rate us"      
+                    TextColor="Brown"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout 
+                Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" 
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Button 
+                    Text="&#xf1e0;" 
+                    FontSize="75"
+                    FontFamily="FontAwesome"
+                    TextColor="Brown" 
+                    BackgroundColor="White"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+                <Label 
+                    Text="Share"      
+                    TextColor="Brown"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>
