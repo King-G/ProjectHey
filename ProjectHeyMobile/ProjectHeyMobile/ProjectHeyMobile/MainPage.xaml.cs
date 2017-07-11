@@ -15,6 +15,11 @@ namespace ProjectHeyMobile
         public MainPage()
         {
             InitializeComponent();
+            var pages = Children.GetEnumerator();
+            pages.MoveNext(); // First page
+            pages.MoveNext(); // Second page
+            //pages.MoveNext(); // Third page
+            CurrentPage = pages.Current;
         }
     }
 }

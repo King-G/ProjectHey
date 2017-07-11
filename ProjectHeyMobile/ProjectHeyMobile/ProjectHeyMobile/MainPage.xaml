@@ -3,7 +3,7 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:ProjectHeyMobile"
             x:Class="ProjectHeyMobile.MainPage"
-            BarBackgroundColor="Brown">
+            Style="{StaticResource tabbedPageStyle}">
 
     <local:ConnectionPage Title="Connections" />
     <local:HeyPage Title="Hey." />

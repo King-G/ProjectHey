@@ -65,7 +65,7 @@ namespace ProjectHeyMobile.ViewModels
         public ICollection<Blocked> BlockedUsers { get; set; }
 
         //User can have multiple connections
-        public ICollection<ConnectionViewModel> Connections { get; set; }
+        public ICollection<Connection> Connections { get; set; }
 
         //User can have multiple categories
         public ICollection<UserCategory> UserCategory { get; set; }

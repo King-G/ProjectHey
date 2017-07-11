@@ -44,6 +44,7 @@
     <Compile Include="HeyPage.xaml.cs">
       <DependentUpon>HeyPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IProjectHeyAPI.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -56,7 +57,7 @@
     <Compile Include="ViewModels\AppSetting.cs" />
     <Compile Include="ViewModels\Blocked.cs" />
     <Compile Include="ViewModels\Category.cs" />
-    <Compile Include="ViewModels\ConnectionViewModel.cs" />
+    <Compile Include="ViewModels\Connection.cs" />
     <Compile Include="ViewModels\Enums\AdvertisementType.cs" />
     <Compile Include="ViewModels\Enums\FeedbackType.cs" />
     <Compile Include="ViewModels\Enums\Gender.cs" />

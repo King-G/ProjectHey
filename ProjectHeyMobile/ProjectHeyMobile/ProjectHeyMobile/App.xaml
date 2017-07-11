@@ -3,8 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProjectHeyMobile.App">
 	<Application.Resources>
-
-		<!-- Application resource dictionary -->
-
-	</Application.Resources>
+        <ResourceDictionary>
+            <!-- Application resource dictionary -->
+            <Style x:Key="tabbedPageStyle"  TargetType="TabbedPage">
+                <Setter Property="BarBackgroundColor" Value="#A0522D" />
+                <Setter Property="BackgroundColor" Value="#ffffff" /> 
+            </Style>
+            <Style x:Key="iconStyle"  TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#ffffff" />
+                <Setter Property="TextColor" Value="#A0522D"/>
+                <Setter Property="FontSize" Value="75" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="iconTextStyle"  TargetType="Label">
+                <Setter Property="TextColor" Value="#A0522D"/>
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

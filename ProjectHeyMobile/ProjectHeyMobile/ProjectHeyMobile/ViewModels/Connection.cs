@@ -1,6 +1,6 @@
 ﻿namespace ProjectHeyMobile.ViewModels
 {
-    public class ConnectionViewModel
+    public class Connection
     {
         public int UserOneId { get; set; }
         public User UserOne { get; set; }

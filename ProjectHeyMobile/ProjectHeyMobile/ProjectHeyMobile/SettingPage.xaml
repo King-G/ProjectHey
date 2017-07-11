@@ -10,17 +10,10 @@
                 VerticalOptions="Center">
                 <Button 
                     Text="&#xf2bd;" 
-                    FontSize="75"
-                    FontFamily="FontAwesome"
-                    TextColor="Brown" 
-                    BackgroundColor="White"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+                     Style="{StaticResource iconStyle}" />
                 <Label 
                     Text="Picture"      
-                    TextColor="Brown"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+                    Style="{StaticResource iconTextStyle}"/>
             </StackLayout>
             <StackLayout 
                 Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" 
@@ -28,17 +21,10 @@
                 VerticalOptions="Center">
                 <Button 
                     Text="&#xf085;" 
-                    FontSize="75"
-                    FontFamily="FontAwesome"
-                    TextColor="Brown" 
-                    BackgroundColor="White"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+                     Style="{StaticResource iconStyle}"/>
                 <Label 
                     Text="Settings"      
-                    TextColor="Brown"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+                    Style="{StaticResource iconTextStyle}"/>
             </StackLayout>
             <StackLayout 
                 Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" 
@@ -46,17 +32,10 @@
                 VerticalOptions="Center">
                 <Button 
                     Text="&#xf007;" 
-                    FontSize="75"
-                    FontFamily="FontAwesome"
-                    TextColor="Brown" 
-                    BackgroundColor="White"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+                     Style="{StaticResource iconStyle}"/>
                 <Label 
                     Text="Edit Profile"      
-                    TextColor="Brown"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+                    Style="{StaticResource iconTextStyle}"/>
             </StackLayout>
             <StackLayout 
                 Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
@@ -64,17 +43,10 @@
                 VerticalOptions="Center">
                 <Button 
                     Text="&#xf05a;" 
-                    FontSize="75"
-                    FontFamily="FontAwesome"
-                    TextColor="Brown" 
-                    BackgroundColor="White"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+                    Style="{StaticResource iconStyle}"/>
                 <Label 
                     Text="About Hey."      
-                    TextColor="Brown"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+                    Style="{StaticResource iconTextStyle}"/>
             </StackLayout>
             <StackLayout 
                 Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" 
@@ -82,17 +54,10 @@
                 VerticalOptions="Center">
                 <Button 
                     Text="&#xf005;" 
-                    FontSize="75"
-                    FontFamily="FontAwesome"
-                    TextColor="Brown" 
-                    BackgroundColor="White"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+                    Style="{StaticResource iconStyle}"/>
                 <Label 
                     Text="Rate us"      
-                    TextColor="Brown"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+                    Style="{StaticResource iconTextStyle}"/>
             </StackLayout>
             <StackLayout 
                 Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" 
@@ -100,17 +65,10 @@
                 VerticalOptions="Center">
                 <Button 
                     Text="&#xf1e0;" 
-                    FontSize="75"
-                    FontFamily="FontAwesome"
-                    TextColor="Brown" 
-                    BackgroundColor="White"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+                    Style="{StaticResource iconStyle}"/>
                 <Label 
                     Text="Share"      
-                    TextColor="Brown"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+                    Style="{StaticResource iconTextStyle}"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

@@ -3,19 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProjectHeyMobile.ConnectionPage">
     <ContentPage.Content>
-        <StackLayout>
-            <!--<StackLayout Orientation="Horizontal">
+        <!--<StackLayout>
+            <StackLayout Orientation="Horizontal">
             <Button Text="Add" Clicked="OnAdd" />
             <Button Text="Update" Clicked="OnUpdate" HorizontalOptions="CenterAndExpand" />
             <Button Text="Delete" Clicked="OnDelete" />
         </StackLayout>-->
-            <!--<ListView x:Name="lvMessages">
+        <ListView x:Name="lvConnections">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Body}" />
+                    <TextCell Text="{Binding Progress}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>-->
-        </StackLayout>
+        </ListView>
     </ContentPage.Content>
 </ContentPage>

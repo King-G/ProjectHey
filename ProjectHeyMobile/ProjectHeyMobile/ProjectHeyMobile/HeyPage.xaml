@@ -3,11 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProjectHeyMobile.HeyPage">
     <ContentPage.Content>
-        <Button Text="&#xf0c0;"
-                TextColor="Brown"
-                BackgroundColor="White"
-                FontSize="75" 
-                VerticalOptions="Center"
-                HorizontalOptions="Center"/>
+        <Button Text="&#xf0c0;" Style="{StaticResource iconStyle}"/>
     </ContentPage.Content>
 </ContentPage>

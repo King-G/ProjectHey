@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using ProjectHeyMobile.Interfaces;
+using ProjectHeyMobile.ViewModels;
+using Refit;
 
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,23 +13,27 @@ namespace ProjectHeyMobile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ConnectionPage : ContentPage
     {
-        //private HttpClient client = new HttpClient();
-        //private ObservableCollection<MessageViewModel> messages;
+        private ObservableCollection<Connection> connections;
         public ConnectionPage()
         {
             InitializeComponent();
-            //var messages = new List<Message>();
-
         }
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
-            //var jsonmessages = await client.GetStringAsync(messageapi);
-            //var objectmessages = JsonConvert.DeserializeObject<List<MessageViewModel>>(jsonmessages);
+            try
+            {
+                var projectHeyAPI = RestService.For<IProjectHeyAPI>("http://localhost:5000/api");
+                var apiresponse = await projectHeyAPI.GetConnectionsByUserId(2);
 
-            //var objectmessages = new List<MessageViewModel>() { new MessageViewModel() { Id= 1,  Body = "Test" }, new MessageViewModel() { Id = 2, Body = "Test" } };
-            //messages = new ObservableCollection<MessageViewModel>(objectmessages);
+                connections = new ObservableCollection<Connection>(apiresponse);
 
-            //lvMessages.ItemsSource = messages;
+                lvConnections.ItemsSource = connections;
+            }
+            catch (System.Exception exception)
+            {
+                Debug.WriteLine(exception);
+            }
+
             base.OnAppearing();
         }
 
