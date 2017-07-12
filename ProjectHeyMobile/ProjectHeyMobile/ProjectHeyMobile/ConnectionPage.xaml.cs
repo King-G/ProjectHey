@@ -16,41 +16,60 @@ namespace ProjectHeyMobile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ConnectionPage : ContentPage
     {
-        private ObservableCollection<ConnectionViewModel> connections;
+        private ObservableCollection<ConnectionViewModel> connections = new ObservableCollection<ConnectionViewModel>();
         public ConnectionPage()
         {
             InitializeComponent();
         }
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
+            if(connections.Count == 0)
+                listviewConnections_Refreshing(this, new System.EventArgs());
+
+            base.OnAppearing();
+        }
+
+        private async void listviewConnections_Refreshing(object sender, System.EventArgs e)
+        {
+            listviewConnections.IsRefreshing = true;
             try
             {
                 var projectHeyAPI = RestService.For<IProjectHeyAPI>("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api");
                 var response = await projectHeyAPI.GetConnectionsViewModelsByUserId(2);
 
-                IEnumerable<ConnectionViewModel> connections = JsonConvert.DeserializeObject<ProjectHeyAPIResponse<ConnectionViewModel>>(response).Value;
-                
-                lvConnections.ItemsSource = connections;
+                IEnumerable<ConnectionViewModel> connectionresponse = JsonConvert.DeserializeObject<ProjectHeyAPIResponse<ConnectionViewModel>>(response).Value;
+
+                connections = new ObservableCollection<ConnectionViewModel>(connectionresponse);
+
+                listviewConnections.ItemsSource = connections;
+                listviewConnections.IsRefreshing = false;
             }
             catch (System.Exception exception)
             {
-                Debug.WriteLine(exception);
-                throw exception;
+                await DisplayAlert("Oops", exception.Message, "OK");
+            }
+            finally
+            {
+                listviewConnections.EndRefresh();
             }
 
-            base.OnAppearing();
         }
 
-        void OnAdd(object sender, System.EventArgs e)
+        private async void listviewConnections_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-        }
+            try
+            {
+                ConnectionViewModel connectionVM = e.SelectedItem as ConnectionViewModel;
+                ChatPage chatPage = new ChatPage(connectionVM);
+                await Navigation.PushAsync(chatPage);
+                await chatPage.ScrollToBottom();
+            }
+            catch (System.Exception exception)
+            {
+                await DisplayAlert("Oops", exception.Message, "OK");
 
-        void OnUpdate(object sender, System.EventArgs e)
-        {
-        }
+            }
 
-        void OnDelete(object sender, System.EventArgs e)
-        {
         }
     }
 }

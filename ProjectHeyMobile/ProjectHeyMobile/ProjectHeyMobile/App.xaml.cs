@@ -8,7 +8,11 @@ namespace ProjectHeyMobile
         {
             InitializeComponent();
 
-            MainPage = new ProjectHeyMobile.MainPage();
+            MainPage = new NavigationPage(new MainPage())
+            {
+                Style = (Style)Current.Resources["navigationpageStyle"]
+            };
+            
         }
 
         protected override void OnStart()

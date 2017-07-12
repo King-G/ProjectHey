@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectHeyMobile.ChatPage">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" VerticalOptions="End">
+            <ScrollView x:Name="messageScrollView" VerticalOptions="End">
+                <StackLayout x:Name="stackMessages" Padding="10" Orientation="Vertical">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Frame BackgroundColor="SandyBrown" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" CornerRadius="10">
+                            <Label Text="Do you think this will work?" FontSize="Medium"  />
+                        </Frame>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Frame BackgroundColor="SaddleBrown" Grid.Row="0" Grid.Column="0" CornerRadius="10" HorizontalOptions="Center">
+                            <Label Text="If you only do what you can do, you will never be more than what you are now" 
+                                FontSize="Medium" />
+                        </Frame>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Frame BackgroundColor="SandyBrown" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" CornerRadius="10">
+                            <Label Text="Do you think this will work?" FontSize="Medium"  />
+                        </Frame>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Frame BackgroundColor="SaddleBrown" Grid.Row="0" Grid.Column="0" CornerRadius="10" HorizontalOptions="Center">
+                            <Label Text="If you only do what you can do, you will never be more than what you are now" 
+                                FontSize="Medium" />
+                        </Frame>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Frame BackgroundColor="SandyBrown" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" CornerRadius="10">
+                            <Label Text="Do you think this will work?" FontSize="Medium"  />
+                        </Frame>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Frame BackgroundColor="SaddleBrown" Grid.Row="0" Grid.Column="0" CornerRadius="10" HorizontalOptions="Center">
+                            <Label Text="If you only do what you can do, you will never be more than what you are now" 
+                                FontSize="Medium" />
+                        </Frame>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+            <Entry Keyboard="Chat" VerticalOptions="End" PlaceholderColor="Red" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

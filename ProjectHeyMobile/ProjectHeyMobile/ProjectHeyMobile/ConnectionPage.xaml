@@ -3,13 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProjectHeyMobile.ConnectionPage">
     <ContentPage.Content>
-        <!--<StackLayout>
-            <StackLayout Orientation="Horizontal">
-            <Button Text="Add" Clicked="OnAdd" />
-            <Button Text="Update" Clicked="OnUpdate" HorizontalOptions="CenterAndExpand" />
-            <Button Text="Delete" Clicked="OnDelete" />
-        </StackLayout>-->
-        <ListView x:Name="lvConnections" HasUnevenRows="True" Style="{StaticResource listviewStyle}">
+        <ListView x:Name="listviewConnections" 
+                  HasUnevenRows="True" 
+                  IsPullToRefreshEnabled="True" Refreshing="listviewConnections_Refreshing"
+                  ItemSelected="listviewConnections_ItemSelected"
+                  Style="{StaticResource listviewStyle}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
