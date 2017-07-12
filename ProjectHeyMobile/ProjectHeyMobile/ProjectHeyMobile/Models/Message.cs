@@ -1,17 +1,12 @@
-﻿using ProjectHeyMobile.ViewModels.Enums;
-using System;
+﻿using System;
 
-namespace ProjectHeyMobile.ViewModels
+namespace ProjectHeyMobile.Models
 {
-    public class Feedback
+    public class Message
     {
         public int Id { get; set; }
 
-        public int Rating { get; set; }
-
-        public FeedbackType FeedbackType { get; set; }
-
-        public string Message { get; set; }
+        public string Body { get; set; }
 
         //[Required(ErrorMessage = "Creation date is required")]
         ////[DisplayName("Creation Date")]
@@ -20,7 +15,11 @@ namespace ProjectHeyMobile.ViewModels
         //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime CreationDate { get; set; } = DateTime.Now;
 
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public int UserSenderId { get; set; }
+        public User UserSender { get; set; }
+
+        public int UserReceiverId { get; set; }
+        public User UserReceiver { get; set; }
+
     }
 }

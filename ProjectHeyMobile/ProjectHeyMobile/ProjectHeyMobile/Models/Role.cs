@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ProjectHeyMobile.ViewModels
+namespace ProjectHeyMobile.Models
 {
     public class Role
     {

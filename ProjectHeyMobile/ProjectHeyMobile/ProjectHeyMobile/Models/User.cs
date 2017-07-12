@@ -1,9 +1,9 @@
-﻿using ProjectHeyMobile.ViewModels.Enums;
-using ProjectHeyMobile.ViewModels.Structs;
+﻿using ProjectHeyMobile.Models.Enums;
+using ProjectHeyMobile.Models.Structs;
 using System;
 using System.Collections.Generic;
 
-namespace ProjectHeyMobile.ViewModels
+namespace ProjectHeyMobile.Models
 {
     public class User
     {

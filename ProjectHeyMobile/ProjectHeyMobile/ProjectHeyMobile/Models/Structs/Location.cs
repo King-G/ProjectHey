@@ -1,5 +1,5 @@
 ﻿
-namespace ProjectHeyMobile.ViewModels.Structs
+namespace ProjectHeyMobile.Models.Structs
 {
     public struct Location
     {

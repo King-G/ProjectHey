@@ -5,7 +5,7 @@
 	<Application.Resources>
         <ResourceDictionary>
             <!-- Application resource dictionary -->
-            <Style x:Key="tabbedPageStyle"  TargetType="TabbedPage">
+            <Style x:Key="tabbedpageStyle"  TargetType="TabbedPage">
                 <Setter Property="BarBackgroundColor" Value="#A0522D" />
                 <Setter Property="BackgroundColor" Value="#ffffff" /> 
             </Style>
@@ -16,10 +16,13 @@
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
-            <Style x:Key="iconTextStyle"  TargetType="Label">
+            <Style x:Key="icontextStyle"  TargetType="Label">
                 <Setter Property="TextColor" Value="#A0522D"/>
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="listviewStyle"  TargetType="ListView">
+                <Setter Property="SeparatorColor" Value="#A0522D"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

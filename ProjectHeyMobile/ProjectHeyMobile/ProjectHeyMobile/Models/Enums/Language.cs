@@ -1,5 +1,5 @@
 ﻿
-namespace ProjectHeyMobile.ViewModels.Enums
+namespace ProjectHeyMobile.Models.Enums
 {
     public enum Language
     {

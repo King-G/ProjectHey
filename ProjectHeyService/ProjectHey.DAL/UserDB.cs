@@ -50,6 +50,12 @@ namespace ProjectHey.DAL
             return await projectHeyContext.User.AsNoTracking().OrderBy(x => x.Id).Skip(skip).Take(take).ToListAsync();
         }
 
+        public async Task<User> GetSimplifiedByIdAsync(int id)
+        {
+            return await projectHeyContext.User.AsNoTracking()
+                 .SingleOrDefaultAsync(x => x.Id == id);
+            
+        }
         public async Task<User> GetByIdAsync(int id)
         {
             User user =  await projectHeyContext.User.AsNoTracking()
@@ -114,5 +120,7 @@ namespace ProjectHey.DAL
 
             return entity;
         }
+
+
     }
 }

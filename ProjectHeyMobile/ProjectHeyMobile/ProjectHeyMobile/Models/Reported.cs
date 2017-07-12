@@ -1,5 +1,5 @@
 ﻿
-namespace ProjectHeyMobile.ViewModels
+namespace ProjectHeyMobile.Models
 {
     public class Reported
     {

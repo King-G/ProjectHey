@@ -1,6 +1,7 @@
-﻿using ProjectHeyMobile.ViewModels;
+﻿using ProjectHeyMobile.Models;
 using Refit;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace ProjectHeyMobile.Interfaces
@@ -8,6 +9,9 @@ namespace ProjectHeyMobile.Interfaces
     public interface IProjectHeyAPI
     {
         [Get("/connections/getbyuserid/{id}")]
-        Task<ICollection<Connection>> GetConnectionsByUserId(int id);
+        Task<string> GetConnectionsByUserId(int id);
+
+        [Get("/connections/getconnectionsviewmodelsbyuserid/{id}")]
+        Task<string> GetConnectionsViewModelsByUserId(int id);
     }
 }

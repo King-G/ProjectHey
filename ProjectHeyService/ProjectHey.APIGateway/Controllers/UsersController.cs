@@ -31,6 +31,19 @@ namespace ProjectHey.APIGateway.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> GetUserNameById(int id)
+        {
+            try
+            {
+                User user = await userManager.GetByIdAsync(id);
+                return Ok(Json(user.Username));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet]
         public async Task<IEnumerable<User>> GetByLocation(User requestor, int skip, int take)
         {
             return await userManager.GetByLocationAsync(requestor, skip, take);

@@ -1,8 +1,11 @@
 ﻿
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ProjectHeyMobile.Interfaces;
+using ProjectHeyMobile.Models;
 using ProjectHeyMobile.ViewModels;
 using Refit;
-
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Xamarin.Forms;
@@ -13,7 +16,7 @@ namespace ProjectHeyMobile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ConnectionPage : ContentPage
     {
-        private ObservableCollection<Connection> connections;
+        private ObservableCollection<ConnectionViewModel> connections;
         public ConnectionPage()
         {
             InitializeComponent();
@@ -22,16 +25,17 @@ namespace ProjectHeyMobile
         {
             try
             {
-                var projectHeyAPI = RestService.For<IProjectHeyAPI>("http://localhost:5000/api");
-                var apiresponse = await projectHeyAPI.GetConnectionsByUserId(2);
+                var projectHeyAPI = RestService.For<IProjectHeyAPI>("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api");
+                var response = await projectHeyAPI.GetConnectionsViewModelsByUserId(2);
 
-                connections = new ObservableCollection<Connection>(apiresponse);
-
+                IEnumerable<ConnectionViewModel> connections = JsonConvert.DeserializeObject<ProjectHeyAPIResponse<ConnectionViewModel>>(response).Value;
+                
                 lvConnections.ItemsSource = connections;
             }
             catch (System.Exception exception)
             {
                 Debug.WriteLine(exception);
+                throw exception;
             }
 
             base.OnAppearing();

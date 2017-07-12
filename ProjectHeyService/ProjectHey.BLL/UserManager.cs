@@ -37,7 +37,10 @@ namespace ProjectHey.BLL
         {
             return await userDB.GetAsync(skip, take);
         }
-
+        public async Task<User> GetSimplifiedByIdAsync(int id)
+        {
+            return await userDB.GetSimplifiedByIdAsync(id);
+        }
         public async Task<User> GetByIdAsync(int id)
         {
             return await userDB.GetByIdAsync(id);
@@ -54,5 +57,7 @@ namespace ProjectHey.BLL
         {
             return await userDB.UpdateAsync(entity);
         }
+
+
     }
 }

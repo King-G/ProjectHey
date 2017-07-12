@@ -7,6 +7,7 @@ using ProjectHey.BLL;
 using ProjectHey.DOMAIN;
 //using ProjectHey.APIGateway.Attribute;
 using Newtonsoft.Json;
+using ProjectHey.APIGateway.ViewModels;
 
 namespace ProjectHey.APIGateway.Controllers
 {
@@ -17,12 +18,38 @@ namespace ProjectHey.APIGateway.Controllers
         ConnectionManager connectionManager = new ConnectionManager();
 
         [HttpGet]
-        public async Task<IActionResult> GetByUserId(int id)
+        public async Task<IActionResult> GetAllByUserId(int id)
         {
             try
             {
-                IEnumerable<Connection> connections = await connectionManager.GetAllByIdAsync(id);              
+                IEnumerable<Connection> connections = await connectionManager.GetAllByIdAsync(id);
                 return Ok(Json(connections));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetConnectionsViewModelsByUserId(int id)
+        {
+            try
+            {
+                IEnumerable<Connection> connections = await connectionManager.GetAllByIdAsync(id);
+                List<ConnectionViewModel> connectionviewModels = new List<ConnectionViewModel>();
+                foreach (Connection connection in connections)
+                {
+                    connectionviewModels.Add(
+                        new ConnectionViewModel()
+                        {
+                            UserOneId = connection.UserOneId,
+                            UserTwoId = connection.UserTwoId,
+                            Username = string.Join(string.Empty, connection.UserTwo.Username.Skip(25)),
+                            Progress = connection.Progress,
+                        });
+                }
+                return Ok(Json(connectionviewModels));
             }
             catch (Exception ex)
             {

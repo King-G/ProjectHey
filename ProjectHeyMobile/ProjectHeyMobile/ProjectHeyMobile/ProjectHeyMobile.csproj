@@ -45,6 +45,7 @@
       <DependentUpon>HeyPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IProjectHeyAPI.cs" />
+    <Compile Include="Interfaces\ProjectHeyAPIResponse.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -52,29 +53,30 @@
     <Compile Include="SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Advertisement.cs" />
-    <Compile Include="ViewModels\AdvertisementCategory.cs" />
-    <Compile Include="ViewModels\AppSetting.cs" />
-    <Compile Include="ViewModels\Blocked.cs" />
-    <Compile Include="ViewModels\Category.cs" />
-    <Compile Include="ViewModels\Connection.cs" />
-    <Compile Include="ViewModels\Enums\AdvertisementType.cs" />
-    <Compile Include="ViewModels\Enums\FeedbackType.cs" />
-    <Compile Include="ViewModels\Enums\Gender.cs" />
-    <Compile Include="ViewModels\Enums\Language.cs" />
-    <Compile Include="ViewModels\Enums\ReportType.cs" />
-    <Compile Include="ViewModels\Feedback.cs" />
-    <Compile Include="ViewModels\Message.cs" />
-    <Compile Include="ViewModels\Provider.cs" />
-    <Compile Include="ViewModels\Report.cs" />
-    <Compile Include="ViewModels\Reported.cs" />
-    <Compile Include="ViewModels\Role.cs" />
-    <Compile Include="ViewModels\Structs\Location.cs" />
-    <Compile Include="ViewModels\User.cs" />
-    <Compile Include="ViewModels\UserAdvertisement.cs" />
-    <Compile Include="ViewModels\UserCategory.cs" />
-    <Compile Include="ViewModels\UserProvider.cs" />
-    <Compile Include="ViewModels\UserRole.cs" />
+    <Compile Include="Models\Advertisement.cs" />
+    <Compile Include="Models\AdvertisementCategory.cs" />
+    <Compile Include="Models\AppSetting.cs" />
+    <Compile Include="Models\Blocked.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Connection.cs" />
+    <Compile Include="Models\Enums\AdvertisementType.cs" />
+    <Compile Include="Models\Enums\FeedbackType.cs" />
+    <Compile Include="Models\Enums\Gender.cs" />
+    <Compile Include="Models\Enums\Language.cs" />
+    <Compile Include="Models\Enums\ReportType.cs" />
+    <Compile Include="Models\Feedback.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Provider.cs" />
+    <Compile Include="Models\Report.cs" />
+    <Compile Include="Models\Reported.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Structs\Location.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserAdvertisement.cs" />
+    <Compile Include="Models\UserCategory.cs" />
+    <Compile Include="Models\UserProvider.cs" />
+    <Compile Include="Models\UserRole.cs" />
+    <Compile Include="ViewModels\ConnectionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">

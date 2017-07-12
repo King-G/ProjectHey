@@ -13,7 +13,7 @@
                      Style="{StaticResource iconStyle}" />
                 <Label 
                     Text="Picture"      
-                    Style="{StaticResource iconTextStyle}"/>
+                    Style="{StaticResource icontextStyle}"/>
             </StackLayout>
             <StackLayout 
                 Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" 
@@ -24,7 +24,7 @@
                      Style="{StaticResource iconStyle}"/>
                 <Label 
                     Text="Settings"      
-                    Style="{StaticResource iconTextStyle}"/>
+                    Style="{StaticResource icontextStyle}"/>
             </StackLayout>
             <StackLayout 
                 Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" 
@@ -35,7 +35,7 @@
                      Style="{StaticResource iconStyle}"/>
                 <Label 
                     Text="Edit Profile"      
-                    Style="{StaticResource iconTextStyle}"/>
+                    Style="{StaticResource icontextStyle}"/>
             </StackLayout>
             <StackLayout 
                 Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
@@ -46,7 +46,7 @@
                     Style="{StaticResource iconStyle}"/>
                 <Label 
                     Text="About Hey."      
-                    Style="{StaticResource iconTextStyle}"/>
+                    Style="{StaticResource icontextStyle}"/>
             </StackLayout>
             <StackLayout 
                 Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" 
@@ -57,7 +57,7 @@
                     Style="{StaticResource iconStyle}"/>
                 <Label 
                     Text="Rate us"      
-                    Style="{StaticResource iconTextStyle}"/>
+                    Style="{StaticResource icontextStyle}"/>
             </StackLayout>
             <StackLayout 
                 Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" 
@@ -68,7 +68,7 @@
                     Style="{StaticResource iconStyle}"/>
                 <Label 
                     Text="Share"      
-                    Style="{StaticResource iconTextStyle}"/>
+                    Style="{StaticResource icontextStyle}"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

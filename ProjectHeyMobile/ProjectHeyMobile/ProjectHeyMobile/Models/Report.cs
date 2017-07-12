@@ -1,6 +1,6 @@
-﻿using ProjectHeyMobile.ViewModels.Enums;
+﻿using ProjectHeyMobile.Models.Enums;
 
-namespace ProjectHeyMobile.ViewModels
+namespace ProjectHeyMobile.Models
 {
     public class Report
     {
