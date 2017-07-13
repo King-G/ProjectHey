@@ -21,7 +21,7 @@ namespace ProjectHey.APIGateway.Controllers
         {
             try
             {
-                User user = await userManager.GetByIdAsync(id);              
+                User user = await userManager.GetByIdAsync(id);
                 return Ok(Json(user));
             }
             catch (Exception ex)

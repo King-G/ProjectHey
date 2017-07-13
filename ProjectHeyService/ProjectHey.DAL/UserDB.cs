@@ -53,7 +53,7 @@ namespace ProjectHey.DAL
         public async Task<User> GetSimplifiedByIdAsync(int id)
         {
             return await projectHeyContext.User.AsNoTracking()
-                 .SingleOrDefaultAsync(x => x.Id == id);
+                 .FirstOrDefaultAsync(x => x.Id == id);
             
         }
         public async Task<User> GetByIdAsync(int id)
@@ -70,12 +70,17 @@ namespace ProjectHey.DAL
                 .Include(x => x.Advertisement)
                 .Include(x => x.WatchedAdvertisement)
                 .Include(x => x.UserProvider)
-                .SingleOrDefaultAsync(x => x.Id == id);
-            user.Location = await GeneralDB.GetLocation(projectHeyContext, "user", id);
-            foreach (Advertisement a in user.Advertisement) //Neccesary? Do we need the location? yes if we aint gonna request, no if we do.
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (user != null)
             {
-                a.Location = await GeneralDB.GetLocation(projectHeyContext, "advertisement", a.Id);
+                user.Location = await GeneralDB.GetLocation(projectHeyContext, "user", id);
+                foreach (Advertisement a in user.Advertisement) //Neccesary? Do we need the location? yes if we aint gonna request, no if we do.
+                {
+                    a.Location = await GeneralDB.GetLocation(projectHeyContext, "advertisement", a.Id);
+                }
             }
+
             return user;
         }
         public async Task<IEnumerable<User>> GetByLocationAsync(User requestor, int skip, int take)

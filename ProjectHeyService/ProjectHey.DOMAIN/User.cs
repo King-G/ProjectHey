@@ -9,42 +9,24 @@ namespace ProjectHey.DOMAIN
     {
         public int Id { get; set; }
 
-        private string username = Guid.NewGuid().ToString("N");
+        public string Username { get; private set; }
 
-        public string Username
-        {
-            get {
-                return username;
-            }
-        }
         public string ResetUsername()
         {
-            username = Guid.NewGuid().ToString("N");
-            return username;
+            Username = Guid.NewGuid().ToString("N");
+            return Username;
         }
 
         public string Firstname { get; set; }
 
         public string Lastname { get; set; }
 
-        //[Required(ErrorMessage = "Creation date is required")]
-        ////[DisplayName("Creation Date")]
-        //[DataType(DataType.Date)]
-        //[Column(TypeName = "datetime2")]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public DateTime CreationDate { get; set; } = DateTime.Now;
-
-        //[Required(ErrorMessage = "Last activity date could not be registered")]
-        ////[DisplayName("Last Activity Date")]
-        //[DataType(DataType.Date)]
-        //[Column(TypeName = "datetime2")]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public DateTime ActivityDate { get; set; } = DateTime.Now;
+        public DateTime CreationDate { get; set; } 
+        public DateTime ActivityDate { get; set; } 
 
         public string ProfilePictureURL { get; set; }
 
-        public Gender Gender { get; set; } = Gender.Unknown;
-
+        public Gender Gender { get; set; }
         public Location Location { get; set; }
 
         public AppSetting Appsetting { get; set; }

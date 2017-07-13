@@ -46,7 +46,7 @@ namespace ProjectHey.DAL
 
         public async Task<Blocked> GetByIdAsync(int id)
         {
-            return await projectHeyContext.Blocked.SingleOrDefaultAsync(x => x.UserId == id);
+            return await projectHeyContext.Blocked.FirstOrDefaultAsync(x => x.UserId == id);
         }
 
         public async Task<Blocked> UpdateAsync(Blocked entity)

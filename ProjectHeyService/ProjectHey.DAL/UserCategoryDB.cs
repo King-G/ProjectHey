@@ -46,7 +46,7 @@ namespace ProjectHey.DAL
 
         public async Task<UserCategory> GetByIdAsync(int id)
         {
-            return await projectHeyContext.UserCategory.SingleOrDefaultAsync(x => x.UserId == id);
+            return await projectHeyContext.UserCategory.FirstOrDefaultAsync(x => x.UserId == id);
         }
 
         public async Task<UserCategory> UpdateAsync(UserCategory entity)

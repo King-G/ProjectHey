@@ -46,7 +46,7 @@ namespace ProjectHey.DAL
 
         public async Task<AdvertisementCategory> GetByIdAsync(int id)
         {
-            return await projectHeyContext.AdvertisementCategory.SingleOrDefaultAsync(x => x.AdvertisementId == id);
+            return await projectHeyContext.AdvertisementCategory.FirstOrDefaultAsync(x => x.AdvertisementId == id);
         }
 
         public async Task<AdvertisementCategory> UpdateAsync(AdvertisementCategory entity)

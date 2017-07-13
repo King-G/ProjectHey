@@ -35,50 +35,125 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Advertisement.cs">
+      <Link>Domain\Advertisement.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\AdvertisementCategory.cs">
+      <Link>Domain\AdvertisementCategory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\AppSetting.cs">
+      <Link>Domain\AppSetting.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Blocked.cs">
+      <Link>Domain\Blocked.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Category.cs">
+      <Link>Domain\Category.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Connection.cs">
+      <Link>Domain\Connection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Enums\AdvertisementType.cs">
+      <Link>Domain\Enums\AdvertisementType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Enums\FeedbackType.cs">
+      <Link>Domain\Enums\FeedbackType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Enums\Gender.cs">
+      <Link>Domain\Enums\Gender.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Enums\Language.cs">
+      <Link>Domain\Enums\Language.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Enums\ReportType.cs">
+      <Link>Domain\Enums\ReportType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Feedback.cs">
+      <Link>Domain\Feedback.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Message.cs">
+      <Link>Domain\Message.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Provider.cs">
+      <Link>Domain\Provider.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Report.cs">
+      <Link>Domain\Report.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Reported.cs">
+      <Link>Domain\Reported.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Role.cs">
+      <Link>Domain\Role.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Structs\Location.cs">
+      <Link>Domain\Structs\Location.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\User.cs">
+      <Link>Domain\User.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\UserAdvertisement.cs">
+      <Link>Domain\UserAdvertisement.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\UserCategory.cs">
+      <Link>Domain\UserCategory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\UserProvider.cs">
+      <Link>Domain\UserProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\UserRole.cs">
+      <Link>Domain\UserRole.cs</Link>
+    </Compile>
+    <Compile Include="APICommunication\ProjectHeyAPISingleResponse.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ChatPage.xaml.cs">
+    <Compile Include="ViewModels\AdvertisementViewModel.cs" />
+    <Compile Include="ViewModels\AppSettingViewModel.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\BlockedViewModel.cs" />
+    <Compile Include="ViewModels\Enums\AdvertisementType.cs" />
+    <Compile Include="ViewModels\Enums\FeedbackType.cs" />
+    <Compile Include="ViewModels\Enums\Gender.cs" />
+    <Compile Include="ViewModels\Enums\Language.cs" />
+    <Compile Include="ViewModels\Enums\ReportType.cs" />
+    <Compile Include="ViewModels\FeedbackViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IPageService.cs" />
+    <Compile Include="ViewModels\PageService.cs" />
+    <Compile Include="ViewModels\ReportedViewModel.cs" />
+    <Compile Include="ViewModels\Structs\Location.cs" />
+    <Compile Include="ViewModels\UserAdvertisementViewModel.cs" />
+    <Compile Include="ViewModels\UserCategoryViewModel.cs" />
+    <Compile Include="ViewModels\UserProviderViewModel.cs" />
+    <Compile Include="ViewModels\UserRoleViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="Views\AppSettingPage.xaml.cs">
+      <DependentUpon>AppSettingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChatPage.xaml.cs">
       <DependentUpon>ChatPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ConnectionPage.xaml.cs">
+    <Compile Include="Views\ConnectionPage.xaml.cs">
       <DependentUpon>ConnectionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HeyPage.xaml.cs">
+    <Compile Include="Views\ErrorPage.xaml.cs">
+      <DependentUpon>ErrorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HeyPage.xaml.cs">
       <DependentUpon>HeyPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\IProjectHeyAPI.cs" />
-    <Compile Include="Interfaces\ProjectHeyAPIResponse.cs" />
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="APICommunication\IProjectHeyAPI.cs" />
+    <Compile Include="APICommunication\ProjectHeyAPIMultiResponse.cs" />
+    <Compile Include="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SettingPage.xaml.cs">
+    <Compile Include="Views\SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Advertisement.cs" />
-    <Compile Include="Models\AdvertisementCategory.cs" />
-    <Compile Include="Models\AppSetting.cs" />
-    <Compile Include="Models\Blocked.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Connection.cs" />
-    <Compile Include="Models\Enums\AdvertisementType.cs" />
-    <Compile Include="Models\Enums\FeedbackType.cs" />
-    <Compile Include="Models\Enums\Gender.cs" />
-    <Compile Include="Models\Enums\Language.cs" />
-    <Compile Include="Models\Enums\ReportType.cs" />
-    <Compile Include="Models\Feedback.cs" />
-    <Compile Include="Models\Message.cs" />
-    <Compile Include="Models\Provider.cs" />
-    <Compile Include="Models\Report.cs" />
-    <Compile Include="Models\Reported.cs" />
-    <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\Structs\Location.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserAdvertisement.cs" />
-    <Compile Include="Models\UserCategory.cs" />
-    <Compile Include="Models\UserProvider.cs" />
-    <Compile Include="Models\UserRole.cs" />
     <Compile Include="ViewModels\MessageViewModel.cs" />
     <Compile Include="ViewModels\ConnectionViewModel.cs" />
   </ItemGroup>
@@ -118,31 +193,49 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MainPage.xaml">
+    <EmbeddedResource Include="Views\MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SettingPage.xaml">
+    <EmbeddedResource Include="Views\SettingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ConnectionPage.xaml">
+    <EmbeddedResource Include="Views\ConnectionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="HeyPage.xaml">
+    <EmbeddedResource Include="Views\HeyPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ChatPage.xaml">
+    <EmbeddedResource Include="Views\ChatPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\AppSettingPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\LoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ErrorPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

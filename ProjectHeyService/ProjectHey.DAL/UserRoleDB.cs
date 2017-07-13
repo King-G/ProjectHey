@@ -46,7 +46,7 @@ namespace ProjectHey.DAL
 
         public async Task<UserRole> GetByIdAsync(int id)
         {
-            return await projectHeyContext.UserRole.SingleOrDefaultAsync(x => x.UserId == id);
+            return await projectHeyContext.UserRole.FirstOrDefaultAsync(x => x.UserId == id);
         }
 
         public async Task<UserRole> UpdateAsync(UserRole entity)

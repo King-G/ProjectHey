@@ -46,7 +46,7 @@ namespace ProjectHey.DAL
 
         public async Task<Category> GetByIdAsync(int id)
         {
-            return await projectHeyContext.Category.SingleOrDefaultAsync(x => x.Id == id);
+            return await projectHeyContext.Category.FirstOrDefaultAsync(x => x.Id == id);
         }
         public async Task<Category> GetByNameAsync(string name)
         {

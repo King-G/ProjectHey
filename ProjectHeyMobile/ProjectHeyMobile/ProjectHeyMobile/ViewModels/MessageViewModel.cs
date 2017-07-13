@@ -1,5 +1,6 @@
 ﻿
-using ProjectHeyMobile.Models;
+
+using ProjectHey.DOMAIN;
 
 namespace ProjectHeyMobile.ViewModels
 {

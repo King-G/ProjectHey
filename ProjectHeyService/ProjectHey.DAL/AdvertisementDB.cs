@@ -61,7 +61,7 @@ namespace ProjectHey.DAL
         public async Task<Advertisement> GetByIdAsync(int id)
         {
             Advertisement advertisement = await projectHeyContext.Advertisement.AsNoTracking()
-                 .SingleOrDefaultAsync(x => x.Id == id);
+                 .FirstOrDefaultAsync(x => x.Id == id);
             advertisement.Location = await GeneralDB.GetLocation(projectHeyContext, "advertisement", id);
             return advertisement;
         }

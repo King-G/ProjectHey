@@ -51,7 +51,7 @@ namespace ProjectHey.DAL
 
         public async Task<Feedback> GetByIdAsync(int id)
         {
-            return await projectHeyContext.Feedback.SingleOrDefaultAsync(x => x.Id == id);
+            return await projectHeyContext.Feedback.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Feedback> UpdateAsync(Feedback entity)

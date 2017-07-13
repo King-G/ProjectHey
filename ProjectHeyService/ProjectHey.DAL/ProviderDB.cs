@@ -46,7 +46,7 @@ namespace ProjectHey.DAL
 
         public async Task<Provider> GetByIdAsync(int id)
         {
-            return await projectHeyContext.Provider.SingleOrDefaultAsync(x => x.Id == id);
+            return await projectHeyContext.Provider.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Provider> GetByNameAsync(string name)

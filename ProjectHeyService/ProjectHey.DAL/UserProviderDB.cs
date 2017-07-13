@@ -45,7 +45,7 @@ namespace ProjectHey.DAL
 
         public async Task<UserProvider> GetByIdAsync(int id)
         {
-            return await projectHeyContext.UserProvider.SingleOrDefaultAsync(x => x.ProviderUserId == id);
+            return await projectHeyContext.UserProvider.FirstOrDefaultAsync(x => x.ProviderUserId == id);
         }
         public async Task<IEnumerable<UserProvider>> GetByUserIdAsync(int userId, int skip, int take)
         {

@@ -46,7 +46,7 @@ namespace ProjectHey.DAL
 
         public async Task<UserAdvertisement> GetByIdAsync(int id)
         {
-            return await projectHeyContext.UserAdvertisement.SingleOrDefaultAsync(x => x.UserId == id);
+            return await projectHeyContext.UserAdvertisement.FirstOrDefaultAsync(x => x.UserId == id);
         }
 
         public async Task<IEnumerable<UserAdvertisement>> GetByViewDate(DateTime date)

@@ -46,7 +46,7 @@ namespace ProjectHey.DAL
 
         public async Task<Role> GetByIdAsync(int id)
         {
-            return await projectHeyContext.Role.SingleOrDefaultAsync(x => x.Id == id);
+            return await projectHeyContext.Role.FirstOrDefaultAsync(x => x.Id == id);
         }
         public async Task<Role> GetByNameAsync(string name)
         {

@@ -54,7 +54,7 @@ namespace ProjectHey.DAL
         }
         public async Task<Message> GetByIdAsync(int id)
         {
-            return await projectHeyContext.Message.SingleOrDefaultAsync(x => x.Id == id);
+            return await projectHeyContext.Message.FirstOrDefaultAsync(x => x.Id == id);
         }
         public async Task<IEnumerable<Message>> GetConversationsAsync(int userOne, int userTwo, int skip, int take)
         {

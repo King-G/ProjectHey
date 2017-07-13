@@ -8,11 +8,6 @@ namespace ProjectHey.DOMAIN
 
         public string Body { get; set; }
 
-        //[Required(ErrorMessage = "Creation date is required")]
-        ////[DisplayName("Creation Date")]
-        //[DataType(DataType.Date)]
-        //[Column(TypeName = "datetime2")]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime CreationDate { get; set; } = DateTime.Now;
 
         public int UserSenderId { get; set; }

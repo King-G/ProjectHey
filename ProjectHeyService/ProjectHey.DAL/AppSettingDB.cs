@@ -46,7 +46,7 @@ namespace ProjectHey.DAL
 
         public async Task<AppSetting> GetByIdAsync(int id)
         {
-            return await projectHeyContext.AppSetting.SingleOrDefaultAsync(x => x.Id == id);
+            return await projectHeyContext.AppSetting.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<AppSetting> UpdateAsync(AppSetting entity)

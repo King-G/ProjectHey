@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectHeyMobile.Views.AppSettingPage"
+             xmlns:local="clr-namespace:ProjectHeyMobile.ViewModels.Enums"
+             Title="Appsettings">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Radius" FontSize="Medium" />
+            <Slider Value="{Binding Radius}" Maximum="5000"/>
+            <Label Text="Max. Notifications" FontSize="Medium" />
+            <Slider Value="{Binding MaximumNotifications}" Maximum="5000"/>
+            <Label Text="Max. Conversations" FontSize="Medium" />
+            <Slider Value="{Binding MaximumConversations}" Maximum="5000"/>
+            <!--<Label Text="Language" FontSize="Medium" />
+            <Picker ItemsSource="{local:Language}" SelectedItem="{Binding Language}"/>-->
+            <Label Text="Sound" FontSize="Medium" />
+            <Switch IsToggled="{Binding Sound}"/>
+            <Label Text="Vibrate" FontSize="Medium" />
+            <Switch IsToggled="{Binding Vibrate}"/>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -46,7 +46,7 @@ namespace ProjectHey.DAL
 
         public async Task<Report> GetByIdAsync(int id)
         {
-            return await projectHeyContext.Report.SingleOrDefaultAsync(x => x.Id == id);
+            return await projectHeyContext.Report.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Report> UpdateAsync(Report entity)

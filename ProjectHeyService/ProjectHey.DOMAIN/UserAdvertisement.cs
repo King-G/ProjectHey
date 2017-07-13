@@ -12,11 +12,6 @@ namespace ProjectHey.DOMAIN
         public int AdvertisementId { get; set; }
         public Advertisement Advertisement { get; set; }
 
-        //[Required(ErrorMessage = "View date is required")]
-        ////[DisplayName("View Date")]
-        //[DataType(DataType.Date)]
-        //[Column(TypeName = "datetime2")]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime ViewDate { get; set; } = DateTime.Now;
 
         public bool IsClicked { get; set; } = false;
