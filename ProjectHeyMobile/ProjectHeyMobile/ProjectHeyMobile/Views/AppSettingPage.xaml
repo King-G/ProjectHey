@@ -19,7 +19,7 @@
                    Style="{StaticResource appsettingstextStyle}" 
                    Grid.Row="0" Grid.Column="0" />
             <Slider x:Name="sliderRadius"
-                    Value="{Binding Radius}" 
+                    Value="{Binding AppSetting.Radius}" 
                     ValueChanged="sliderRadius_ValueChanged"
                     Minimum="0"
                     Maximum="5000"
@@ -32,7 +32,7 @@
                    Style="{StaticResource appsettingstextStyle}" 
                    Grid.Row="1" Grid.Column="0" />
             <Slider x:Name="sliderMaximumNotifications" 
-                    Value="{Binding MaximumNotifications}"
+                    Value="{Binding AppSetting.MaximumNotifications}"
                     ValueChanged="sliderMaximumNotifications_ValueChanged"
                     Minimum="0"
                     Maximum="30"
@@ -45,7 +45,7 @@
                    Style="{StaticResource appsettingstextStyle}" 
                    Grid.Row="2" Grid.Column="0" />
             <Slider x:Name="sliderMaximumConversations"
-                    Value="{Binding MaximumConversations}"
+                    Value="{Binding AppSetting.MaximumConversations}"
                     ValueChanged="sliderMaximumConversations_ValueChanged"
                     Minimum="0"
                     Maximum="20" 
@@ -53,18 +53,18 @@
 
             <Label Text="Language" Style="{StaticResource appsettingstextStyle}" 
                    Grid.Row="3" Grid.Column="0" />
-            <Picker ItemsSource="{Binding Languages}" SelectedIndex="{Binding Language, Converter=IntEnum}" 
+            <Picker ItemsSource="{Binding Languages}" SelectedIndex="{Binding AppSetting.Language, Converter=IntEnum}" 
                     Grid.Row="3" Grid.Column="1" />
 
             <Label Text="Sound" Style="{StaticResource appsettingstextStyle}" 
                    Grid.Row="4" Grid.Column="0"/>
-            <Switch IsToggled="{Binding Sound}" 
+            <Switch IsToggled="{Binding AppSetting.Sound}" 
                     HorizontalOptions="Start" VerticalOptions="Center"
                     Grid.Row="4" Grid.Column="1" />
 
             <Label Text="Vibrate" Style="{StaticResource appsettingstextStyle}" 
                    Grid.Row="5" Grid.Column="0" />
-            <Switch IsToggled="{Binding Vibrate}" 
+            <Switch IsToggled="{Binding AppSetting.Vibrate}" 
                     HorizontalOptions="Start" VerticalOptions="Center"
                     Grid.Row="5" Grid.Column="1" />
             

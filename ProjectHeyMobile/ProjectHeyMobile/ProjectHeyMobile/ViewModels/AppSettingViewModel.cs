@@ -4,6 +4,7 @@ using System.Linq;
 using ProjectHeyMobile.Utils;
 using ProjectHey.DOMAIN;
 using ProjectHey.DOMAIN.Enums;
+using System.ComponentModel;
 
 namespace ProjectHeyMobile.ViewModels
 {
