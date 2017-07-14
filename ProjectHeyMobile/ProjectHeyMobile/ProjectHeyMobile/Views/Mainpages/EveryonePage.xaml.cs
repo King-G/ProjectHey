@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ProjectHeyMobile.Views
+namespace ProjectHeyMobile.Views.Mainpages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ProfilePage : ContentPage
+    public partial class EveryonePage : ContentPage
     {
-        public ProfilePage()
+        public EveryonePage()
         {
-            BindingContext = App.Main.User;
             InitializeComponent();
         }
     }

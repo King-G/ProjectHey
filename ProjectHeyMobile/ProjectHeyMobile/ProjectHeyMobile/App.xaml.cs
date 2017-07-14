@@ -3,6 +3,10 @@ using ProjectHey.DOMAIN;
 using ProjectHeyMobile.APICommunication;
 using ProjectHeyMobile.ViewModels;
 using ProjectHeyMobile.Views;
+using ProjectHeyMobile.Views.Authenticationpages;
+using ProjectHeyMobile.Views.Mainpages;
+using ProjectHeyMobile.Views.Rootpages;
+using ProjectHeyMobile.Views.Utilitypages;
 using Refit;
 using System;
 using System.Collections.Generic;
@@ -15,6 +19,7 @@ namespace ProjectHeyMobile
     {
         public static MainViewModel Main = new MainViewModel();
 
+        public NavigationPage NavigationPage { get; private set; }
         private bool _isValidStartUp = true;
         private Exception _startUpException = new Exception();
 
@@ -41,6 +46,7 @@ namespace ProjectHeyMobile
 
             if (_isValidStartUp)
             {
+
                 if (Main == null)
                 {
                     MainPage = new NavigationPage(new LoginPage())
@@ -50,11 +56,19 @@ namespace ProjectHeyMobile
                 }
                 else
                 {
-                    MainPage = new NavigationPage(new MainPage())
+                    //var menuPage = new MenuPage();
+                    //var rootPage = new RootPage();
+                    MainPage = new NavigationPage(new RootPage())
                     {
                         Style = (Style)Current.Resources["navigationpageStyle"]
-                    };                  
+                    };
+                    //rootPage.Master = menuPage;
+                    //rootPage.Detail = NavigationPage;
+
+                    //MainPage = rootPage;
                 }
+
+
             }
             else
             {

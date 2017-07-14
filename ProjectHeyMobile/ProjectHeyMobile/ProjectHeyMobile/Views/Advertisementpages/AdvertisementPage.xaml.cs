@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ProjectHeyMobile.Views
+namespace ProjectHeyMobile.Views.Advertisementpages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HeyPage : ContentPage
+    public partial class AdvertisementPage : ContentPage
     {
-        public HeyPage()
+        public AdvertisementPage()
         {
             InitializeComponent();
         }

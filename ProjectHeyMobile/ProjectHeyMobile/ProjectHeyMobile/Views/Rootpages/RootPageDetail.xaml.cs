@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ProjectHeyMobile.Views
+namespace ProjectHeyMobile.Views.Rootpages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AdvertisementPage : ContentPage
+    public partial class RootPageDetail : TabbedPage
     {
-        public AdvertisementPage()
+        public RootPageDetail()
         {
             InitializeComponent();
         }

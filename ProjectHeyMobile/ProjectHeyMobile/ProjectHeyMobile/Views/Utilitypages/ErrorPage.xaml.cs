@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ProjectHeyMobile.Views
+namespace ProjectHeyMobile.Views.Utilitypages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ErrorPage : ContentPage

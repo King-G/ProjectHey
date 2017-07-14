@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ProjectHeyMobile.APICommunication;
 using ProjectHeyMobile.ViewModels;
+using ProjectHeyMobile.Views.Chatpages;
 using Refit;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +11,7 @@ using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ProjectHeyMobile.Views
+namespace ProjectHeyMobile.Views.Menupages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ConnectionPage : ContentPage
