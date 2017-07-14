@@ -9,33 +9,47 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center">
                 <Button 
-                    Text="&#xf2bd;" 
-                     Style="{StaticResource iconStyle}" />
+                    Text="&#xf007;" 
+                    Clicked="Profile_Clicked"
+                    Style="{StaticResource iconStyle}" />
                 <Label 
-                    Text="Picture"      
+                    Text="Profile"      
                     Style="{StaticResource icontextStyle}"/>
             </StackLayout>
             <StackLayout 
-                Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" 
+                Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
                 HorizontalOptions="Center"
                 VerticalOptions="Center">
                 <Button 
                     Text="&#xf085;" 
                     Clicked="AppSetting_Clicked"
-                     Style="{StaticResource iconStyle}"/>
+                    Style="{StaticResource iconStyle}"/>
                 <Label 
                     Text="Settings"      
                     Style="{StaticResource icontextStyle}"/>
             </StackLayout>
             <StackLayout 
-                Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" 
+                Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" 
                 HorizontalOptions="Center"
                 VerticalOptions="Center">
                 <Button 
-                    Text="&#xf007;" 
-                     Style="{StaticResource iconStyle}"/>
+                    Text="&#xf292;" 
+                    Clicked="Categories_Clicked"
+                    Style="{StaticResource iconStyle}"/>
                 <Label 
-                    Text="Edit Profile"      
+                    Text="Edit Tags"      
+                    Style="{StaticResource icontextStyle}"/>
+            </StackLayout>
+            <StackLayout 
+                Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" 
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Button 
+                    Text="&#xf235;" 
+                    Clicked="Blocked_Clicked"
+                    Style="{StaticResource iconStyle}"/>
+                <Label 
+                    Text="Blocked"      
                     Style="{StaticResource icontextStyle}"/>
             </StackLayout>
             <StackLayout 
@@ -43,7 +57,8 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center">
                 <Button 
-                    Text="&#xf05a;" 
+                    Text="&#xf059;" 
+                    Clicked="About_Clicked"
                     Style="{StaticResource iconStyle}"/>
                 <Label 
                     Text="About Hey."      
@@ -54,10 +69,11 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center">
                 <Button 
-                    Text="&#xf005;" 
+                    Text="&#xf0e0;" 
+                    Clicked="Feedback_Clicked"
                     Style="{StaticResource iconStyle}"/>
                 <Label 
-                    Text="Rate us"      
+                    Text="Feedback"
                     Style="{StaticResource icontextStyle}"/>
             </StackLayout>
             <StackLayout 
@@ -66,6 +82,7 @@
                 VerticalOptions="Center">
                 <Button 
                     Text="&#xf1e0;" 
+                    Clicked="Share_Clicked"
                     Style="{StaticResource iconStyle}"/>
                 <Label 
                     Text="Share"      

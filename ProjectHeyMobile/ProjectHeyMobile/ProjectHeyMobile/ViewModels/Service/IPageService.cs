@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace ProjectHeyMobile.ViewModels.Interfaces
+namespace ProjectHeyMobile.ViewModels.Service
 {
     public interface IPageService
     {
-        void DisplayAlert(string title, string message, string cancel);
+        Task DisplayAlert(string title, string message, string cancel);
         Task<bool> DisplayAlert(string title, string message, string accept, string cancel);
 
         Task PushAsync(Page page);

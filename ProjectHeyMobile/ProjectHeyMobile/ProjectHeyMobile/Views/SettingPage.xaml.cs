@@ -18,16 +18,33 @@ namespace ProjectHeyMobile.Views
             InitializeComponent();
         }
 
+        private async void Profile_Clicked(object sender, System.EventArgs e)
+        {
+            await App.User.PageService.PushAsync(new ProfilePage());
+        }
         private async void AppSetting_Clicked(object sender, System.EventArgs e)
         {
-            try
-            {
-                await Navigation.PushAsync(new AppSettingPage());
-            }
-            catch (Exception exception)
-            {
-                await Navigation.PushAsync(new ErrorPage(exception));
-            }
+            await App.User.PageService.PushAsync(new AppSettingPage());
+        }
+        private async void Categories_Clicked(object sender, System.EventArgs e)
+        {
+            await App.User.PageService.DisplayAlert("Categories", "Coming soon...", "Can't Wait!");
+        }
+        private async void Blocked_Clicked(object sender, System.EventArgs e)
+        {
+            await App.User.PageService.DisplayAlert("Blocked users", "Coming soon...", "Can't Wait!");
+        }
+        private async void About_Clicked(object sender, System.EventArgs e)
+        {
+            await App.User.PageService.DisplayAlert("About", "www.epicness.com", "Awesome!");
+        }
+        private async void Feedback_Clicked(object sender, System.EventArgs e)
+        {
+            await App.User.PageService.DisplayAlert("Feedback", "Give us some feedback", "Will do!");
+        }
+        private async void Share_Clicked(object sender, System.EventArgs e)
+        {
+            await App.User.PageService.DisplayAlert("Share", "Sharing is caring", "Aight Captain!");
         }
     }
 }

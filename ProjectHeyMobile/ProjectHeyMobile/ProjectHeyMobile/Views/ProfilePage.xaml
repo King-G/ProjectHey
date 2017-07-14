@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectHeyMobile.Views.ProfilePage"
+             Title="Profile">
+    <ContentPage.Content>
+        <Grid>
+            <Label Text="Username"
+                   Style="{StaticResource profiletextStyle}" 
+                   Grid.Row="0"/>
+            <Label Text="{Binding Username}"
+                   Style="{StaticResource profilesubtextStyle}" 
+                   Grid.Row="1"/>
+
+            <Label Text="Firstname" 
+                   Style="{StaticResource profiletextStyle}" 
+                   Grid.Row="2"/>
+            <Label Text="{Binding Firstname}" 
+                   Style="{StaticResource profilesubtextStyle}" 
+                   Grid.Row="3"/>
+
+            <Label Text="Lastname" 
+                   Style="{StaticResource profiletextStyle}" 
+                   Grid.Row="4"/>
+            <Label Text="{Binding Lastname}" 
+                   Style="{StaticResource profilesubtextStyle}" 
+                   Grid.Row="5"/>
+
+            <Label Text="Gender" 
+                   Style="{StaticResource profiletextStyle}" 
+                   Grid.Row="6"/>
+            <Label Text="{Binding Gender}" 
+                   Style="{StaticResource profilesubtextStyle}" 
+                   Grid.Row="7"/>
+
+            <Label Text="Email" 
+                   Style="{StaticResource profiletextStyle}" 
+                   Grid.Row="8"/>
+            <Label Text="{Binding Email}" 
+                   Style="{StaticResource profilesubtextStyle}" 
+                   Grid.Row="9"/>
+
+            <Label Text="ActivityDate" 
+                   Style="{StaticResource profiletextStyle}" 
+                   Grid.Row="10"/>
+            <Label Text="{Binding ActivityDate}" 
+                   Style="{StaticResource profilesubtextStyle}" 
+                   Grid.Row="11" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -12,7 +12,7 @@ namespace ProjectHeyMobile
 {
     public partial class App : Application
     {
-        public static UserViewModel UserViewModel;
+        public static UserViewModel User;
 
         private bool _isValidStartUp = true;
         private Exception _startUpException = new Exception();
@@ -29,7 +29,7 @@ namespace ProjectHeyMobile
                 var projectHeyAPI = RestService.For<IProjectHeyAPI>("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api");
                 var response = projectHeyAPI.UserGetById((int)Current.Properties["HeyUserId"]).Result;
 
-                UserViewModel = JsonConvert.DeserializeObject<ProjectHeyAPISingleResponse<UserViewModel>>(response).Value;
+                User = JsonConvert.DeserializeObject<ProjectHeyAPISingleResponse<UserViewModel>>(response).Value;
             }
             catch (Exception exception)
             {
@@ -39,7 +39,7 @@ namespace ProjectHeyMobile
 
             if (_isValidStartUp)
             {
-                if (UserViewModel == null)
+                if (User == null)
                 {
                     MainPage = new NavigationPage(new LoginPage())
                     {
@@ -51,8 +51,7 @@ namespace ProjectHeyMobile
                     MainPage = new NavigationPage(new MainPage())
                     {
                         Style = (Style)Current.Resources["navigationpageStyle"]
-                    };
-                   
+                    };                  
                 }
             }
             else

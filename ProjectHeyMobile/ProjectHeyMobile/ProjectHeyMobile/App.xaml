@@ -26,6 +26,24 @@
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
+            <Style x:Key="appsettingstextStyle"  TargetType="Label">
+                <Setter Property="TextColor" Value="#A0522D"/>
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="profiletextStyle"  TargetType="Label">
+                <Setter Property="TextColor" Value="#A0522D"/>
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="profilesubtextStyle"  TargetType="Label">
+                <Setter Property="TextColor" Value="#A0522D"/>
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
             <Style x:Key="listviewStyle"  TargetType="ListView">
                 <Setter Property="SeparatorColor" Value="#A0522D"/>
             </Style>

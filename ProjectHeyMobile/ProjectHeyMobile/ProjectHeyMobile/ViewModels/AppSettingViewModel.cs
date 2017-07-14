@@ -1,9 +1,14 @@
 ﻿using ProjectHeyMobile.APICommunication;
 using ProjectHeyMobile.ViewModels.Enums;
-using ProjectHeyMobile.ViewModels.Interfaces;
+using ProjectHeyMobile.ViewModels.Service;
 using Refit;
 using System.Windows.Input;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using ProjectHeyMobile.Utils;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace ProjectHeyMobile.ViewModels
 {
@@ -18,8 +23,6 @@ namespace ProjectHeyMobile.ViewModels
         private bool _vibrate;
         private int _userId;
         private UserViewModel _user;
-
-        private readonly IPageService _pageService;
 
         public int Id
         {
@@ -67,29 +70,34 @@ namespace ProjectHeyMobile.ViewModels
             get { return _user; }
             set { SetValue(ref _user, value); }
         }
-
-        public ICommand GetAppSettings;
-        public AppSettingViewModel()
+        public List<string> Languages
         {
-
-        }
-        public AppSettingViewModel(IPageService pageService)
-        {
-            _pageService = pageService;
+            get
+            {
+                return Enum.GetNames(typeof(Language)).Select(b => b.SplitCamelCase()).ToList();
+            }
         }
 
-        public async void SaveChanges()
+        public async Task SaveChanges()
         {
             try
             {
                 var projectHeyAPI = RestService.For<IProjectHeyAPI>("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api");
-                var response = projectHeyAPI.AppSettingsUpdate(this);
-                //Arrived here, is it actually saved well? maybe a response is needed!
-                //No response needed, so no serialization, fire and forget.
+                var response = await projectHeyAPI.AppSettingsUpdate(this);
+                AppSettingViewModel apsvm = JsonConvert.DeserializeObject<ProjectHeyAPISingleResponse<AppSettingViewModel>>(response).Value;
+                if (apsvm != null)
+                {
+                    await App.User.PageService.DisplayAlert("Done", "Appsettings were saved", "OK");
+                }
+                else
+                {
+                    await App.User.PageService.DisplayAlert("Oops", "Something went wrong trying to sync settings", "OK");
+                }
             }
-            catch (System.Exception exception)
+            catch (Exception exception)
             {
-                _pageService.DisplayAlert("Oops", exception.Message, "OK");
+                await App.User.PageService.DisplayAlert("Oops", exception.Message, "OK");
+
             }
         }
     }

@@ -2,23 +2,72 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProjectHeyMobile.Views.AppSettingPage"
-             xmlns:local="clr-namespace:ProjectHeyMobile.ViewModels.Enums"
+             xmlns:converters="clr-namespace:ProjectHeyMobile.Utils"
              Title="Appsettings">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IntEnumConverter x:Key="IntEnum"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Radius" FontSize="Medium" />
-            <Slider Value="{Binding Radius}" Maximum="5000"/>
-            <Label Text="Max. Notifications" FontSize="Medium" />
-            <Slider Value="{Binding MaximumNotifications}" Maximum="5000"/>
-            <Label Text="Max. Conversations" FontSize="Medium" />
-            <Slider Value="{Binding MaximumConversations}" Maximum="5000"/>
-            <!--<Label Text="Language" FontSize="Medium" />
-            <Picker ItemsSource="{local:Language}" SelectedItem="{Binding Language}"/>-->
-            <Label Text="Sound" FontSize="Medium" />
-            <Switch IsToggled="{Binding Sound}"/>
-            <Label Text="Vibrate" FontSize="Medium" />
-            <Switch IsToggled="{Binding Vibrate}"/>
+        <Grid Padding="5">
+
+            <Label Text="{Binding 
+                        Source={x:Reference sliderRadius}, 
+                        Path=Value,
+                        StringFormat='Radius: {0}m'}" 
+                   Style="{StaticResource appsettingstextStyle}" 
+                   Grid.Row="0" Grid.Column="0" />
+            <Slider x:Name="sliderRadius"
+                    Value="{Binding Radius}" 
+                    ValueChanged="sliderRadius_ValueChanged"
+                    Minimum="0"
+                    Maximum="5000"
+                    Grid.Row="0" Grid.Column="1"/>
+
+            <Label Text="{Binding 
+                        Source={x:Reference sliderMaximumNotifications}, 
+                        Path=Value,
+                        StringFormat='Max. Notifications: {0}'}"
+                   Style="{StaticResource appsettingstextStyle}" 
+                   Grid.Row="1" Grid.Column="0" />
+            <Slider x:Name="sliderMaximumNotifications" 
+                    Value="{Binding MaximumNotifications}"
+                    ValueChanged="sliderMaximumNotifications_ValueChanged"
+                    Minimum="0"
+                    Maximum="30"
+                    Grid.Row="1" Grid.Column="1" />
+
+            <Label Text="{Binding 
+                        Source={x:Reference sliderMaximumConversations}, 
+                        Path=Value,
+                        StringFormat='Max. Conversation: {0}'}"
+                   Style="{StaticResource appsettingstextStyle}" 
+                   Grid.Row="2" Grid.Column="0" />
+            <Slider x:Name="sliderMaximumConversations"
+                    Value="{Binding MaximumConversations}"
+                    ValueChanged="sliderMaximumConversations_ValueChanged"
+                    Minimum="0"
+                    Maximum="20" 
+                    Grid.Row="2" Grid.Column="1" />
+
+            <Label Text="Language" Style="{StaticResource appsettingstextStyle}" 
+                   Grid.Row="3" Grid.Column="0" />
+            <Picker ItemsSource="{Binding Languages}" SelectedIndex="{Binding Language, Converter=IntEnum}" 
+                    Grid.Row="3" Grid.Column="1" />
+
+            <Label Text="Sound" Style="{StaticResource appsettingstextStyle}" 
+                   Grid.Row="4" Grid.Column="0"/>
+            <Switch IsToggled="{Binding Sound}" 
+                    HorizontalOptions="Start" VerticalOptions="Center"
+                    Grid.Row="4" Grid.Column="1" />
+
+            <Label Text="Vibrate" Style="{StaticResource appsettingstextStyle}" 
+                   Grid.Row="5" Grid.Column="0" />
+            <Switch IsToggled="{Binding Vibrate}" 
+                    HorizontalOptions="Start" VerticalOptions="Center"
+                    Grid.Row="5" Grid.Column="1" />
             
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

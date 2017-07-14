@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ProjectHeyMobile.ViewModels.Interfaces;
 using Xamarin.Forms;
 
-namespace ProjectHeyMobile.ViewModels
+namespace ProjectHeyMobile.ViewModels.Service
 {
     public class PageService : IPageService
     {
-        public async void DisplayAlert(string title, string message, string cancel)
+        public async Task DisplayAlert(string title, string message, string cancel)
         {
             await Application.Current.MainPage.DisplayAlert(title, message, cancel);
         }

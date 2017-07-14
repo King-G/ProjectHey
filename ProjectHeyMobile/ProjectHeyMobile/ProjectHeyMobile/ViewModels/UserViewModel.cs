@@ -1,4 +1,5 @@
 ﻿using ProjectHeyMobile.ViewModels.Enums;
+using ProjectHeyMobile.ViewModels.Service;
 using ProjectHeyMobile.ViewModels.Structs;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace ProjectHeyMobile.ViewModels
 {
     public class UserViewModel
     {
+        public readonly IPageService PageService = new PageService();
         public int Id { get; set; }
         public string Username { get; set; }
         public string Firstname { get; set; }
@@ -52,5 +54,7 @@ namespace ProjectHeyMobile.ViewModels
 
         //User can have multiple providers
         public ICollection<UserProviderViewModel> UserProvider { get; set; }
+
+        
     }
 }

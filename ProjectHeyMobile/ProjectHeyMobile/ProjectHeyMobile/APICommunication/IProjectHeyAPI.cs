@@ -15,7 +15,7 @@ namespace ProjectHeyMobile.APICommunication
         [Get("/connections/getconnectionsviewmodelsbyuserid/{id}")]
         Task<string> GetConnectionsViewModelsByUserId(int id);
 
-        [Get("/AppSettings/Update/{appSettingViewModel}")]
-        Task<string> AppSettingsUpdate(AppSettingViewModel appSettingViewModel);
+        [Post("/appsettings/update")]
+        Task<string> AppSettingsUpdate([Body(BodySerializationMethod.UrlEncoded)]AppSettingViewModel appsettings);
     }
 }

@@ -16,10 +16,10 @@ namespace ProjectHeyMobile.Views
 	{
         private ConnectionViewModel connectionVM = new ConnectionViewModel();
         private ObservableCollection<MessageViewModel> messages = new ObservableCollection<MessageViewModel>();
-		//public ChatPage ()
-		//{
-		//	InitializeComponent ();
-		//}
+        //public ChatPage()
+        //{
+        //    InitializeComponent();
+        //}
         public ChatPage(ConnectionViewModel connectionVM)
         {
             InitializeComponent();
