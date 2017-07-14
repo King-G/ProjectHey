@@ -17,5 +17,8 @@ namespace ProjectHeyMobile.APICommunication
 
         [Post("/appsettings/update")]
         Task<string> AppSettingsUpdate([Body(BodySerializationMethod.UrlEncoded)]AppSettingViewModel appsettings);
+
+        [Post("/users/update")]
+        Task<string> SyncUser([Body(BodySerializationMethod.UrlEncoded)]UserViewModel user);
     }
 }

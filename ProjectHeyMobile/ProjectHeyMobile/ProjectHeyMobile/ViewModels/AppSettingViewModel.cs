@@ -77,28 +77,5 @@ namespace ProjectHeyMobile.ViewModels
                 return Enum.GetNames(typeof(Language)).Select(b => b.SplitCamelCase()).ToList();
             }
         }
-
-        public async Task SaveChanges()
-        {
-            try
-            {
-                var projectHeyAPI = RestService.For<IProjectHeyAPI>("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api");
-                var response = await projectHeyAPI.AppSettingsUpdate(this);
-                AppSettingViewModel apsvm = JsonConvert.DeserializeObject<ProjectHeyAPISingleResponse<AppSettingViewModel>>(response).Value;
-                if (apsvm != null)
-                {
-                    await App.User.PageService.DisplayAlert("Done", "Appsettings were saved", "OK");
-                }
-                else
-                {
-                    await App.User.PageService.DisplayAlert("Oops", "Something went wrong trying to sync settings", "OK");
-                }
-            }
-            catch (Exception exception)
-            {
-                await App.User.PageService.DisplayAlert("Oops", exception.Message, "OK");
-
-            }
-        }
     }
 }

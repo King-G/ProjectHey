@@ -110,10 +110,12 @@
     </Compile>
     <Compile Include="Utils\IntEnumConverter.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
+    <Compile Include="ViewModels\AdvertisementCategoryViewModel.cs" />
     <Compile Include="ViewModels\AdvertisementViewModel.cs" />
     <Compile Include="ViewModels\AppSettingViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BlockedViewModel.cs" />
+    <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\Enums\AdvertisementType.cs" />
     <Compile Include="ViewModels\Enums\FeedbackType.cs" />
     <Compile Include="ViewModels\Enums\Gender.cs" />
