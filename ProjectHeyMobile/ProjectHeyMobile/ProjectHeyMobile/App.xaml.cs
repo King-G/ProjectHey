@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ProjectHey.DOMAIN;
 using ProjectHeyMobile.APICommunication;
 using ProjectHeyMobile.ViewModels;
 using ProjectHeyMobile.Views;
@@ -12,7 +13,7 @@ namespace ProjectHeyMobile
 {
     public partial class App : Application
     {
-        public static UserViewModel User;
+        public static MainViewModel Main = new MainViewModel();
 
         private bool _isValidStartUp = true;
         private Exception _startUpException = new Exception();
@@ -29,7 +30,8 @@ namespace ProjectHeyMobile
                 var projectHeyAPI = RestService.For<IProjectHeyAPI>("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api");
                 var response = projectHeyAPI.UserGetById((int)Current.Properties["HeyUserId"]).Result;
 
-                User = JsonConvert.DeserializeObject<ProjectHeyAPISingleResponse<UserViewModel>>(response).Value;
+                Main.User = JsonConvert.DeserializeObject<ProjectHeyAPISingleResponse<User>>(response).Value;
+                
             }
             catch (Exception exception)
             {
@@ -39,7 +41,7 @@ namespace ProjectHeyMobile
 
             if (_isValidStartUp)
             {
-                if (User == null)
+                if (Main == null)
                 {
                     MainPage = new NavigationPage(new LoginPage())
                     {

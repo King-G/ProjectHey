@@ -1,4 +1,5 @@
-﻿using ProjectHeyMobile.ViewModels;
+﻿using ProjectHey.DOMAIN;
+using ProjectHeyMobile.ViewModels;
 using Refit;
 using System.Threading.Tasks;
 
@@ -19,6 +20,6 @@ namespace ProjectHeyMobile.APICommunication
         Task<string> AppSettingsUpdate([Body(BodySerializationMethod.UrlEncoded)]AppSettingViewModel appsettings);
 
         [Post("/users/update")]
-        Task<string> SyncUser([Body(BodySerializationMethod.UrlEncoded)]UserViewModel user);
+        Task<string> SyncUser([Body(BodySerializationMethod.UrlEncoded)]User user);
     }
 }

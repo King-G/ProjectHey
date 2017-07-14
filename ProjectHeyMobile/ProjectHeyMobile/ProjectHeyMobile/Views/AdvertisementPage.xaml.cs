@@ -10,11 +10,10 @@ using Xamarin.Forms.Xaml;
 namespace ProjectHeyMobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ProfilePage : ContentPage
+    public partial class AdvertisementPage : ContentPage
     {
-        public ProfilePage()
+        public AdvertisementPage()
         {
-            BindingContext = App.Main.User;
             InitializeComponent();
         }
     }

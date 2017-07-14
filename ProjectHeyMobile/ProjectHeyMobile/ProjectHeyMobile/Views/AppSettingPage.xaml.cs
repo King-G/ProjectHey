@@ -15,7 +15,7 @@ namespace ProjectHeyMobile.Views
     {
         public AppSettingPage()
         {
-            BindingContext = App.User.Appsetting;
+            BindingContext = new AppSettingViewModel(App.Main.User.Appsetting);
             InitializeComponent();
         }
         protected override void OnAppearing()
@@ -25,7 +25,7 @@ namespace ProjectHeyMobile.Views
 
         protected override async void OnDisappearing()
         {
-            await App.User.Appsetting.SaveChanges();
+            await App.Main.SaveChangesAsync();
             base.OnDisappearing();
         }
 

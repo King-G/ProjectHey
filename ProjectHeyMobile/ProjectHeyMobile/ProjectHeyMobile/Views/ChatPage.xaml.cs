@@ -14,17 +14,12 @@ namespace ProjectHeyMobile.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ChatPage : ContentPage
 	{
-        private ConnectionViewModel connectionVM = new ConnectionViewModel();
-        private ObservableCollection<MessageViewModel> messages = new ObservableCollection<MessageViewModel>();
-        //public ChatPage()
-        //{
-        //    InitializeComponent();
-        //}
-        public ChatPage(ConnectionViewModel connectionVM)
+        ObservableCollection<MessageViewModel> _messages;
+
+        public ChatPage(ICollection<MessageViewModel> messages)
         {
             InitializeComponent();
-            this.connectionVM = connectionVM;
-            Title = connectionVM.Username;
+            _messages = new ObservableCollection<MessageViewModel>(messages);
         }
 
         public async Task ScrollToBottom()

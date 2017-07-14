@@ -1,17 +1,14 @@
 ﻿using ProjectHey.DOMAIN;
-using ProjectHeyMobile.ViewModels.Enums;
-using ProjectHeyMobile.ViewModels.Structs;
-using System.Collections.Generic;
 
 namespace ProjectHeyMobile.ViewModels
 {
     public class AdvertisementViewModel : BaseViewModel
     {
-        private Advertisement _Advertisement;
+        private Advertisement  _Advertisement;
 
-        public AdvertisementViewModel()
+        public AdvertisementViewModel(Advertisement Advertisement)
         {
-
+            _Advertisement = Advertisement;
         }
         public Advertisement Advertisement
         {

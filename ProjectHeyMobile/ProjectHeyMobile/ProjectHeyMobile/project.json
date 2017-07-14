@@ -1,0 +1,18 @@
+﻿{
+  "supports": {},
+  "dependencies": {
+    "AutoMapper": "6.1.1",
+    "Microsoft.Bcl": "1.1.10",
+    "Microsoft.Bcl.Build": "1.0.21",
+    "Microsoft.NETCore.Portable.Compatibility": "1.0.2",
+    "NETStandard.Library": "1.6.1",
+    "Newtonsoft.Json": "10.0.3",
+    "Refit": "3.1.0",
+    "Xamarin.Forms": "2.3.5.256-pre6"
+  },
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "portable-net45+win8+wpa81+wp8"
+    }
+  }
+}

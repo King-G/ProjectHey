@@ -15,8 +15,6 @@ namespace ProjectHeyMobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ConnectionPage : ContentPage
     {
-        public UserViewModel UserViewModel { get; set; }
-
         private ObservableCollection<ConnectionViewModel> connections = new ObservableCollection<ConnectionViewModel>();
         public ConnectionPage()
         {
@@ -61,7 +59,7 @@ namespace ProjectHeyMobile.Views
             try
             {
                 ConnectionViewModel connectionVM = e.SelectedItem as ConnectionViewModel;
-                ChatPage chatPage = new ChatPage(connectionVM);
+                ChatPage chatPage = new ChatPage(new List<MessageViewModel>());
                 await Navigation.PushAsync(chatPage);
                 await chatPage.ScrollToBottom();
             }
