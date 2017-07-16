@@ -109,6 +109,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\ElementSource.cs" />
     <Compile Include="Utils\IntEnumConverter.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="ViewModels\AdvertisementCategoryViewModel.cs" />
@@ -119,6 +120,8 @@
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\Enums\MessagePosition.cs" />
     <Compile Include="ViewModels\FeedbackViewModel.cs" />
+    <Compile Include="ViewModels\ConnectionsViewModel.cs" />
+    <Compile Include="ViewModels\HeyFeaturesViewModel.cs" />
     <Compile Include="ViewModels\MessagesViewModel.cs" />
     <Compile Include="ViewModels\Service\IPageService.cs" />
     <Compile Include="ViewModels\Service\PageService.cs" />
@@ -131,6 +134,9 @@
     <Compile Include="Views\Advertisementpages\AdvertisementPage.xaml.cs">
       <DependentUpon>AdvertisementPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Chatpages\MessageView.xaml.cs">
+      <DependentUpon>MessageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Menupages\AppSettingPage.xaml.cs">
       <DependentUpon>AppSettingPage.xaml</DependentUpon>
     </Compile>
@@ -142,6 +148,9 @@
     </Compile>
     <Compile Include="Views\Menupages\ConnectionPage.xaml.cs">
       <DependentUpon>ConnectionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menupages\ConnectionView.xaml.cs">
+      <DependentUpon>ConnectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Rootpages\RootPage.xaml.cs">
       <DependentUpon>RootPage.xaml</DependentUpon>
@@ -179,6 +188,12 @@
     </Compile>
     <Compile Include="ViewModels\MessageViewModel.cs" />
     <Compile Include="ViewModels\ConnectionViewModel.cs" />
+    <Compile Include="Views\Utilitypages\HeyFeaturesPage.xaml.cs">
+      <DependentUpon>HeyFeaturesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Utilitypages\ReportPage.xaml.cs">
+      <DependentUpon>ReportPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -283,6 +298,29 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Chatpages\MessageView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Utilitypages\HeyFeaturesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Utilitypages\ReportPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Menupages\ConnectionView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

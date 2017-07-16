@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:util="clr-namespace:ProjectHeyMobile.Utils"
+   x:Class="ProjectHeyMobile.Views.Menupages.ConnectionView">
+    <StackLayout HorizontalOptions="Fill" Padding="5" Orientation="Horizontal">
+        <Label Text="PIC" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" />
+        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Vertical" Padding="5">
+            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical">
+                <Label Text="{Binding Username}" FontSize="Medium" />
+                <Label Text="Last created message" FontSize="Default" />
+            </StackLayout>
+            <ProgressBar Progress="0.75" HorizontalOptions="Fill" />
+        </StackLayout>
+    </StackLayout>
+    <ViewCell.ContextActions>
+        <!--<MenuItem Text="Block" Command="{Binding Source={x:Reference ConnectionsListView.BindingContext.BlockConnectionCommand}}" CommandParameter="{Binding .}" />
+        <MenuItem Text="Report" />-->
+        <MenuItem 
+            Text="Hey. Features" 
+            IsDestructive="True"
+            Command="{Binding Path=BindingContext.ShowHeyFeaturesCommand, Source={util:ElementSource ConnectionsListView}}"
+            CommandParameter="{Binding}"/>
+    </ViewCell.ContextActions>
+</ViewCell>

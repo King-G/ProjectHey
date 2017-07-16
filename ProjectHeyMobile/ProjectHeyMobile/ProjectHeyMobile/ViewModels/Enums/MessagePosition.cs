@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProjectHeyMobile.ViewModels.Enums
 {
-    public enum MessagePosition
+    public enum MessageType
     {
-        Start,
-        End,
-        Center
+        Send,
+        Received
     }
 }

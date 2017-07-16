@@ -16,16 +16,18 @@ namespace ProjectHeyMobile.Views.Chatpages
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ChatPage : ContentPage
 	{
+        private MessagesViewModel MessagesViewModel
+        {
+            get { return (BindingContext as MessagesViewModel); }
+            set { BindingContext = value; }
+        }
         public ChatPage() : this(new MessagesViewModel())
         {
          
         }
         public ChatPage(MessagesViewModel messages)
         {
-            
-            BindingContext = new MessagesViewModel();
-            (BindingContext as MessagesViewModel).Messages = messages.Messages;
-
+            MessagesViewModel = messages;
             InitializeComponent();
 
             ScrollToBottom();
@@ -41,8 +43,7 @@ namespace ProjectHeyMobile.Views.Chatpages
                 Body = ((Entry)sender).Text
             };
             
-            MessageViewModel messageViewModel = new MessageViewModel(message);
-            (BindingContext as MessagesViewModel).AddMessage(messageViewModel);
+            MessagesViewModel.AddMessageCommand.Execute(new MessageViewModel(message));
 
             ((Entry)sender).Text = string.Empty;
             ScrollToBottom();
@@ -50,8 +51,12 @@ namespace ProjectHeyMobile.Views.Chatpages
 
         private void ScrollToBottom()
         {
-            messagesListView.ScrollTo(messagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault(), ScrollToPosition.End, false);
+            MessagesListView.ScrollTo(MessagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault(), ScrollToPosition.End, true);
         }
 
+        private void MessagesListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            MessagesViewModel.SelectMessageCommand.Execute(e.SelectedItem as MessageViewModel);
+        }
     }
 }

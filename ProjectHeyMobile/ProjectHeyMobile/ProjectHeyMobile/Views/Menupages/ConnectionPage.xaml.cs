@@ -1,6 +1,7 @@
 ﻿
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ProjectHey.DOMAIN;
 using ProjectHeyMobile.APICommunication;
 using ProjectHeyMobile.ViewModels;
 using ProjectHeyMobile.Views.Chatpages;
@@ -16,22 +17,38 @@ namespace ProjectHeyMobile.Views.Menupages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ConnectionPage : ContentPage
     {
-        private ObservableCollection<ConnectionViewModel> connections = new ObservableCollection<ConnectionViewModel>();
+        private ConnectionsViewModel ConnectionsViewModel
+        {
+            get { return (BindingContext as ConnectionsViewModel); }
+            set { BindingContext = value; }
+        }
         public ConnectionPage()
         {
+            List<ConnectionViewModel> connections = new List<ConnectionViewModel>();
+            foreach (Connection connection in App.Main.User.Connections)
+            {
+                connections.Add(new ConnectionViewModel(connection));
+            }
+            ConnectionsViewModel = new ConnectionsViewModel(connections);
             InitializeComponent();
+
         }
+        //public ConnectionPage(ConnectionsViewModel connections)
+        //{
+        //    ConnectionsViewModel = connections;
+        //    InitializeComponent();
+        //}
         protected override void OnAppearing()
         {
-            if(connections.Count == 0)
-                listviewConnections_Refreshing(this, new System.EventArgs());
+            if(ConnectionsViewModel.Connections.Count == 0)
+                ConnectionsListView_Refreshing(this, new System.EventArgs());
 
             base.OnAppearing();
         }
 
-        private async void listviewConnections_Refreshing(object sender, System.EventArgs e)
+        private async void ConnectionsListView_Refreshing(object sender, System.EventArgs e)
         {
-            listviewConnections.IsRefreshing = true;
+            ConnectionsListView.IsRefreshing = true;
             try
             {
                 var projectHeyAPI = RestService.For<IProjectHeyAPI>("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api");
@@ -39,10 +56,9 @@ namespace ProjectHeyMobile.Views.Menupages
 
                 IEnumerable<ConnectionViewModel> connectionresponse = JsonConvert.DeserializeObject<ProjectHeyAPIMultiResponse<ConnectionViewModel>>(response).Value;
 
-                connections = new ObservableCollection<ConnectionViewModel>(connectionresponse);
+                ConnectionsViewModel.Connections = new ObservableCollection<ConnectionViewModel>(connectionresponse);
 
-                listviewConnections.ItemsSource = connections;
-                listviewConnections.IsRefreshing = false;
+                ConnectionsListView.IsRefreshing = false;
             }
             catch (System.Exception exception)
             {
@@ -50,25 +66,14 @@ namespace ProjectHeyMobile.Views.Menupages
             }
             finally
             {
-                listviewConnections.EndRefresh();
+                ConnectionsListView.EndRefresh();
             }
 
         }
 
-        private async void listviewConnections_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void ConnectionsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            try
-            {
-                ConnectionViewModel connectionVM = e.SelectedItem as ConnectionViewModel;
-                ChatPage chatPage = new ChatPage(new MessagesViewModel());
-                await Navigation.PushAsync(chatPage);
-            }
-            catch (System.Exception exception)
-            {
-                await DisplayAlert("Oops", exception.Message, "OK");
-
-            }
-
+            ConnectionsViewModel.SelectConnectionCommand.Execute(e.SelectedItem as ConnectionViewModel);
         }
     }
 }

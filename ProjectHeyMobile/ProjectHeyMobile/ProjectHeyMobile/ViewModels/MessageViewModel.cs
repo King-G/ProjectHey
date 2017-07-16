@@ -1,26 +1,27 @@
 ﻿using ProjectHey.DOMAIN;
 using ProjectHeyMobile.ViewModels.Enums;
 using System.Collections.ObjectModel;
+using Xamarin.Forms;
 
 namespace ProjectHeyMobile.ViewModels
 {
     public class MessageViewModel : BaseViewModel
     {
         private Message _Message;
-        private int _MessagePosition;
-        private string _ColorHex;
-
+        private MessageType _MessageType;
+        private Color _Color;
+         
         public MessageViewModel(Message Message)
         {
             _Message = Message;
-            _ColorHex = "#A0522D";
+            _Color = Color.FromHex("#A0522D");
             if (Message.UserReceiverId == App.Main.User.Id)
             {
-                _MessagePosition = 1;
+                _MessageType = MessageType.Received;
             }
             else
             {
-                _MessagePosition = 0;
+                _MessageType = MessageType.Send;
             }
         }
         public Message Message
@@ -28,15 +29,15 @@ namespace ProjectHeyMobile.ViewModels
             get { return _Message; }
             set { SetValue(ref _Message, value); }
         }
-        public int MessagePosition
+        public MessageType MessageType
         {
-            get { return _MessagePosition; }
-            set { SetValue(ref _MessagePosition, value); }
+            get { return _MessageType; }
+            set { SetValue(ref _MessageType, value); }
         }
-        public string ColorHex
+        public Color Color
         {
-            get { return _ColorHex; }
-            set { SetValue(ref _ColorHex, value); }
+            get { return _Color; }
+            set { SetValue(ref _Color, value); }
         }
     }
 }

@@ -1,38 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:ProjectHeyMobile.Views.Chatpages"
              x:Class="ProjectHeyMobile.Views.Chatpages.ChatPage">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" 
-                     VerticalOptions="FillAndExpand">
-            <ListView x:Name="messagesListView" 
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ListView x:Name="MessagesListView" 
                       HasUnevenRows="True"
                       SeparatorVisibility="None"
                       VerticalOptions="FillAndExpand"
                       HorizontalOptions="FillAndExpand"
-                      ItemsSource="{Binding Messages}">
+                      ItemsSource="{Binding Messages}"
+                      SelectedItem="{Binding SelectedMessage, Mode=TwoWay}"
+                      ItemSelected = "MessagesListView_ItemSelected"
+                      Grid.Column="0" Grid.Row="0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Frame BackgroundColor="{Binding Message.ColorHex}" 
-                                       Padding="10"
-                                       Grid.Row="0" Grid.Column="{Binding Message.MessagePosition}" 
-                                       HorizontalOptions="Start" 
-                                       CornerRadius="10">
-                                    <Label Text="{Binding Message.Body}" TextColor="Black" FontSize="Medium"  />
-                                </Frame>
-                            </Grid>
-                        </ViewCell>
+                        <view:MessageView BindingContext = "{Binding}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Entry Keyboard="Chat" VerticalOptions="End" Completed="Entry_Completed" />
-        </StackLayout>
+            <Entry Keyboard="Chat"
+                   Grid.Column="0" Grid.Row="1"
+                   Completed="Entry_Completed"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

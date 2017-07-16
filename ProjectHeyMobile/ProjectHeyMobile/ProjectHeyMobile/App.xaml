@@ -28,6 +28,12 @@
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
+            <Style x:Key="heypagefeaturesStyle"  TargetType="Label">
+                <Setter Property="TextColor" Value="#000000"/>
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
             <Style x:Key="tabbedpageStyle"  TargetType="TabbedPage">
                 <Setter Property="BarBackgroundColor" Value="#A0522D" />
                 <Setter Property="BackgroundColor" Value="#ffffff" /> 
