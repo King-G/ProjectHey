@@ -22,58 +22,11 @@ namespace ProjectHeyMobile.Views.Mainpages
 
         private async void Anyone_Clicked(object sender, EventArgs e)
         {
-            List<MessageViewModel> messages = new List<MessageViewModel>()
+            List<MessageViewModel> messages = new List<MessageViewModel>();
+            foreach (Message message in App.Main.User.Messages)
             {
-                new MessageViewModel(
-                    new Message()
-                    {
-                        CreationDate = DateTime.Now,
-                        UserSenderId = 1,
-                        UserReceiverId = 2,
-                        Body = "Hello there, how are you?"
-                    }, 0),
-                new MessageViewModel(
-                    new Message()
-                    {
-                        CreationDate = DateTime.Now,
-                        UserSenderId = 1,
-                        UserReceiverId = 2,
-                        Body = "Good, you?"
-                    }, 1),
-                new MessageViewModel(
-                    new Message()
-                    {
-                        CreationDate = DateTime.Now,
-                        UserSenderId = 1,
-                        UserReceiverId = 2,
-                        Body = "Not much, not much.. Just chillin"
-                    }, 0),
-                new MessageViewModel(
-                    new Message()
-                    {
-                        CreationDate = DateTime.Now,
-                        UserSenderId = 1,
-                        UserReceiverId = 2,
-                        Body = "Did you hear about that new app called 'Hey.'?"
-                    }, 0),
-                new MessageViewModel(
-                    new Message()
-                    {
-                        CreationDate = DateTime.Now,
-                        UserSenderId = 1,
-                        UserReceiverId = 2,
-                        Body = "You should check it out!"
-                    }, 0),
-                new MessageViewModel(
-                    new Message()
-                    {
-                        CreationDate = DateTime.Now,
-                        UserSenderId = 1,
-                        UserReceiverId = 2,
-                        Body = "Hold on, let me download that"
-                    }, 1)
-            };
-
+                messages.Add(new MessageViewModel(message));
+            }
             MessagesViewModel messagesViewModel = new MessagesViewModel(messages);
             await App.Main.PageService.PushAsync(new ChatPage(messagesViewModel));
         }

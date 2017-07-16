@@ -10,11 +10,18 @@ namespace ProjectHeyMobile.ViewModels
         private int _MessagePosition;
         private string _ColorHex;
 
-        public MessageViewModel(Message Message, int MessagePosition)
+        public MessageViewModel(Message Message)
         {
             _Message = Message;
-            _MessagePosition = MessagePosition;
             _ColorHex = "#A0522D";
+            if (Message.UserReceiverId == App.Main.User.Id)
+            {
+                _MessagePosition = 1;
+            }
+            else
+            {
+                _MessagePosition = 0;
+            }
         }
         public Message Message
         {

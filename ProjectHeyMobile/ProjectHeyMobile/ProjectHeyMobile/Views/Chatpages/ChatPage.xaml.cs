@@ -36,12 +36,12 @@ namespace ProjectHeyMobile.Views.Chatpages
             Message message = new Message()
             {
                 CreationDate = DateTime.Now,
-                UserSenderId = 1,
+                UserSenderId = App.Main.User.Id,
                 UserReceiverId = 2,
                 Body = ((Entry)sender).Text
             };
             
-            MessageViewModel messageViewModel = new MessageViewModel(message, 0);
+            MessageViewModel messageViewModel = new MessageViewModel(message);
             (BindingContext as MessagesViewModel).AddMessage(messageViewModel);
 
             ((Entry)sender).Text = string.Empty;
