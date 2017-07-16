@@ -46,36 +46,18 @@ namespace ProjectHeyMobile
 
             if (_isValidStartUp)
             {
-
                 if (Main == null)
                 {
-                    MainPage = new NavigationPage(new LoginPage())
-                    {
-                        Style = (Style)Current.Resources["navigationpageStyle"]
-                    };
+                    MainPage = new NavigationPage(new LoginPage());
                 }
                 else
                 {
-                    //var menuPage = new MenuPage();
-                    //var rootPage = new RootPage();
-                    MainPage = new NavigationPage(new RootPage())
-                    {
-                        Style = (Style)Current.Resources["navigationpageStyle"]
-                    };
-                    //rootPage.Master = menuPage;
-                    //rootPage.Detail = NavigationPage;
-
-                    //MainPage = rootPage;
+                    MainPage = new NavigationPage(new RootPage());
                 }
-
-
             }
             else
             {
-                MainPage = new NavigationPage(new ErrorPage(_startUpException))
-                {
-                    Style = (Style)Current.Resources["navigationpageStyle"]
-                };
+                MainPage = new NavigationPage(new ErrorPage(_startUpException));
             }     
         }
 

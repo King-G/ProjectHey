@@ -1,4 +1,6 @@
-﻿using ProjectHeyMobile.ViewModels;
+﻿using ProjectHey.DOMAIN;
+using ProjectHeyMobile.ViewModels;
+using ProjectHeyMobile.ViewModels.Enums;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,17 +16,42 @@ namespace ProjectHeyMobile.Views.Chatpages
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ChatPage : ContentPage
 	{
-        ObservableCollection<MessageViewModel> _messages;
-
-        public ChatPage(ICollection<MessageViewModel> messages)
+        public ChatPage() : this(new MessagesViewModel())
         {
+         
+        }
+        public ChatPage(MessagesViewModel messages)
+        {
+            
+            BindingContext = new MessagesViewModel();
+            (BindingContext as MessagesViewModel).Messages = messages.Messages;
+
             InitializeComponent();
-            _messages = new ObservableCollection<MessageViewModel>(messages);
+
+            ScrollToBottom();
         }
 
-        public async Task ScrollToBottom()
+        private void Entry_Completed(object sender, EventArgs e)
         {
-            await messageScrollView.ScrollToAsync(0, messageScrollView.Height, false);
+            Message message = new Message()
+            {
+                CreationDate = DateTime.Now,
+                UserSenderId = 1,
+                UserReceiverId = 2,
+                Body = ((Entry)sender).Text
+            };
+            
+            MessageViewModel messageViewModel = new MessageViewModel(message, 0);
+            (BindingContext as MessagesViewModel).AddMessage(messageViewModel);
+
+            ((Entry)sender).Text = string.Empty;
+            ScrollToBottom();
         }
+
+        private void ScrollToBottom()
+        {
+            messagesListView.ScrollTo(messagesListView.ItemsSource.Cast<MessageViewModel>().LastOrDefault(), ScrollToPosition.End, false);
+        }
+
     }
 }

@@ -3,18 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProjectHeyMobile.Views.Rootpages.RootPage"
              xmlns:pages="clr-namespace:ProjectHeyMobile.Views.Rootpages"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False" MasterBehavior="Default">
     
   <MasterDetailPage.Master>
-    <pages:RootPageMaster x:Name="MasterPage" />
+        <pages:RootPageMaster x:Name="MasterPage"/>
   </MasterDetailPage.Master>
     
   <MasterDetailPage.Detail>
-    <NavigationPage>
-      <x:Arguments>
-        <pages:RootPageDetail />
-      </x:Arguments>
-    </NavigationPage>
+        <NavigationPage>
+          <x:Arguments>
+                <pages:RootPageDetail />
+          </x:Arguments>
+        </NavigationPage>
   </MasterDetailPage.Detail>
     
 </MasterDetailPage>

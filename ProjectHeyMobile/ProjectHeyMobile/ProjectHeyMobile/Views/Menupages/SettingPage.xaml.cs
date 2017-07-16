@@ -17,7 +17,6 @@ namespace ProjectHeyMobile.Views.Menupages
         {
             InitializeComponent();
         }
-
         private async void Profile_Clicked(object sender, System.EventArgs e)
         {
             await App.Main.PageService.PushAsync(new ProfilePage());

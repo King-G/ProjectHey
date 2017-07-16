@@ -15,6 +15,7 @@ namespace ProjectHeyMobile.Views.Rootpages
         public RootPageDetail()
         {
             InitializeComponent();
+           
         }
     }
 }

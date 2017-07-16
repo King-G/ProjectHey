@@ -4,11 +4,29 @@
              x:Class="ProjectHeyMobile.App">
 	<Application.Resources>
         <ResourceDictionary>
+            <!-- Pallete -->
+            <Color x:Key="primary-title-color">#FFFFFF</Color>
+            <Color x:Key="primary-theme-color">#A0522D</Color>
+            <!-- Pallete-end -->
+            
             <!-- Application resource dictionary -->
             <Style x:Key="navigationpageStyle"  TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="#A0522D" />
                 <Setter Property="BarTextColor" Value="#ffffff" />
                 <Setter Property="BackgroundColor" Value="#ffffff" />
+            </Style>
+            <Style ApplyToDerivedTypes="true" TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource Key=primary-theme-color}"/>
+                <Setter Property="BarTextColor" Value="{StaticResource Key=primary-title-color}"/>
+            </Style>
+            <Style x:Key="menupageStyle"  TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="{StaticResource Key=primary-theme-color}"/>
+                <Setter Property="SeparatorColor" Value="#000000" />
+            </Style>
+            <Style x:Key="menupageitemStyle"  TargetType="Label">
+                <Setter Property="TextColor" Value="#ffffff"/>
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
             <Style x:Key="tabbedpageStyle"  TargetType="TabbedPage">
                 <Setter Property="BarBackgroundColor" Value="#A0522D" />
@@ -16,36 +34,36 @@
             </Style>
             <Style x:Key="iconStyle"  TargetType="Button">
                 <Setter Property="BackgroundColor" Value="#ffffff" />
-                <Setter Property="TextColor" Value="#A0522D"/>
+                <Setter Property="TextColor" Value="{StaticResource Key=primary-theme-color}"/>
                 <Setter Property="FontSize" Value="75" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
             <Style x:Key="icontextStyle"  TargetType="Label">
-                <Setter Property="TextColor" Value="#A0522D"/>
+                <Setter Property="TextColor" Value="{StaticResource Key=primary-theme-color}"/>
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
             <Style x:Key="appsettingstextStyle"  TargetType="Label">
-                <Setter Property="TextColor" Value="#A0522D"/>
+                <Setter Property="TextColor" Value="{StaticResource Key=primary-theme-color}"/>
                 <Setter Property="FontSize" Value="Medium" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
             <Style x:Key="profiletextStyle"  TargetType="Label">
-                <Setter Property="TextColor" Value="#A0522D"/>
+                <Setter Property="TextColor" Value="{StaticResource Key=primary-theme-color}"/>
                 <Setter Property="FontSize" Value="Large" />
                 <Setter Property="VerticalOptions" Value="End" />
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
             <Style x:Key="profilesubtextStyle"  TargetType="Label">
-                <Setter Property="TextColor" Value="#A0522D"/>
+                <Setter Property="TextColor" Value="{StaticResource Key=primary-theme-color}"/>
                 <Setter Property="FontSize" Value="Medium" />
                 <Setter Property="VerticalOptions" Value="Start" />
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
             <Style x:Key="listviewStyle"  TargetType="ListView">
-                <Setter Property="SeparatorColor" Value="#A0522D"/>
+                <Setter Property="SeparatorColor" Value="{StaticResource Key=primary-theme-color}"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

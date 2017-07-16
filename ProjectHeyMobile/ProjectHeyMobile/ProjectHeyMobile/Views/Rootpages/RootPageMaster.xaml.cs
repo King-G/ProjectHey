@@ -36,7 +36,7 @@ namespace ProjectHeyMobile.Views.Rootpages
                 {
                     new RootPageMenuItem { Id = 0, Title = "Hey.", TargetType = typeof(RootPageDetail) },
                     new RootPageMenuItem { Id = 1, Title = "Connections" , TargetType = typeof(ConnectionPage)},
-                    new RootPageMenuItem { Id = 2, Title = "App Settings", TargetType = typeof(AppSettingPage) }
+                    new RootPageMenuItem { Id = 2, Title = "Settings", TargetType = typeof(SettingPage) }
                 });
             }
 

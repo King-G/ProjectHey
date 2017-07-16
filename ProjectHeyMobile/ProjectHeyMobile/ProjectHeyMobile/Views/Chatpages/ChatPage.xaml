@@ -3,79 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProjectHeyMobile.Views.Chatpages.ChatPage">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" VerticalOptions="End">
-            <ScrollView x:Name="messageScrollView" VerticalOptions="End">
-                <StackLayout x:Name="stackMessages" Padding="10" Orientation="Vertical">
+        <StackLayout Orientation="Vertical" 
+                     VerticalOptions="FillAndExpand">
+            <ListView x:Name="messagesListView" 
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None"
+                      VerticalOptions="FillAndExpand"
+                      HorizontalOptions="FillAndExpand"
+                      ItemsSource="{Binding Messages}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="2*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Frame BackgroundColor="SandyBrown" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" CornerRadius="10">
-                            <Label Text="Do you think this will work?" FontSize="Medium"  />
-                        </Frame>
-                    </Grid>
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Frame BackgroundColor="SaddleBrown" Grid.Row="0" Grid.Column="0" CornerRadius="10" HorizontalOptions="Center">
-                            <Label Text="If you only do what you can do, you will never be more than what you are now" 
-                                FontSize="Medium" />
-                        </Frame>
-                    </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="2*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Frame BackgroundColor="SandyBrown" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" CornerRadius="10">
-                            <Label Text="Do you think this will work?" FontSize="Medium"  />
-                        </Frame>
-                    </Grid>
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Frame BackgroundColor="SaddleBrown" Grid.Row="0" Grid.Column="0" CornerRadius="10" HorizontalOptions="Center">
-                            <Label Text="If you only do what you can do, you will never be more than what you are now" 
-                                FontSize="Medium" />
-                        </Frame>
-                    </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="2*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Frame BackgroundColor="SandyBrown" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" CornerRadius="10">
-                            <Label Text="Do you think this will work?" FontSize="Medium"  />
-                        </Frame>
-                    </Grid>
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Frame BackgroundColor="SaddleBrown" Grid.Row="0" Grid.Column="0" CornerRadius="10" HorizontalOptions="Center">
-                            <Label Text="If you only do what you can do, you will never be more than what you are now" 
-                                FontSize="Medium" />
-                        </Frame>
-                    </Grid>
-                </StackLayout>
-            </ScrollView>
-            <Entry Keyboard="Chat" VerticalOptions="End" PlaceholderColor="Red" />
+                                <Frame BackgroundColor="{Binding Message.ColorHex}" 
+                                       Padding="10"
+                                       Grid.Row="0" Grid.Column="{Binding Message.MessagePosition}" 
+                                       HorizontalOptions="Start" 
+                                       CornerRadius="10">
+                                    <Label Text="{Binding Message.Body}" TextColor="Black" FontSize="Medium"  />
+                                </Frame>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Entry Keyboard="Chat" VerticalOptions="End" Completed="Entry_Completed" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

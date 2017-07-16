@@ -60,9 +60,8 @@ namespace ProjectHeyMobile.Views.Menupages
             try
             {
                 ConnectionViewModel connectionVM = e.SelectedItem as ConnectionViewModel;
-                ChatPage chatPage = new ChatPage(new List<MessageViewModel>());
+                ChatPage chatPage = new ChatPage(new MessagesViewModel());
                 await Navigation.PushAsync(chatPage);
-                await chatPage.ScrollToBottom();
             }
             catch (System.Exception exception)
             {

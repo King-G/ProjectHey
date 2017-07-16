@@ -117,7 +117,9 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BlockedViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\Enums\MessagePosition.cs" />
     <Compile Include="ViewModels\FeedbackViewModel.cs" />
+    <Compile Include="ViewModels\MessagesViewModel.cs" />
     <Compile Include="ViewModels\Service\IPageService.cs" />
     <Compile Include="ViewModels\Service\PageService.cs" />
     <Compile Include="ViewModels\ReportedViewModel.cs" />
@@ -134,6 +136,9 @@
     </Compile>
     <Compile Include="Views\Chatpages\ChatPage.xaml.cs">
       <DependentUpon>ChatPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menupages\BlockedPage.xaml.cs">
+      <DependentUpon>BlockedPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Menupages\ConnectionPage.xaml.cs">
       <DependentUpon>ConnectionPage.xaml</DependentUpon>
@@ -272,5 +277,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Menupages\BlockedPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
