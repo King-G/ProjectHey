@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProjectHeyMobile.Views.Menupages.SettingPage"
              NavigationPage.HasNavigationBar="True"
-             NavigationPage.HasBackButton="True">
+             NavigationPage.HasBackButton="True" BackgroundColor="White">
     <ContentPage.Content>
         <Grid>
             <StackLayout 
