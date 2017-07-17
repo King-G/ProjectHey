@@ -109,15 +109,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utils\ElementSource.cs" />
     <Compile Include="Utils\IntEnumConverter.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="ViewModels\AdvertisementCategoryViewModel.cs" />
     <Compile Include="ViewModels\AdvertisementViewModel.cs" />
     <Compile Include="ViewModels\AppSettingViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\BlockedsViewModel.cs" />
     <Compile Include="ViewModels\BlockedViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\CategoriesViewModel.cs" />
     <Compile Include="ViewModels\Enums\MessagePosition.cs" />
     <Compile Include="ViewModels\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\ConnectionsViewModel.cs" />
@@ -134,23 +135,26 @@
     <Compile Include="Views\Advertisementpages\AdvertisementPage.xaml.cs">
       <DependentUpon>AdvertisementPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Chatpages\ChannelSearchPage.xaml.cs">
+      <DependentUpon>ChannelSearchPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Chatpages\MessageView.xaml.cs">
       <DependentUpon>MessageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Menupages\AppSettingPage.xaml.cs">
+    <Compile Include="Views\Settingspages\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settingspages\AppSettingPage.xaml.cs">
       <DependentUpon>AppSettingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Chatpages\ChatPage.xaml.cs">
       <DependentUpon>ChatPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Menupages\BlockedPage.xaml.cs">
+    <Compile Include="Views\Settingspages\BlockedPage.xaml.cs">
       <DependentUpon>BlockedPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Menupages\ConnectionPage.xaml.cs">
       <DependentUpon>ConnectionPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Menupages\ConnectionView.xaml.cs">
-      <DependentUpon>ConnectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Rootpages\RootPage.xaml.cs">
       <DependentUpon>RootPage.xaml</DependentUpon>
@@ -162,6 +166,18 @@
       <DependentUpon>RootPageMaster.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Rootpages\RootPageMenuItem.cs" />
+    <Compile Include="Views\Settingspages\CategoriesPage.xaml.cs">
+      <DependentUpon>CategoriesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settingspages\CategorySearchPage.xaml.cs">
+      <DependentUpon>CategorySearchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settingspages\FeedbackPage.xaml.cs">
+      <DependentUpon>FeedbackPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settingspages\SharePage.xaml.cs">
+      <DependentUpon>SharePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Utilitypages\ErrorPage.xaml.cs">
       <DependentUpon>ErrorPage.xaml</DependentUpon>
     </Compile>
@@ -180,7 +196,7 @@
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Menupages\ProfilePage.xaml.cs">
+    <Compile Include="Views\Settingspages\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Menupages\SettingPage.xaml.cs">
@@ -226,7 +242,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Menupages\AppSettingPage.xaml">
+    <EmbeddedResource Include="Views\Settingspages\AppSettingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -244,7 +260,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Menupages\ProfilePage.xaml">
+    <EmbeddedResource Include="Views\Settingspages\ProfilePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -293,7 +309,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Menupages\BlockedPage.xaml">
+    <EmbeddedResource Include="Views\Settingspages\BlockedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -317,7 +333,37 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Menupages\ConnectionView.xaml">
+    <EmbeddedResource Include="Views\Settingspages\CategoriesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Settingspages\AboutPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Settingspages\FeedbackPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Settingspages\SharePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Settingspages\CategorySearchPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Chatpages\ChannelSearchPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

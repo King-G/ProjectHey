@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ProjectHeyMobile.Views.Menupages
+namespace ProjectHeyMobile.Views.Settingspages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ConnectionView : ViewCell
+    public partial class ProfilePage : ContentPage
     {
-        public ConnectionView()
+        public ProfilePage()
         {
+            BindingContext = App.Main.User;
             InitializeComponent();
         }
     }

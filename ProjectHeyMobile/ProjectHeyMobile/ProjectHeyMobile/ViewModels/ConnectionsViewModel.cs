@@ -1,5 +1,4 @@
-﻿
-using ProjectHeyMobile.Views.Chatpages;
+﻿using ProjectHeyMobile.Views.Chatpages;
 using ProjectHeyMobile.Views.Utilitypages;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -60,6 +59,7 @@ namespace ProjectHeyMobile.ViewModels
         {
             //Get Messages from connection & pass it in ChatPage ctor
             await App.Main.PageService.PushAsync(new HeyFeaturesPage(new HeyFeaturesViewModel(connection)));
+
     
         }
         private void SelectConnection(ConnectionViewModel connection)

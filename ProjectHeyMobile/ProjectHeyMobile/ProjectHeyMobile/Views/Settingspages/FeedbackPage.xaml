@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProjectHeyMobile.Views.Utilitypages.ReportPage">
+             x:Class="ProjectHeyMobile.Views.Settingspages.FeedbackPage"
+             Title="Feedback">
     <ContentPage.Content>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -9,22 +10,19 @@
                 <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*"/>
-                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="0.3*"/>
                 <RowDefinition Height="0.5*"/>
                 <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
-            <Label Text="{Binding Username, StringFormat='Username: {0}'}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                   Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
             <Label Text="Feedback Type" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                   Grid.Column="0" Grid.Row="1"/>
-            <Picker ItemsSource="{Binding ReportTypes}" SelectedIndex="{Binding Report.ReportType, Converter=IntEnum}"
-                    Grid.Column="1" Grid.Row="1" Margin="20"/>
-            <Entry Keyboard="Default" Placeholder="Thank you for your feedback!" Text="{Binding Report.Message}"
+                   Grid.Column="0" Grid.Row="0"/>
+            <Picker ItemsSource="{Binding FeedbackTypes}" SelectedIndex="{Binding Feedback.FeedbackType, Converter=IntEnum}"
+                    Grid.Column="1" Grid.Row="0" Margin="20"/>
+            <Entry Keyboard="Default" Placeholder="Thank you for your feedback!" Text="{Binding Feedback.Message}"
                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                   Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"/>
+                   Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
             <Button Text="Submit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                    Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"/>
+                    Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ProjectHeyMobile.Views.Menupages
+namespace ProjectHeyMobile.Views.Settingspages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class BlockedPage : ContentPage
+	public partial class AboutPage : ContentPage
 	{
-		public BlockedPage ()
+		public AboutPage ()
 		{
 			InitializeComponent ();
 		}

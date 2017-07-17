@@ -1,10 +1,5 @@
-﻿using ProjectHeyMobile.ViewModels;
+﻿using ProjectHeyMobile.Views.Settingspages;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,33 +12,33 @@ namespace ProjectHeyMobile.Views.Menupages
         {
             InitializeComponent();
         }
-        private async void Profile_Clicked(object sender, System.EventArgs e)
+        private async void Profile_Clicked(object sender, EventArgs e)
         {
             await App.Main.PageService.PushAsync(new ProfilePage());
         }
-        private async void AppSetting_Clicked(object sender, System.EventArgs e)
+        private async void AppSetting_Clicked(object sender, EventArgs e)
         {
             await App.Main.PageService.PushAsync(new AppSettingPage());
         }
-        private async void Categories_Clicked(object sender, System.EventArgs e)
+        private async void Categories_Clicked(object sender, EventArgs e)
         {
-            await App.Main.PageService.DisplayAlert("Categories", "Coming soon...", "Can't Wait!");
+            await App.Main.PageService.PushAsync(new CategoriesPage());
         }
-        private async void Blocked_Clicked(object sender, System.EventArgs e)
+        private async void Blocked_Clicked(object sender, EventArgs e)
         {
-            await App.Main.PageService.DisplayAlert("Blocked users", "Coming soon...", "Can't Wait!");
+            await App.Main.PageService.PushAsync(new BlockedPage());
         }
-        private async void About_Clicked(object sender, System.EventArgs e)
+        private async void About_Clicked(object sender, EventArgs e)
         {
-            await App.Main.PageService.DisplayAlert("About", "www.epicness.com", "Awesome!");
+            await App.Main.PageService.PushAsync(new AboutPage());
         }
-        private async void Feedback_Clicked(object sender, System.EventArgs e)
+        private async void Feedback_Clicked(object sender, EventArgs e)
         {
-            await App.Main.PageService.DisplayAlert("Feedback", "Give us some feedback", "Will do!");
+            await App.Main.PageService.PushAsync(new FeedbackPage());
         }
-        private async void Share_Clicked(object sender, System.EventArgs e)
+        private async void Share_Clicked(object sender, EventArgs e)
         {
-            await App.Main.PageService.DisplayAlert("Share", "Sharing is caring", "Aight Captain!");
+            await App.Main.PageService.PushAsync(new SharePage());
         }
     }
 }

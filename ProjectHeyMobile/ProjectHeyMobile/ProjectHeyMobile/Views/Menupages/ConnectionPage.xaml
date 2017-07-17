@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:util="clr-namespace:ProjectHeyMobile.Utils"
              x:Class="ProjectHeyMobile.Views.Menupages.ConnectionPage">
     <ContentPage.Content>
         <ListView x:Name="ConnectionsListView"
@@ -14,18 +13,17 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                    <!--<view:ConnectionView BindingContext = "{Binding}"/>-->
-                    <StackLayout HorizontalOptions="Fill" Padding="5" Orientation="Horizontal">
-                        <Label Text="PIC" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" />
-                        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Vertical" Padding="5">
-                            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical">
-                                <Label Text="{Binding Connections.Username}" FontSize="Medium" />
-                                <Label Text="Last created message" FontSize="Default" />
+                        <StackLayout HorizontalOptions="Fill" Padding="5" Orientation="Horizontal">
+                            <Label Text="PIC" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" />
+                            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Vertical" Padding="5">
+                                <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical">
+                                    <Label Text="{Binding Connections.Username}" FontSize="Medium" />
+                                    <Label Text="Last created message" FontSize="Default" />
+                                </StackLayout>
+                                <ProgressBar Progress="0.75" HorizontalOptions="Fill" />
                             </StackLayout>
-                            <ProgressBar Progress="0.75" HorizontalOptions="Fill" />
                         </StackLayout>
-                    </StackLayout>
-                    <ViewCell.ContextActions>
+                        <ViewCell.ContextActions>
                             <MenuItem 
                                 Text="Hey. Features" 
                                 Command="{Binding Path=BindingContext.ShowHeyFeaturesCommand, Source={x:Reference ConnectionsListView}}"
@@ -35,12 +33,11 @@
                                 Command="{Binding Path=BindingContext.BlockConnectionCommand, Source={x:Reference ConnectionsListView}}"
                                 CommandParameter="{Binding}"/>
                             <MenuItem 
-                            Text="Report" 
-                            Command="{Binding Path=BindingContext.ReportConnectionCommand, Source={x:Reference ConnectionsListView}}"
-                            CommandParameter="{Binding}"/>
+                                Text="Report" 
+                                Command="{Binding Path=BindingContext.ReportConnectionCommand, Source={x:Reference ConnectionsListView}}"
+                                CommandParameter="{Binding}"/>
                         </ViewCell.ContextActions>
-                 </ViewCell>
-
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

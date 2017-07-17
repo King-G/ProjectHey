@@ -8,14 +8,19 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ProjectHeyMobile.Views.Menupages
+namespace ProjectHeyMobile.Views.Settingspages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AppSettingPage : ContentPage
     {
+        private AppSettingViewModel AppSettingViewModel
+        {
+            get { return (BindingContext as AppSettingViewModel); }
+            set { BindingContext = value; }
+        }
         public AppSettingPage()
         {
-            BindingContext = new AppSettingViewModel(App.Main.User.Appsetting);
+            AppSettingViewModel = new AppSettingViewModel(App.Main.User.Appsetting);
             InitializeComponent();
         }
         protected override void OnAppearing()
