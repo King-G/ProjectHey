@@ -1,7 +1,7 @@
 ﻿{
   "supports": {},
   "dependencies": {
-    "AutoMapper": "6.1.1",
+    "Microsoft.AspNet.SignalR.Client": "2.2.2",
     "Microsoft.Bcl": "1.1.10",
     "Microsoft.Bcl.Build": "1.0.21",
     "Microsoft.NETCore.Portable.Compatibility": "1.0.2",

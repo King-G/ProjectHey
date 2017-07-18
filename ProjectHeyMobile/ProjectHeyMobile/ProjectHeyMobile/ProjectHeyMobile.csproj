@@ -109,6 +109,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChatCommunication\ChatMessage.cs" />
+    <Compile Include="ChatCommunication\ChatServices.cs" />
+    <Compile Include="ChatCommunication\IChatServices.cs" />
     <Compile Include="Utils\IntEnumConverter.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="ViewModels\AdvertisementCategoryViewModel.cs" />
@@ -123,7 +126,7 @@
     <Compile Include="ViewModels\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\ConnectionsViewModel.cs" />
     <Compile Include="ViewModels\HeyFeaturesViewModel.cs" />
-    <Compile Include="ViewModels\MessagesViewModel.cs" />
+    <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\Service\IPageService.cs" />
     <Compile Include="ViewModels\Service\PageService.cs" />
     <Compile Include="ViewModels\ReportedViewModel.cs" />

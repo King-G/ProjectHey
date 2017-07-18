@@ -27,7 +27,7 @@ namespace ProjectHeyMobile.Views.Mainpages
             {
                 messages.Add(new MessageViewModel(message));
             }
-            MessagesViewModel messagesViewModel = new MessagesViewModel(messages);
+            ChatViewModel messagesViewModel = new ChatViewModel(messages);
             await App.Main.PageService.PushAsync(new ChatPage(messagesViewModel));
         }
     }

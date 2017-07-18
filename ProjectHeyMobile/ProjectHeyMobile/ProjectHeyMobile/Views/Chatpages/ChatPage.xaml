@@ -17,6 +17,7 @@
                       ItemsSource="{Binding Messages}"
                       SelectedItem="{Binding SelectedMessage, Mode=TwoWay}"
                       ItemSelected = "MessagesListView_ItemSelected"
+                      ChildAdded="MessagesListView_ChildAdded"
                       Grid.Column="0" Grid.Row="0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
