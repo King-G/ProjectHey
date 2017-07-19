@@ -2,7 +2,7 @@
 
 namespace ProjectHeyMobile.APICommunication
 {
-    public class ProjectHeyAPIMultiResponse<T>
+    public class APIMultiResponse<T>
     {
         public IEnumerable<T> Value { get; set; }
 

@@ -105,13 +105,16 @@
     <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\UserRole.cs">
       <Link>Domain\UserRole.cs</Link>
     </Compile>
-    <Compile Include="APICommunication\ProjectHeyAPISingleResponse.cs" />
+    <Compile Include="APICommunication\APISingleResponse.cs" />
+    <Compile Include="APICommunication\IFacebookAPI.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ChatCommunication\ChatMessage.cs" />
-    <Compile Include="ChatCommunication\ChatServices.cs" />
-    <Compile Include="ChatCommunication\IChatServices.cs" />
+    <Compile Include="Authentication\AuthenticationState.cs" />
+    <Compile Include="Authentication\HeyAuthentication.cs" />
+    <Compile Include="Authentication\OAuthSettings.cs" />
+    <Compile Include="Authentication\ServerInfo.cs" />
+    <Compile Include="LoginPage.cs" />
     <Compile Include="Utils\IntEnumConverter.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="ViewModels\AdvertisementCategoryViewModel.cs" />
@@ -123,6 +126,7 @@
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\CategoriesViewModel.cs" />
     <Compile Include="ViewModels\Enums\MessagePosition.cs" />
+    <Compile Include="ViewModels\FBModels\FacebookProfileModel.cs" />
     <Compile Include="ViewModels\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\ConnectionsViewModel.cs" />
     <Compile Include="ViewModels\HeyFeaturesViewModel.cs" />
@@ -143,6 +147,15 @@
     </Compile>
     <Compile Include="Views\Chatpages\MessageView.xaml.cs">
       <DependentUpon>MessageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mainpages\MainPage.ButtonGoogleClick.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mainpages\MainPage.ButtonFacebookClick.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mainpages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settingspages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
@@ -194,10 +207,7 @@
       <DependentUpon>EveryonePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="APICommunication\IProjectHeyAPI.cs" />
-    <Compile Include="APICommunication\ProjectHeyAPIMultiResponse.cs" />
-    <Compile Include="Views\Authenticationpages\LoginPage.xaml.cs">
-      <DependentUpon>LoginPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="APICommunication\APIMultiResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Settingspages\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
@@ -212,6 +222,9 @@
     </Compile>
     <Compile Include="Views\Utilitypages\ReportPage.xaml.cs">
       <DependentUpon>ReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Utilitypages\WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -246,12 +259,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Settingspages\AppSettingPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\Authenticationpages\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -367,6 +374,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Chatpages\ChannelSearchPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Utilitypages\WelcomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Mainpages\MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

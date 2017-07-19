@@ -54,7 +54,7 @@ namespace ProjectHeyMobile.Views.Menupages
                 var projectHeyAPI = RestService.For<IProjectHeyAPI>("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api");
                 var response = await projectHeyAPI.GetConnectionsViewModelsByUserId(2);
 
-                IEnumerable<ConnectionViewModel> connectionresponse = JsonConvert.DeserializeObject<ProjectHeyAPIMultiResponse<ConnectionViewModel>>(response).Value;
+                IEnumerable<ConnectionViewModel> connectionresponse = JsonConvert.DeserializeObject<APIMultiResponse<ConnectionViewModel>>(response).Value;
 
                 ConnectionsViewModel.Connections = new ObservableCollection<ConnectionViewModel>(connectionresponse);
 

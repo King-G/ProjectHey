@@ -2,7 +2,7 @@
 
 namespace ProjectHeyMobile.APICommunication
 {
-    public class ProjectHeyAPISingleResponse<T>
+    public class APISingleResponse<T>
     {
         public T Value { get; set; }
 
