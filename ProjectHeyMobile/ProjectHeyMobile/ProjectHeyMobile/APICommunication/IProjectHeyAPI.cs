@@ -7,6 +7,9 @@ namespace ProjectHeyMobile.APICommunication
 {
     public interface IProjectHeyAPI
     {
+        [Get("/users/getbyfacebookid/{id}")]
+        Task<string> UserGetByFacebookId(int id);
+
         [Get("/users/getbyid/{id}")]
         Task<string> UserGetById(int id);
 
@@ -18,6 +21,9 @@ namespace ProjectHeyMobile.APICommunication
 
         [Post("/appsettings/update")]
         Task<string> AppSettingsUpdate([Body(BodySerializationMethod.UrlEncoded)]AppSettingViewModel appsettings);
+
+        [Post("/users/create")]
+        Task<string> CreateUser ([Body(BodySerializationMethod.UrlEncoded)]User user);
 
         [Post("/users/update")]
         Task<string> SyncUser([Body(BodySerializationMethod.UrlEncoded)]User user);

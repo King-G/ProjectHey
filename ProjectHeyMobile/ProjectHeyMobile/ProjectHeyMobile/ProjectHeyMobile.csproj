@@ -106,15 +106,12 @@
       <Link>Domain\UserRole.cs</Link>
     </Compile>
     <Compile Include="APICommunication\APISingleResponse.cs" />
-    <Compile Include="APICommunication\IFacebookAPI.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Authentication\AuthenticationState.cs" />
-    <Compile Include="Authentication\HeyAuthentication.cs" />
-    <Compile Include="Authentication\OAuthSettings.cs" />
-    <Compile Include="Authentication\ServerInfo.cs" />
-    <Compile Include="LoginPage.cs" />
+    <Compile Include="Authentication\FacebookModel.cs" />
+    <Compile Include="Authentication\ProjectHeyAuthentication.cs" />
     <Compile Include="Utils\IntEnumConverter.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="ViewModels\AdvertisementCategoryViewModel.cs" />
@@ -148,14 +145,8 @@
     <Compile Include="Views\Chatpages\MessageView.xaml.cs">
       <DependentUpon>MessageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Mainpages\MainPage.ButtonGoogleClick.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Mainpages\MainPage.ButtonFacebookClick.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Mainpages\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Views\Rootpages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settingspages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
@@ -385,7 +376,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Mainpages\MainPage.xaml">
+    <EmbeddedResource Include="Views\Rootpages\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

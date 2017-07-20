@@ -30,7 +30,7 @@ namespace ProjectHeyMobile.Views.Settingspages
 
         protected override async void OnDisappearing()
         {
-            await App.Main.SaveChangesAsync();
+            //await App.Main.SaveChangesAsync();
             base.OnDisappearing();
         }
 

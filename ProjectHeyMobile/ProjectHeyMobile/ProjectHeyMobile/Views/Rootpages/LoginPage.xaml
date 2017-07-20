@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProjectHeyMobile.Views.Mainpages.MainPage">
+             x:Class="ProjectHeyMobile.Views.Rootpages.LoginPage"
+             Title="Login">
     <ContentPage.Padding>
         <OnPlatform 
                 x:TypeArguments="Thickness" 
@@ -25,14 +26,10 @@
                     <Image x:Name="profileImage" WidthRequest="300" HeightRequest="200" />
                     <!--
                     -->
-                    <Button 
-                        x:Name="buttonGoogle" 
-                        Text="Google OAuth" 
-                        />
 
                     <Button 
                         x:Name="buttonFacebook" 
-                        Text="Facebook OAuth" 
+                        Text="Login with Facebook." 
                         />
 
                 </StackLayout>
