@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Amazon.Runtime;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ProjectHeyMobile.Authentication;
 using System;
@@ -26,8 +27,24 @@ namespace ProjectHeyMobile.Views.Rootpages
             account = store.FindAccountsForService(ProjectHeyAuthentication.ServiceId).FirstOrDefault();
             this.BindingContext = this;
 
+            buttonFacebook.IsEnabled = true;
+            buttonHey.IsEnabled = false;
+
+            buttonHey.Clicked += ButtenHey_Clicked;
             buttonFacebook.Clicked += ButtonFacebook_Clicked;
-            ButtonFacebook_Clicked(this, new EventArgs());
+        }
+
+        private void ButtenHey_Clicked(object sender, EventArgs e)
+        {
+            FacebookModel facebooModel = GetProfile().Result;
+            App.LoadUser(facebooModel);
+            App.Current.MainPage = new NavigationPage(new RootPage()); ;
+        }
+        private void PresentUILoginScreen(OAuth2Authenticator authenticator)
+        {
+            Xamarin.Auth.Presenters.OAuthLoginPresenter presenter = null;
+            presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
+            presenter.Login(authenticator);
         }
 
         void ButtonFacebook_Clicked(object sender, EventArgs e)
@@ -53,29 +70,52 @@ namespace ProjectHeyMobile.Views.Rootpages
 
         }
 
-        async void SyncProfile()
+        async Task<FacebookModel> GetProfile()
         {
             try
             {
-                var request = new OAuth2Request("GET", ProjectHeyAuthentication.ApiEndpoint, null, account);
-                var response = await request.GetResponseAsync();
-                var responseData = response.GetResponseText();
+                #region WHILE WE WAIT FOR  AUTH0 TO GET THEIR SHIT TOGETHER
+                FacebookModel facebookModel = new FacebookModel()
+                {
+                    name = "Karim Gabsi",
+                    family_name = "Gabsi",
+                    given_name = "Karim",
+                    email = "gabsikarim@gmail.com",
+                    age_range = new AgeRange() { min = 21 },
+                    gender = "male",
+                    birthday = "01/16/1991",
+                    location = new Location() { id = "114521328558541", name = "Kortrijk" }
 
-                FacebookModel facebookModel = JsonConvert.DeserializeObject<FacebookModel>(responseData);
+                };
 
-                //var imageRequest = new OAuth2Request("GET", new Uri(imageUrl), null, account);
-                //var stream = await (await imageRequest.GetResponseAsync()).GetResponseStreamAsync();
-                //profileImage.Source = ImageSource.FromStream(() => stream);
+                return facebookModel;
+                #endregion
 
-                App.LoadUser(facebookModel);
-                App.Current.MainPage = new NavigationPage(new RootPage());
+
+                //#region AUTH0 FIXED WHATEVER NEEDED FIXED
+                //var request = new OAuth2Request("GET", ProjectHeyAuthentication.ApiEndpoint, null, account);
+
+                //var response = await request.GetResponseAsync();
+                //var responseData = await response.GetResponseTextAsync();
+
+                //FacebookModel facebookModel = JsonConvert.DeserializeObject<FacebookModel>(responseData);
+
+                //return facebookModel;
+                ////var imageRequest = new OAuth2Request("GET", new Uri(imageUrl), null, account);
+                ////var stream = await (await imageRequest.GetResponseAsync()).GetResponseStreamAsync();
+                ////profileImage.Source = ImageSource.FromStream(() => stream);
+                //#endregion
+
+
             }
             catch (Exception exception)
             {
                 await App.Current.MainPage.DisplayAlert("Oops", "Get data failure: " + exception.Message + "\r\nHas the access token expired?", "ok");
+                return null;
             }
         }
 
+        #region TOKEN REFRESH
         //async void RefreshButtonClicked(object sender, EventArgs e)
         //{
         //    var refreshToken = account.Properties["refresh_token"];
@@ -124,7 +164,9 @@ namespace ProjectHeyMobile.Views.Rootpages
         //    }
         //}
 
-        void OnAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
+        #endregion
+
+        async void OnAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
         {
             var authenticator = sender as OAuth2Authenticator;
 
@@ -141,13 +183,28 @@ namespace ProjectHeyMobile.Views.Rootpages
                 if (account != null)
                     store.Delete(account, ProjectHeyAuthentication.ServiceId);
 
-                store.Save(account = e.Account, ProjectHeyAuthentication.ServiceId);
+                account = e.Account;
+                store.Save(account, ProjectHeyAuthentication.ServiceId);
 
-                SyncProfile();
+                ProjectHeyAuthentication.FacebookAccessToken = account.Properties["access_token"];
+
+                ProjectHeyAuthentication.AWSCredentials.AddLogin("graph.facebook.com", ProjectHeyAuthentication.FacebookAccessToken);
+
+                try
+                {
+                    await ProjectHeyAuthentication.AWSCredentials.GetIdentityIdAsync();
+                }
+                catch (Exception exception)
+                {
+
+                }
+
+                buttonHey.IsEnabled = true;
+                buttonFacebook.IsEnabled = false;
             }
             else
             {
-                App.Current.MainPage.DisplayAlert("Dammit...", "Authentication Failed", "I'll report it");
+               await App.Current.MainPage.DisplayAlert("Dammit...", "Authentication Failed", "I'll report it");
 
             }
         }
@@ -165,13 +222,6 @@ namespace ProjectHeyMobile.Views.Rootpages
             }
 
             App.Current.MainPage.DisplayAlert("Dammit... Obviously something went wrong...", e.Message,  "It happens...");
-        }
-
-        private void PresentUILoginScreen(OAuth2Authenticator authenticator)
-        {
-            Xamarin.Auth.Presenters.OAuthLoginPresenter presenter = null;
-            presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
-            presenter.Login(authenticator);
         }
 
     }

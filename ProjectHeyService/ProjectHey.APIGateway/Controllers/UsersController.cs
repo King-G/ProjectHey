@@ -52,16 +52,32 @@ namespace ProjectHey.APIGateway.Controllers
         [HttpPost]
         //[ValidateModel]
         //localhost:5000/api/users/create?Id=0&firstname=test&....
-        public async Task<User> Create(User user)
+        public async Task<IActionResult> Create(User user)
         {
-            return await userManager.CreateAsync(user);
+            try
+            {
+                user = await userManager.CreateAsync(user);
+                return Ok(Json(user));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
         //[ValidateModel]
-        public async Task<User> Update(User user)
+        public async Task<IActionResult> Update(User user)
         {
-            return await userManager.UpdateAsync(user);
+            try
+            {
+                user = await userManager.UpdateAsync(user);
+                return Ok(Json(user));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE api/values/5

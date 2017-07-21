@@ -36,15 +36,15 @@ namespace ProjectHeyMobile.Views.Chatpages
 
         private void Entry_Completed(object sender, EventArgs e)
         {
-            Message message = new Message()
-            {
-                CreationDate = DateTime.Now,
-                UserSenderId = App.Main.User.Id,
-                UserReceiverId = 2,
-                Body = ((Entry)sender).Text
-            };
+            //Message message = new Message()
+            //{
+            //    CreationDate = DateTime.Now,
+            //    UserSenderId = App.Main.User.Id,
+            //    UserReceiverId = 2,
+            //    Body = ((Entry)sender).Text
+            //};
 
-            ChatViewModel.SendMessageCommand.Execute(new MessageViewModel(message));
+            ChatViewModel.SendMessageCommand.Execute(new MessageViewModel(((Entry)sender).Text));
 
             ((Entry)sender).Text = string.Empty;
         }

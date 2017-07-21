@@ -72,20 +72,26 @@
     <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Feedback.cs">
       <Link>Domain\Feedback.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Message.cs">
-      <Link>Domain\Message.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Provider.cs">
-      <Link>Domain\Provider.cs</Link>
-    </Compile>
     <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Report.cs">
       <Link>Domain\Report.cs</Link>
     </Compile>
     <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Reported.cs">
       <Link>Domain\Reported.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Role.cs">
-      <Link>Domain\Role.cs</Link>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\SignalRConnection.cs">
+      <Link>Domain\SignalRConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\SignalRConversationRoom.cs">
+      <Link>Domain\SignalRConversationRoom.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\SignalRMessage.cs">
+      <Link>Domain\SignalRMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\SignalRUser.cs">
+      <Link>Domain\SignalRUser.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\SignalRUserConversationRoom.cs">
+      <Link>Domain\SignalRUserConversationRoom.cs</Link>
     </Compile>
     <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Structs\Location.cs">
       <Link>Domain\Structs\Location.cs</Link>
@@ -99,16 +105,11 @@
     <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\UserCategory.cs">
       <Link>Domain\UserCategory.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\UserProvider.cs">
-      <Link>Domain\UserProvider.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\UserRole.cs">
-      <Link>Domain\UserRole.cs</Link>
-    </Compile>
     <Compile Include="APICommunication\APISingleResponse.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Authentication\AuthenticatedHttpClientHandler.cs" />
     <Compile Include="Authentication\AuthenticationState.cs" />
     <Compile Include="Authentication\FacebookModel.cs" />
     <Compile Include="Authentication\ProjectHeyAuthentication.cs" />
@@ -133,8 +134,6 @@
     <Compile Include="ViewModels\ReportedViewModel.cs" />
     <Compile Include="ViewModels\UserAdvertisementViewModel.cs" />
     <Compile Include="ViewModels\UserCategoryViewModel.cs" />
-    <Compile Include="ViewModels\UserProviderViewModel.cs" />
-    <Compile Include="ViewModels\UserRoleViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\Advertisementpages\AdvertisementPage.xaml.cs">
       <DependentUpon>AdvertisementPage.xaml</DependentUpon>

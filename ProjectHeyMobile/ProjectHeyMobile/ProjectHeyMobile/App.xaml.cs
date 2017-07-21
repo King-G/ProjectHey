@@ -11,6 +11,8 @@ using ProjectHeyMobile.Views.Rootpages;
 using ProjectHeyMobile.Views.Utilitypages;
 using Refit;
 using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ProjectHeyMobile
@@ -53,85 +55,86 @@ namespace ProjectHeyMobile
 
         public static void LoadUser(FacebookModel FacebookModel = null)
         {
-            FacebookModel savedFacebookModel = null;
-            if (Current.Properties.ContainsKey("FacebookModel"))
+            try
             {
-                savedFacebookModel = Current.Properties["FacebookModel"] as FacebookModel;
-            }
-
-            if (FacebookModel != null)
-            {
-                if (savedFacebookModel == null)
+                FacebookModel savedFacebookModel = null;
+                if (Current.Properties.ContainsKey("FacebookModel"))
                 {
-                    //First time user
-                    Main.User = CreateUser(FacebookModel);
-                    Current.Properties["FacebookModel"] = FacebookModel;
-                    Current.SavePropertiesAsync();
+                    savedFacebookModel = Current.Properties["FacebookModel"] as FacebookModel;
                 }
-                else if (!savedFacebookModel.Equals(FacebookModel))
+
+                if (FacebookModel != null)
                 {
-                    //user's facebook is out of sync
-                    Main.User = GetSyncedUser(FacebookModel);
-                    
+                    if (savedFacebookModel == null)
+                    {
+                        //First time user
+                        Main.User = CreateUser(FacebookModel).Result;
+                        Current.Properties["FacebookModel"] = FacebookModel;
+                        Current.SavePropertiesAsync();
+                    }
+                    else if (!savedFacebookModel.Equals(FacebookModel))
+                    {
+                        //user's facebook is out of sync
+                        Main.User = GetSyncedUser(FacebookModel).Result;
+
+                    }
+                    else
+                    {
+                        //user's facebook didn't change.
+                        Main.User = GetUserByFacebookId(FacebookModel.user_id).Result;
+                    }
+                }
+                else if (savedFacebookModel != null)
+                {
+                    Main.User = GetUserByFacebookId(FacebookModel.user_id).Result;
                 }
                 else
                 {
-                    //user's facebook didn't change.
-                    Main.User = GetUserByFacebookId(FacebookModel.user_id);
+                    Exception exception = new Exception("Trying to load a user that doesn't exist");
+                    if (App.Current.MainPage == null)
+                    {
+                        Current.MainPage.Navigation.PushAsync(new ErrorPage(exception));
+                    }
+                    else
+                    {
+                        App.Current.MainPage = new NavigationPage(new ErrorPage(exception));
+                    }
                 }
             }
-            else if (savedFacebookModel != null)
+            catch (Exception exception)
             {
-                Main.User = GetUserByFacebookId(FacebookModel.user_id);
+                App.Current.MainPage = new NavigationPage(new ErrorPage(exception));
             }
-            else
-            {
-                Exception exception = new Exception("Trying to load a user that doesn't exist");
-                if (App.Current.MainPage == null)
-                {
-                    Current.MainPage.Navigation.PushAsync(new ErrorPage(exception));
-                }
-                else
-                {
-                    App.Current.MainPage = new NavigationPage(new ErrorPage(exception));
-                }
-            }
-
-
         }
 
-        private static User GetUserByFacebookId(string user_id)
+        private static async Task<User> GetUserByFacebookId(string user_id)
         {
-            var projectHeyAPI = RestService.For<IProjectHeyAPI>("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api");
-            var response = projectHeyAPI.UserGetByFacebookId(Convert.ToInt32(user_id)).Result;
-
+            var response = await ProjectHeyAuthentication.GetProjectHeyAPI().Result.UserGetByFacebookId(Convert.ToInt32(user_id));
             return JsonConvert.DeserializeObject<APISingleResponse<User>>(response).Value;
         }
 
-        private static User GetSyncedUser(FacebookModel facebookModel)
+        private static async Task<User> GetSyncedUser(FacebookModel facebookModel)
         {
             Current.Properties["FacebookModel"] = facebookModel;
-            Current.SavePropertiesAsync();
+            await Current.SavePropertiesAsync();
 
-            User user = GetUserByFacebookId(facebookModel.user_id);
+            User user = await GetUserByFacebookId(facebookModel.user_id);
 
             user = FacebookModelToUser(facebookModel, user);
 
-            var projectHeyAPI = RestService.For<IProjectHeyAPI>("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api");
-            var response = projectHeyAPI.SyncUser(user).Result;
+            var response = await ProjectHeyAuthentication.GetProjectHeyAPI().Result.SyncUser(user);
 
             return JsonConvert.DeserializeObject<APISingleResponse<User>>(response).Value;
         }
 
-        private static User CreateUser(FacebookModel facebookModel)
+        private static async Task<User> CreateUser(FacebookModel facebookModel)
         {
             Current.Properties["FacebookModel"] = facebookModel;
-            Current.SavePropertiesAsync();
+            await Current.SavePropertiesAsync();
 
             User user = FacebookModelToUser(facebookModel);
 
-            var projectHeyAPI = RestService.For<IProjectHeyAPI>("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api");
-            var response = projectHeyAPI.CreateUser(user).Result;
+            var response = await ProjectHeyAuthentication.GetProjectHeyAPI().Result.CreateUser(user);
 
             return JsonConvert.DeserializeObject<APISingleResponse<User>>(response).Value;
         }

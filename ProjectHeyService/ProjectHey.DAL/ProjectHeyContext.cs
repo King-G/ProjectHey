@@ -30,20 +30,22 @@ namespace ProjectHey.DAL
 
         }
         public DbSet<User> User { get; set; }
-        public DbSet<UserProvider> UserProvider { get; set; }
-        public DbSet<Role> Role { get; set; }
         public DbSet<AppSetting> AppSetting { get; set; }
         public DbSet<Category> Category { get; set; }
-        public DbSet<Message> Message { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
-        public DbSet<Provider> Provider { get; set; }
         public DbSet<Report> Report { get; set; }
         public DbSet<Advertisement> Advertisement { get; set; }
         public DbSet<AdvertisementCategory> AdvertisementCategory { get; set; }
         public DbSet<Blocked> Blocked { get; set; }
         public DbSet<UserCategory> UserCategory { get; set; }
-        public DbSet<UserRole> UserRole { get; set; }
 
+        //<<<<<SignalR>>>>>
+        public DbSet<SignalRUser> SignalRUser { get; set; }
+        public DbSet<SignalRConnection> SignalRConnection { get; set; }
+        public DbSet<SignalRConversationRoom> SignalRConversationRoom { get; set; }
+        public DbSet<SignalRMessage> SignalRMessage { get; set; }
+        public DbSet<SignalRUserConversationRoom> SignalRUserConversationRoom { get; set; }
+        //<<<<<END SignalR>>>>>
 
         //<<<<<Special Intersection Tables>>>>>
 
@@ -67,20 +69,22 @@ namespace ProjectHey.DAL
             #endregion
 
             #region Getters Mapping
-            modelBuilder.Entity<User>().Property(x => x.Username).HasColumnName("Username");
+            //modelBuilder.Entity<User>().Property(x => x.Username).HasColumnName("Username");
             #endregion
 
             #region Primary Keys (Excl. One-One & Many-Many)
             //<<<<PRIMARY KEYS (Excl. ONE-ONE & MANY-MANY)>>>>
             modelBuilder.Entity<User>()
                 .HasKey(x => x.Id);
-            modelBuilder.Entity<Role>()
+            modelBuilder.Entity<SignalRUser>()
                 .HasKey(x => x.Id);
-            modelBuilder.Entity<Provider>()
+            modelBuilder.Entity<SignalRConnection>()
+                .HasKey(x => x.Id);
+            modelBuilder.Entity<SignalRConversationRoom>()
+                .HasKey(x => x.Id);
+            modelBuilder.Entity<SignalRMessage>()
                 .HasKey(x => x.Id);
             modelBuilder.Entity<Category>()
-                .HasKey(x => x.Id);
-            modelBuilder.Entity<Message>()
                 .HasKey(x => x.Id);
             modelBuilder.Entity<Feedback>()
                 .HasKey(x => x.Id);
@@ -98,19 +102,20 @@ namespace ProjectHey.DAL
                 .WithOne(z => z.User)
                 .HasForeignKey<AppSetting>(x => x.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<User>()
+                .HasOne(x => x.SignalRUser)
+                .WithOne(z => z.User)
+                .HasForeignKey<SignalRUser>(x => x.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
             //<<<<One-To-One Relationships>>>> 
             #endregion
 
             #region UNIQUE KEYS
             //<<<<UNIQUE>>>>
-            modelBuilder.Entity<Role>()
-                .HasIndex(x => x.Name).IsUnique();
-            modelBuilder.Entity<Provider>()
-                .HasIndex(x => x.Name).IsUnique();
             modelBuilder.Entity<Category>()
                 .HasIndex(x => x.Name).IsUnique();
-            modelBuilder.Entity<UserProvider>()
-                .HasIndex(x => x.ProviderUserId).IsUnique();
+            modelBuilder.Entity<SignalRConversationRoom>()
+                .HasIndex(x => x.RoomName).IsUnique();
             //<<<<END UNIQUE>>>> 
             #endregion
 
@@ -140,6 +145,20 @@ namespace ProjectHey.DAL
                 .HasForeignKey(pt => pt.BlockedUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<SignalRUserConversationRoom>()
+                .HasKey(x => new { x.SignalRUserId, x.SignalRConversationRoomId });
+
+            modelBuilder.Entity<SignalRUserConversationRoom>()
+                .HasOne(pt => pt.SignalRUser)
+                .WithMany(p => p.Rooms)
+                .HasForeignKey(pt => pt.SignalRUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<SignalRUserConversationRoom>()
+                .HasOne(pt => pt.SignalRConversationRoom)
+                .WithMany(p => p.Users)
+                .HasForeignKey(pt => pt.SignalRConversationRoomId)
+                .OnDelete(DeleteBehavior.Restrict);
             //Reported
             modelBuilder.Entity<Reported>()
                 .HasKey(x => new { x.ReporterUserId, x.ReportedUserId });
@@ -172,32 +191,6 @@ namespace ProjectHey.DAL
                 .HasForeignKey(pt => pt.UserTwoId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Messages
-            modelBuilder.Entity<Message>()
-                .HasOne(pt => pt.UserSender)
-                .WithMany(p => p.Messages)
-                .HasForeignKey(pt => pt.UserSenderId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Message>()
-                .HasOne(pt => pt.UserReceiver)
-                .WithMany()
-                .HasForeignKey(pt => pt.UserReceiverId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            //Roles
-            modelBuilder.Entity<UserRole>()
-                .HasKey(x => new { x.UserId, x.RoleId });
-
-            modelBuilder.Entity<UserRole>()
-                .HasOne(pt => pt.User)
-                .WithMany(p => p.UserRole)
-                .HasForeignKey(pt => pt.UserId);
-
-            modelBuilder.Entity<UserRole>()
-                .HasOne(pt => pt.Role)
-                .WithMany(t => t.UserRole)
-                .HasForeignKey(pt => pt.RoleId);
 
             //User Categories
             modelBuilder.Entity<UserCategory>()
@@ -226,20 +219,6 @@ namespace ProjectHey.DAL
                 .HasOne(pt => pt.Category)
                 .WithMany(t => t.AdvertisementCategory)
                 .HasForeignKey(pt => pt.CategoryId);
-
-            //User Providers
-            modelBuilder.Entity<UserProvider>()
-                .HasKey(x => new { x.UserId, x.ProviderId });
-
-            modelBuilder.Entity<UserProvider>()
-                .HasOne(pt => pt.User)
-                .WithMany(p => p.UserProvider)
-                .HasForeignKey(pt => pt.UserId);
-
-            modelBuilder.Entity<UserProvider>()
-                .HasOne(pt => pt.Provider)
-                .WithMany(t => t.UserProvider)
-                .HasForeignKey(pt => pt.ProviderId);
 
             //User advertisements
             modelBuilder.Entity<UserAdvertisement>()
@@ -286,19 +265,13 @@ namespace ProjectHey.DAL
                     .Property(x => x.Radius)
                     .IsRequired();
             modelBuilder.Entity<AppSetting>()
-                    .Property(x => x.MaximumNotifications)
-                    .IsRequired();
-            modelBuilder.Entity<AppSetting>()
-                    .Property(x => x.MaximumConversations)
+                    .Property(x => x.MaximumConnections)
                     .IsRequired();
             modelBuilder.Entity<AppSetting>()
                    .Property(x => x.Language)
                    .IsRequired();
             modelBuilder.Entity<AppSetting>()
                     .Property(x => x.Sound)
-                    .IsRequired();
-            modelBuilder.Entity<AppSetting>()
-                    .Property(x => x.Vibrate)
                     .IsRequired();
             modelBuilder.Entity<AppSetting>()
                     .Property(x => x.UserId)
@@ -333,21 +306,21 @@ namespace ProjectHey.DAL
                     .Property(x => x.UserId)
                     .IsRequired();
             #endregion
-            #region Message
-            modelBuilder.Entity<Message>()
+            #region SignalRMessage
+            modelBuilder.Entity<SignalRMessage>()
                     .Property(x => x.Body)
                     .IsRequired()
                     .HasMaxLength(500);
-            modelBuilder.Entity<Message>()
+            modelBuilder.Entity<SignalRMessage>()
                     .Property(x => x.CreationDate)
                     .HasColumnType("datetime2")
                     .IsRequired();
             #endregion
-            #region Provider
-            modelBuilder.Entity<Provider>()
-                    .Property(x => x.Name)
+            #region SignalRConversationRoom
+            modelBuilder.Entity<SignalRConversationRoom>()
+                    .Property(x => x.RoomName)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(150);
             #endregion
             #region Report
             modelBuilder.Entity<Report>()
@@ -362,12 +335,6 @@ namespace ProjectHey.DAL
             modelBuilder.Entity<Reported>()
                     .Property(x => x.ReporterUserId)
                     .IsRequired();
-            #endregion
-            #region Role
-            modelBuilder.Entity<Role>()
-                    .Property(x => x.Name)
-                    .IsRequired()
-                    .HasMaxLength(50);
             #endregion
             #region User
             modelBuilder.Entity<User>()
@@ -413,11 +380,6 @@ namespace ProjectHey.DAL
                     .IsRequired();
             modelBuilder.Entity<UserAdvertisement>()
                     .Property(x => x.IsClicked)
-                    .IsRequired();
-            #endregion
-            #region UserProvider
-            modelBuilder.Entity<UserProvider>()
-                    .Property(x => x.ProviderUserId)
                     .IsRequired();
             #endregion
             //<<<<END REQUIRED AND/OR MAXLENGTH>>>> 

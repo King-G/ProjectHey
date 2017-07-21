@@ -22,12 +22,7 @@ namespace ProjectHeyMobile.Views.Mainpages
 
         private async void Anyone_Clicked(object sender, EventArgs e)
         {
-            List<MessageViewModel> messages = new List<MessageViewModel>();
-            foreach (Message message in App.Main.User.Messages)
-            {
-                messages.Add(new MessageViewModel(message));
-            }
-            ChatViewModel messagesViewModel = new ChatViewModel(messages);
+            ChatViewModel messagesViewModel = new ChatViewModel();
             await App.Main.PageService.PushAsync(new ChatPage(messagesViewModel));
         }
     }

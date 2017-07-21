@@ -6,19 +6,27 @@ namespace ProjectHey.DOMAIN
     {
         public int Id { get; set; }
 
-        public int Radius { get; set; } = 1000;
+        public int Radius { get; set; }
 
-        public int MaximumNotifications { get; set; } = 10;
+        public int MaximumConnections { get; set; }
 
-        public int MaximumConversations { get; set; } = 10;
+        public Language Language { get; set; }
 
-        public Language Language { get; set; } = Language.English;
-
-        public bool Sound { get; set; } = true;
-
-        public bool Vibrate { get; set; } = true;
+        public bool Sound { get; set; }
 
         public int UserId { get; set; }
         public User User { get; set; }
+
+        public AppSetting GetDefaultAppSettings()
+        {
+            AppSetting defaultAppSetting = new AppSetting()
+            {
+                Radius = 1500,
+                Language = Language.English,
+                Sound = true,
+                MaximumConnections = 20
+            };
+            return defaultAppSetting;
+        }
     }
 }

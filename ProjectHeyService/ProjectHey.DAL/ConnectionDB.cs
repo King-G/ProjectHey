@@ -45,23 +45,18 @@ namespace ProjectHey.DAL
         }
         public async Task<IEnumerable<Connection>> GetByIdAsync(int id, int skip, int take)
         {
-            return await projectHeyContext.Connection.AsNoTracking().Where(x => x.UserOneId == id || x.UserTwoId == id).OrderBy(x => x.UserOneId).Skip(skip).Take(take).ToListAsync();
+            return await projectHeyContext.Connection.AsNoTracking().Where(x => x.UserOneId == id).OrderBy(x => x.UserOneId).Skip(skip).Take(take).ToListAsync();
         }
         public async Task<IEnumerable<Connection>> GetAllByIdAsync(int id)
         {
             return await projectHeyContext.Connection.AsNoTracking()
                 .Include(x => x.UserTwo)
-                .Where(x => x.UserOneId == id || x.UserTwoId == id).OrderBy(x => x.UserOneId)
+                .Where(x => x.UserOneId == id).OrderBy(x => x.UserOneId)
                 .ToListAsync();
         }
         public Task<Connection> GetByIdAsync(int id)
         {
             throw new NotSupportedException();
-        }
-
-        public async Task<Connection> GetOneByIdAsync(int id)
-        {
-            return await projectHeyContext.Connection.FirstOrDefaultAsync(x => x.UserOneId == id || x.UserTwoId == id);
         }
 
         public async Task<Connection> UpdateAsync(Connection entity)

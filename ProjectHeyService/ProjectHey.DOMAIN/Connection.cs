@@ -8,6 +8,8 @@
         public int UserTwoId { get; set; }
         public User UserTwo { get; set; }
 
-        public int Progress { get; set; } = 0;
+        public double Progress { get; set; }
+
+        public string CustomUsername { get; set; }
     }
 }

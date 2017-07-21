@@ -23,19 +23,6 @@ namespace ProjectHey.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Provider",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Provider", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Report",
                 columns: table => new
                 {
@@ -50,16 +37,16 @@ namespace ProjectHey.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Role",
+                name: "SignalRConversationRoom",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 50, nullable: false)
+                    RoomName = table.Column<string>(maxLength: 150, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Role", x => x.Id);
+                    table.PrimaryKey("PK_SignalRConversationRoom", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -71,6 +58,8 @@ namespace ProjectHey.DAL.Migrations
                     ActivityDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Email = table.Column<string>(maxLength: 320, nullable: true),
+                    FacebookId = table.Column<int>(nullable: false),
+                    FacebookToken = table.Column<int>(nullable: false),
                     Firstname = table.Column<string>(maxLength: 50, nullable: false),
                     Gender = table.Column<int>(nullable: false),
                     IsBanned = table.Column<bool>(nullable: false),
@@ -162,7 +151,8 @@ namespace ProjectHey.DAL.Migrations
                 {
                     UserOneId = table.Column<int>(nullable: false),
                     UserTwoId = table.Column<int>(nullable: false),
-                    Progress = table.Column<int>(nullable: false)
+                    CustomUsername = table.Column<string>(nullable: true),
+                    Progress = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -205,34 +195,6 @@ namespace ProjectHey.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Message",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Body = table.Column<string>(maxLength: 500, nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserReceiverId = table.Column<int>(nullable: false),
-                    UserSenderId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Message", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Message_User_UserReceiverId",
-                        column: x => x.UserReceiverId,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Message_User_UserSenderId",
-                        column: x => x.UserSenderId,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Reported",
                 columns: table => new
                 {
@@ -264,6 +226,25 @@ namespace ProjectHey.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SignalRUser",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SignalRUser", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SignalRUser_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserCategory",
                 columns: table => new
                 {
@@ -281,55 +262,6 @@ namespace ProjectHey.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserCategory_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserProvider",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(nullable: false),
-                    ProviderId = table.Column<int>(nullable: false),
-                    ProviderUserId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserProvider", x => new { x.UserId, x.ProviderId });
-                    table.ForeignKey(
-                        name: "FK_UserProvider_Provider_ProviderId",
-                        column: x => x.ProviderId,
-                        principalTable: "Provider",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserProvider_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserRole",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(nullable: false),
-                    RoleId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserRole", x => new { x.UserId, x.RoleId });
-                    table.ForeignKey(
-                        name: "FK_UserRole_Role_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "Role",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserRole_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
@@ -395,6 +327,79 @@ namespace ProjectHey.DAL.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SignalRConnection",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Connected = table.Column<bool>(nullable: false),
+                    SignalRUserId = table.Column<int>(nullable: false),
+                    UserAgent = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SignalRConnection", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SignalRConnection_SignalRUser_SignalRUserId",
+                        column: x => x.SignalRUserId,
+                        principalTable: "SignalRUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SignalRMessage",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Body = table.Column<string>(maxLength: 500, nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SignalRConversationRoomId = table.Column<int>(nullable: false),
+                    SignalRUserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SignalRMessage", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SignalRMessage_SignalRConversationRoom_SignalRConversationRoomId",
+                        column: x => x.SignalRConversationRoomId,
+                        principalTable: "SignalRConversationRoom",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SignalRMessage_SignalRUser_SignalRUserId",
+                        column: x => x.SignalRUserId,
+                        principalTable: "SignalRUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SignalRUserConversationRoom",
+                columns: table => new
+                {
+                    SignalRUserId = table.Column<int>(nullable: false),
+                    SignalRConversationRoomId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SignalRUserConversationRoom", x => new { x.SignalRUserId, x.SignalRConversationRoomId });
+                    table.ForeignKey(
+                        name: "FK_SignalRUserConversationRoom_SignalRConversationRoom_SignalRConversationRoomId",
+                        column: x => x.SignalRConversationRoomId,
+                        principalTable: "SignalRConversationRoom",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SignalRUserConversationRoom_SignalRUser_SignalRUserId",
+                        column: x => x.SignalRUserId,
+                        principalTable: "SignalRUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Advertisement_UserId",
                 table: "Advertisement",
@@ -448,22 +453,6 @@ namespace ProjectHey.DAL.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Message_UserReceiverId",
-                table: "Message",
-                column: "UserReceiverId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Message_UserSenderId",
-                table: "Message",
-                column: "UserSenderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Provider_Name",
-                table: "Provider",
-                column: "Name",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Reported_ReportId",
                 table: "Reported",
                 column: "ReportId");
@@ -479,10 +468,41 @@ namespace ProjectHey.DAL.Migrations
                 column: "ReporterUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Role_Name",
-                table: "Role",
-                column: "Name",
+                name: "IX_SignalRConnection_SignalRUserId",
+                table: "SignalRConnection",
+                column: "SignalRUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SignalRConversationRoom_RoomName",
+                table: "SignalRConversationRoom",
+                column: "RoomName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SignalRMessage_SignalRConversationRoomId",
+                table: "SignalRMessage",
+                column: "SignalRConversationRoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SignalRMessage_SignalRUserId",
+                table: "SignalRMessage",
+                column: "SignalRUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SignalRUser_UserId",
+                table: "SignalRUser",
+                column: "UserId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SignalRUserConversationRoom_SignalRConversationRoomId",
+                table: "SignalRUserConversationRoom",
+                column: "SignalRConversationRoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SignalRUserConversationRoom_SignalRUserId",
+                table: "SignalRUserConversationRoom",
+                column: "SignalRUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserAdvertisement_AdvertisementId",
@@ -509,34 +529,9 @@ namespace ProjectHey.DAL.Migrations
                 table: "UserCategory",
                 column: "UserId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_UserProvider_ProviderId",
-                table: "UserProvider",
-                column: "ProviderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserProvider_ProviderUserId",
-                table: "UserProvider",
-                column: "ProviderUserId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserProvider_UserId",
-                table: "UserProvider",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserRole_RoleId",
-                table: "UserRole",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserRole_UserId",
-                table: "UserRole",
-                column: "UserId");
-
             migrationBuilder.Sql(@"ALTER TABLE [dbo].[User] ADD [Location] geography NULL");
             migrationBuilder.Sql(@"ALTER TABLE [dbo].[Advertisement] ADD [Location] geography NULL");
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -557,10 +552,16 @@ namespace ProjectHey.DAL.Migrations
                 name: "Feedback");
 
             migrationBuilder.DropTable(
-                name: "Message");
+                name: "Reported");
 
             migrationBuilder.DropTable(
-                name: "Reported");
+                name: "SignalRConnection");
+
+            migrationBuilder.DropTable(
+                name: "SignalRMessage");
+
+            migrationBuilder.DropTable(
+                name: "SignalRUserConversationRoom");
 
             migrationBuilder.DropTable(
                 name: "UserAdvertisement");
@@ -569,10 +570,10 @@ namespace ProjectHey.DAL.Migrations
                 name: "UserCategory");
 
             migrationBuilder.DropTable(
-                name: "UserProvider");
+                name: "SignalRConversationRoom");
 
             migrationBuilder.DropTable(
-                name: "UserRole");
+                name: "SignalRUser");
 
             migrationBuilder.DropTable(
                 name: "Advertisement");
@@ -582,12 +583,6 @@ namespace ProjectHey.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Category");
-
-            migrationBuilder.DropTable(
-                name: "Provider");
-
-            migrationBuilder.DropTable(
-                name: "Role");
 
             migrationBuilder.DropTable(
                 name: "User");

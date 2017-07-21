@@ -68,12 +68,29 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Refit, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Refit.3.1.0\lib\net45\Refit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.2\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net46\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net46\System.Security.Cryptography.X509Certificates.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Cors, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.0.0\lib\net45\System.Web.Cors.dll</HintPath>
@@ -96,6 +113,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Index.html" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -105,18 +123,90 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ChatTest.html" />
+    <Content Include="privacypolicy.html" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
-    <Content Include="Index.html" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\jquery.signalR-2.2.2.js" />
     <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
-    <Content Include="privacypolicy.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\ProjectHey.DOMAIN\Advertisement.cs">
+      <Link>Domain\Advertisement.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\AdvertisementCategory.cs">
+      <Link>Domain\AdvertisementCategory.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\AppSetting.cs">
+      <Link>Domain\AppSetting.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\Blocked.cs">
+      <Link>Domain\Blocked.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\Category.cs">
+      <Link>Domain\Category.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\Connection.cs">
+      <Link>Domain\Connection.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\Enums\AdvertisementType.cs">
+      <Link>Domain\Enums\AdvertisementType.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\Enums\FeedbackType.cs">
+      <Link>Domain\Enums\FeedbackType.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\Enums\Gender.cs">
+      <Link>Domain\Enums\Gender.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\Enums\Language.cs">
+      <Link>Domain\Enums\Language.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\Enums\ReportType.cs">
+      <Link>Domain\Enums\ReportType.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\Feedback.cs">
+      <Link>Domain\Feedback.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\Report.cs">
+      <Link>Domain\Report.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\Reported.cs">
+      <Link>Domain\Reported.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\SignalRConnection.cs">
+      <Link>Domain\SignalRConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\SignalRConversationRoom.cs">
+      <Link>Domain\SignalRConversationRoom.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\SignalRMessage.cs">
+      <Link>Domain\SignalRMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\SignalRUser.cs">
+      <Link>Domain\SignalRUser.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\SignalRUserConversationRoom.cs">
+      <Link>Domain\SignalRUserConversationRoom.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\Structs\Location.cs">
+      <Link>Domain\Structs\Location.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\User.cs">
+      <Link>Domain\User.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\UserAdvertisement.cs">
+      <Link>Domain\UserAdvertisement.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\UserCategory.cs">
+      <Link>Domain\UserCategory.cs</Link>
+    </Compile>
+    <Compile Include="ProjectHeyAPI\APIMultiResponse.cs" />
+    <Compile Include="ProjectHeyAPI\APISingleResponse.cs" />
+    <Compile Include="ProjectHeyAPI\IProjectHeyAPI.cs" />
     <Compile Include="signalR\ChatHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -152,7 +242,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Refit.3.1.0\build\netstandard1.1\refit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Refit.3.1.0\build\netstandard1.1\refit.targets'))" />
   </Target>
+  <Import Project="..\packages\Refit.3.1.0\build\netstandard1.1\refit.targets" Condition="Exists('..\packages\Refit.3.1.0\build\netstandard1.1\refit.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

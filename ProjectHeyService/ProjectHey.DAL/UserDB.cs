@@ -65,11 +65,8 @@ namespace ProjectHey.DAL
                 .Include(x => x.BlockedUsers)
                 .Include(x => x.Connections)
                 .Include(x => x.UserCategory)
-                .Include(x => x.UserRole)
-                .Include(x => x.Messages)
                 .Include(x => x.Advertisement)
                 .Include(x => x.WatchedAdvertisement)
-                .Include(x => x.UserProvider)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (user != null)

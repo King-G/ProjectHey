@@ -9,12 +9,15 @@ namespace ProjectHey.DOMAIN
     {
         public int Id { get; set; }
 
-        public string Username { get; private set; }
+        public int FacebookId { get; set; }
+
+        public int FacebookToken { get; set; }
+
+        public string Username { get; set; }
 
         public string ResetUsername()
         {
-            Username = Guid.NewGuid().ToString("N");
-            return Username;
+           return Guid.NewGuid().ToString("N");
         }
 
         public string Firstname { get; set; }
@@ -30,12 +33,13 @@ namespace ProjectHey.DOMAIN
         public Location Location { get; set; }
 
         public AppSetting Appsetting { get; set; }
+        public SignalRUser SignalRUser { get; set; }
 
         public string Email { get; set; }
 
-        public bool IsHidden { get; set; } = false;
+        public bool IsHidden { get; set; }
 
-        public bool IsBanned { get; set; } = false;
+        public bool IsBanned { get; set; }
 
         //User can have multiple feedbacks
         public ICollection<Feedback> Feedback { get; set; }
@@ -52,20 +56,12 @@ namespace ProjectHey.DOMAIN
         //User can have multiple categories
         public ICollection<UserCategory> UserCategory { get; set; }
 
-        //User can have multiple roles
-        public ICollection<UserRole> UserRole { get; set; }
-
-        //User can have multiple messages
-        public ICollection<Message> Messages { get; set; }
-
         //User can watch multiple advertisements
         public ICollection<Advertisement> Advertisement { get; set; }
 
         //User can watch multiple advertisements
         public ICollection<UserAdvertisement> WatchedAdvertisement { get; set; }
 
-        //User can have multiple providers
-        public ICollection<UserProvider> UserProvider { get; set; }
 
     }
 }

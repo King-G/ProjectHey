@@ -8,5 +8,7 @@
 
         public int BlockedUserId { get; set; }
         public User BlockedUser { get; set; }
+
+        public bool IsHidden { get; set; }
     }
 }

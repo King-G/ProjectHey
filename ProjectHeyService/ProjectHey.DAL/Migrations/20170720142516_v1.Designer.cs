@@ -9,13 +9,13 @@ using ProjectHey.DOMAIN.Enums;
 namespace ProjectHey.DAL.Migrations
 {
     [DbContext(typeof(ProjectHeyContext))]
-    [Migration("20170706154600_v1")]
+    [Migration("20170720142516_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.3")
+                .HasAnnotation("ProductVersion", "1.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("ProjectHey.DOMAIN.Advertisement", b =>
@@ -123,7 +123,9 @@ namespace ProjectHey.DAL.Migrations
 
                     b.Property<int>("UserTwoId");
 
-                    b.Property<int>("Progress");
+                    b.Property<string>("CustomUsername");
+
+                    b.Property<double>("Progress");
 
                     b.HasKey("UserOneId", "UserTwoId");
 
@@ -156,48 +158,6 @@ namespace ProjectHey.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Feedback");
-                });
-
-            modelBuilder.Entity("ProjectHey.DOMAIN.Message", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Body")
-                        .IsRequired()
-                        .HasMaxLength(500);
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserReceiverId");
-
-                    b.Property<int>("UserSenderId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserReceiverId");
-
-                    b.HasIndex("UserSenderId");
-
-                    b.ToTable("Message");
-                });
-
-            modelBuilder.Entity("ProjectHey.DOMAIN.Provider", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("Provider");
                 });
 
             modelBuilder.Entity("ProjectHey.DOMAIN.Report", b =>
@@ -235,21 +195,94 @@ namespace ProjectHey.DAL.Migrations
                     b.ToTable("Reported");
                 });
 
-            modelBuilder.Entity("ProjectHey.DOMAIN.Role", b =>
+            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRConnection", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.Property<bool>("Connected");
+
+                    b.Property<int>("SignalRUserId");
+
+                    b.Property<string>("UserAgent");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
+                    b.HasIndex("SignalRUserId");
+
+                    b.ToTable("SignalRConnection");
+                });
+
+            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRConversationRoom", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("RoomName")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomName")
                         .IsUnique();
 
-                    b.ToTable("Role");
+                    b.ToTable("SignalRConversationRoom");
+                });
+
+            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasMaxLength(500);
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SignalRConversationRoomId");
+
+                    b.Property<int>("SignalRUserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SignalRConversationRoomId");
+
+                    b.HasIndex("SignalRUserId");
+
+                    b.ToTable("SignalRMessage");
+                });
+
+            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("SignalRUser");
+                });
+
+            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRUserConversationRoom", b =>
+                {
+                    b.Property<int>("SignalRUserId");
+
+                    b.Property<int>("SignalRConversationRoomId");
+
+                    b.HasKey("SignalRUserId", "SignalRConversationRoomId");
+
+                    b.HasIndex("SignalRConversationRoomId");
+
+                    b.HasIndex("SignalRUserId");
+
+                    b.ToTable("SignalRUserConversationRoom");
                 });
 
             modelBuilder.Entity("ProjectHey.DOMAIN.User", b =>
@@ -265,6 +298,10 @@ namespace ProjectHey.DAL.Migrations
 
                     b.Property<string>("Email")
                         .HasMaxLength(320);
+
+                    b.Property<int>("FacebookId");
+
+                    b.Property<int>("FacebookToken");
 
                     b.Property<string>("Firstname")
                         .IsRequired()
@@ -285,7 +322,6 @@ namespace ProjectHey.DAL.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnName("Username")
                         .HasMaxLength(32);
 
                     b.HasKey("Id");
@@ -333,41 +369,6 @@ namespace ProjectHey.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserCategory");
-                });
-
-            modelBuilder.Entity("ProjectHey.DOMAIN.UserProvider", b =>
-                {
-                    b.Property<int>("UserId");
-
-                    b.Property<int>("ProviderId");
-
-                    b.Property<int>("ProviderUserId");
-
-                    b.HasKey("UserId", "ProviderId");
-
-                    b.HasIndex("ProviderId");
-
-                    b.HasIndex("ProviderUserId")
-                        .IsUnique();
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserProvider");
-                });
-
-            modelBuilder.Entity("ProjectHey.DOMAIN.UserRole", b =>
-                {
-                    b.Property<int>("UserId");
-
-                    b.Property<int>("RoleId");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserRole");
                 });
 
             modelBuilder.Entity("ProjectHey.DOMAIN.Advertisement", b =>
@@ -427,17 +428,6 @@ namespace ProjectHey.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ProjectHey.DOMAIN.Message", b =>
-                {
-                    b.HasOne("ProjectHey.DOMAIN.User", "UserReceiver")
-                        .WithMany()
-                        .HasForeignKey("UserReceiverId");
-
-                    b.HasOne("ProjectHey.DOMAIN.User", "UserSender")
-                        .WithMany("Messages")
-                        .HasForeignKey("UserSenderId");
-                });
-
             modelBuilder.Entity("ProjectHey.DOMAIN.Reported", b =>
                 {
                     b.HasOne("ProjectHey.DOMAIN.Report", "Report")
@@ -452,6 +442,45 @@ namespace ProjectHey.DAL.Migrations
                     b.HasOne("ProjectHey.DOMAIN.User", "ReporterUser")
                         .WithMany("ReportedUsers")
                         .HasForeignKey("ReporterUserId");
+                });
+
+            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRConnection", b =>
+                {
+                    b.HasOne("ProjectHey.DOMAIN.SignalRUser", "SignalRUser")
+                        .WithMany("Connections")
+                        .HasForeignKey("SignalRUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRMessage", b =>
+                {
+                    b.HasOne("ProjectHey.DOMAIN.SignalRConversationRoom", "SignalRConversationRoom")
+                        .WithMany("Messages")
+                        .HasForeignKey("SignalRConversationRoomId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ProjectHey.DOMAIN.SignalRUser", "SignalRUser")
+                        .WithMany("Messages")
+                        .HasForeignKey("SignalRUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRUser", b =>
+                {
+                    b.HasOne("ProjectHey.DOMAIN.User", "User")
+                        .WithOne("SignalRUser")
+                        .HasForeignKey("ProjectHey.DOMAIN.SignalRUser", "UserId");
+                });
+
+            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRUserConversationRoom", b =>
+                {
+                    b.HasOne("ProjectHey.DOMAIN.SignalRConversationRoom", "SignalRConversationRoom")
+                        .WithMany("Users")
+                        .HasForeignKey("SignalRConversationRoomId");
+
+                    b.HasOne("ProjectHey.DOMAIN.SignalRUser", "SignalRUser")
+                        .WithMany("Rooms")
+                        .HasForeignKey("SignalRUserId");
                 });
 
             modelBuilder.Entity("ProjectHey.DOMAIN.UserAdvertisement", b =>
@@ -478,32 +507,6 @@ namespace ProjectHey.DAL.Migrations
 
                     b.HasOne("ProjectHey.DOMAIN.User", "User")
                         .WithMany("UserCategory")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ProjectHey.DOMAIN.UserProvider", b =>
-                {
-                    b.HasOne("ProjectHey.DOMAIN.Provider", "Provider")
-                        .WithMany("UserProvider")
-                        .HasForeignKey("ProviderId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ProjectHey.DOMAIN.User", "User")
-                        .WithMany("UserProvider")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ProjectHey.DOMAIN.UserRole", b =>
-                {
-                    b.HasOne("ProjectHey.DOMAIN.Role", "Role")
-                        .WithMany("UserRole")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ProjectHey.DOMAIN.User", "User")
-                        .WithMany("UserRole")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

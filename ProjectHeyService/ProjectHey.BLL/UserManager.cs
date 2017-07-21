@@ -15,6 +15,10 @@ namespace ProjectHey.BLL
 
         public async Task<User> CreateAsync(User entity)
         {
+            entity.Username = entity.ResetUsername();
+            entity.Appsetting = entity.Appsetting.GetDefaultAppSettings();
+            entity.SignalRUser = new SignalRUser();
+
             return await userDB.CreateAsync(entity);
         }
 

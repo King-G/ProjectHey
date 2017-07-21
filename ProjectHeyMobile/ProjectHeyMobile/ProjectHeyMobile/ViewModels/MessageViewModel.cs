@@ -7,24 +7,24 @@ namespace ProjectHeyMobile.ViewModels
 {
     public class MessageViewModel : BaseViewModel
     {
-        private Message _Message;
+        private string _Message;
         private MessageType _MessageType;
         private Color _Color;
          
-        public MessageViewModel(Message Message)
+        public MessageViewModel(string Message)
         {
             _Message = Message;
             _Color = Color.FromHex("#A0522D");
-            if (Message.UserReceiverId == App.Main.User.Id)
-            {
-                _MessageType = MessageType.Received;
-            }
-            else
-            {
-                _MessageType = MessageType.Send;
-            }
+            //if (Message.SignalRUser.UserId == App.Main.User.Id)
+            //{
+            //    _MessageType = MessageType.Received;
+            //}
+            //else
+            //{
+            //    _MessageType = MessageType.Send;
+            //}
         }
-        public Message Message
+        public string Message
         {
             get { return _Message; }
             set { SetValue(ref _Message, value); }
