@@ -1,4 +1,5 @@
-﻿using Amazon.Runtime;
+﻿using Amazon.CognitoIdentity;
+using Amazon.Runtime;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ProjectHeyMobile.Authentication;
@@ -186,13 +187,19 @@ namespace ProjectHeyMobile.Views.Rootpages
                 account = e.Account;
                 store.Save(account, ProjectHeyAuthentication.ServiceId);
 
+
                 ProjectHeyAuthentication.FacebookAccessToken = account.Properties["access_token"];
+
+                
+                //ProjectHeyAuthentication.AWSCredentials.AddLogin("projecthey.eu.auth0.com", ProjectHeyAuthentication.FacebookAccessToken);
 
                 ProjectHeyAuthentication.AWSCredentials.AddLogin("graph.facebook.com", ProjectHeyAuthentication.FacebookAccessToken);
 
                 try
                 {
-                    await ProjectHeyAuthentication.AWSCredentials.GetIdentityIdAsync();
+                    ImmutableCredentials ic = await ProjectHeyAuthentication.AWSCredentials.GetCredentialsAsync();
+                    IDictionary<string, string> test = authenticator.RequestAccessTokenAsync(authenticator.ClientSecret).Result;
+
                 }
                 catch (Exception exception)
                 {

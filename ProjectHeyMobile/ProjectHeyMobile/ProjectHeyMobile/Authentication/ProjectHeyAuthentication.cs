@@ -32,6 +32,8 @@ namespace ProjectHeyMobile.Authentication
             return ic.Token;
         }
         public static CognitoAWSCredentials AWSCredentials = new CognitoAWSCredentials("eu-west-2:bf2f5ee6-8025-4e5b-b818-bc941eae7a34", RegionEndpoint.EUWest2);
+        public const string AWSRoleARN = "arn:aws:cognito-identity:eu-west-2:593910519982:identitypool/eu-west-2:bf2f5ee6-8025-4e5b-b818-bc941eae7a34";
+
         #endregion
 
         #region OAuthorization
