@@ -2,31 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProjectHeyMobile.Views.Rootpages.LoginPage"
-             Title="Login">
-    <ContentPage.Padding>
-        <OnPlatform 
-                x:TypeArguments="Thickness" 
-		        iOS="0, 20, 0, 0" 
-		        WinPhone="20,20,20,20" 
-			    >
-        </OnPlatform>
-    </ContentPage.Padding>
-    <ScrollView>
-        <Grid Padding="12">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="auto" />
-            </Grid.RowDefinitions>
-            <ScrollView>
-                <StackLayout>
-                    <Button x:Name="buttonHey" Text="Start Hey." />
-
-                    <Button x:Name="buttonFacebook" Text="Login with Facebook." />
-
-                </StackLayout>
-            </ScrollView>
-            <Label x:Name="statusText" Grid.Row="1" HorizontalTextAlignment="Center" />
-        </Grid>
-    </ScrollView>
+             NavigationPage.HasNavigationBar="False">
 
 </ContentPage>

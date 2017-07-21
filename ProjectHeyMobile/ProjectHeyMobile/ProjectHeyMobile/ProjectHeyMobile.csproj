@@ -110,9 +110,14 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Authentication\AuthenticatedHttpClientHandler.cs" />
-    <Compile Include="Authentication\AuthenticationState.cs" />
     <Compile Include="Authentication\FacebookModel.cs" />
+    <Compile Include="Authentication\FacebookServices.cs" />
+    <Compile Include="Authentication\FacebookViewModel.cs" />
     <Compile Include="Authentication\ProjectHeyAuthentication.cs" />
+    <Compile Include="Authentication\Signers\AWS4SignerBase.cs" />
+    <Compile Include="Authentication\Signers\AWS4SignerForAuthorizationHeader.cs" />
+    <Compile Include="Authentication\Signers\AWS4SignerForQueryParameterAuth.cs" />
+    <Compile Include="Authentication\Util\HttpHelpers.cs" />
     <Compile Include="Utils\IntEnumConverter.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="ViewModels\AdvertisementCategoryViewModel.cs" />
@@ -146,6 +151,9 @@
     </Compile>
     <Compile Include="Views\Rootpages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Rootpages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settingspages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
@@ -376,6 +384,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Rootpages\LoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Rootpages\MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

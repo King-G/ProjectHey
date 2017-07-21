@@ -8,9 +8,11 @@
     "NETStandard.Library": "1.6.1",
     "Newtonsoft.Json": "10.0.3",
     "Refit": "3.1.0",
+    "System.Security.Cryptography.Algorithms": "4.3.0",
+    "System.Security.Cryptography.Encoding": "4.3.0",
+    "System.Security.Cryptography.Primitives": "4.3.0",
+    "System.Security.Cryptography.X509Certificates": "4.3.0",
     "Xam.Plugin.Connectivity": "3.0.1",
-    "Xamarin.Auth": "1.5.0.3",
-    "Xamarin.Auth.XamarinForms": "1.5.0.3",
     "Xamarin.Forms": "2.3.5.256-pre6"
   },
   "frameworks": {

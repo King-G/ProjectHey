@@ -10,7 +10,6 @@ using System.ComponentModel;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Xamarin.Auth;
 using Xamarin.Forms;
 
 namespace ProjectHeyMobile.Authentication
@@ -22,17 +21,13 @@ namespace ProjectHeyMobile.Authentication
         public static bool IsAuthenticated { get; set; }
 
         #region AWSSettings
-        public static async Task<IProjectHeyAPI> GetProjectHeyAPI()
-        {
-            return RestService.For<IProjectHeyAPI>(new HttpClient(new AuthenticatedHttpClientHandler(await GetAWSAccessToken())) { BaseAddress = new Uri("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api") });
-        }
-        public static async Task<string> GetAWSAccessToken()
-        {
-            ImmutableCredentials ic = await AWSCredentials.GetCredentialsAsync();
-            return ic.Token;
-        }
-        public static CognitoAWSCredentials AWSCredentials = new CognitoAWSCredentials("eu-west-2:bf2f5ee6-8025-4e5b-b818-bc941eae7a34", RegionEndpoint.EUWest2);
-        public const string AWSRoleARN = "arn:aws:cognito-identity:eu-west-2:593910519982:identitypool/eu-west-2:bf2f5ee6-8025-4e5b-b818-bc941eae7a34";
+
+        public static string AWSAccessKey { get; set; }
+        public static string AWSSecretKey { get; set; }
+
+        public const string AWSIdentityPool = "eu-west-2:c3e48aac-7a76-4375-a2f9-167b72aa7867";
+        public static RegionEndpoint AWSRegionEndpoint = RegionEndpoint.EUWest2;
+        //public const string AWSRoleARN = "arn:aws:cognito-identity:eu-west-2:593910519982:identitypool/eu-west-2:bf2f5ee6-8025-4e5b-b818-bc941eae7a34";
 
         #endregion
 

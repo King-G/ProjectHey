@@ -93,7 +93,7 @@ namespace ProjectHeyMobile
                     Exception exception = new Exception("Trying to load a user that doesn't exist");
                     if (App.Current.MainPage == null)
                     {
-                        Current.MainPage.Navigation.PushAsync(new ErrorPage(exception));
+                        App.Current.MainPage.Navigation.PushAsync(new ErrorPage(exception));
                     }
                     else
                     {
@@ -109,7 +109,8 @@ namespace ProjectHeyMobile
 
         private static async Task<User> GetUserByFacebookId(string user_id)
         {
-            var response = await ProjectHeyAuthentication.GetProjectHeyAPI().Result.UserGetByFacebookId(Convert.ToInt32(user_id));
+            var projectHeyAPI = RestService.For<IProjectHeyAPI>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api") });
+            var response = await projectHeyAPI.UserGetByFacebookId(Convert.ToInt32(user_id));
             return JsonConvert.DeserializeObject<APISingleResponse<User>>(response).Value;
         }
 
@@ -122,21 +123,33 @@ namespace ProjectHeyMobile
 
             user = FacebookModelToUser(facebookModel, user);
 
-            var response = await ProjectHeyAuthentication.GetProjectHeyAPI().Result.SyncUser(user);
+            var projectHeyAPI = RestService.For<IProjectHeyAPI>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api") });
+            var response = await projectHeyAPI.SyncUser(user);
 
             return JsonConvert.DeserializeObject<APISingleResponse<User>>(response).Value;
         }
 
         private static async Task<User> CreateUser(FacebookModel facebookModel)
         {
-            Current.Properties["FacebookModel"] = facebookModel;
-            await Current.SavePropertiesAsync();
-
             User user = FacebookModelToUser(facebookModel);
 
-            var response = await ProjectHeyAuthentication.GetProjectHeyAPI().Result.CreateUser(user);
+            try
+            {
+                var projectHeyAPI = RestService.For<IProjectHeyAPI>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api") });
+                //var response = await ProjectHeyAuthentication.GetProjectHeyAPI().CreateUser(user); //disabled for testing
+                var response = await projectHeyAPI.UserGetById(2);
 
-            return JsonConvert.DeserializeObject<APISingleResponse<User>>(response).Value;
+                Current.Properties["FacebookModel"] = facebookModel;
+                await Current.SavePropertiesAsync();
+
+                return JsonConvert.DeserializeObject<APISingleResponse<User>>(response).Value;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+
+
         }
 
         private static User FacebookModelToUser(FacebookModel facebookModel, User user = null)
