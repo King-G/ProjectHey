@@ -116,7 +116,6 @@
     <Compile Include="Authentication\ProjectHeyAuthentication.cs" />
     <Compile Include="Authentication\Signers\AWS4SignerBase.cs" />
     <Compile Include="Authentication\Signers\AWS4SignerForAuthorizationHeader.cs" />
-    <Compile Include="Authentication\Signers\AWS4SignerForQueryParameterAuth.cs" />
     <Compile Include="Authentication\Util\HttpHelpers.cs" />
     <Compile Include="Utils\IntEnumConverter.cs" />
     <Compile Include="Utils\StringExtensions.cs" />

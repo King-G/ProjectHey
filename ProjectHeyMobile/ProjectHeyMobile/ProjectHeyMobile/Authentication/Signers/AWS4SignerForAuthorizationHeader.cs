@@ -117,14 +117,12 @@ namespace ProjectHeyMobile.Authentication.Signers
             // compute the signing key
             //var kha = KeyedHashAlgorithm.Create(HMACSHA256);
             //kha.Key = DeriveSigningKey(HMACSHA256, awsSecretKey, Region, dateStamp, Service);
-
             //// compute the AWS4 signature and return it
             //var signature = kha.ComputeHash(Encoding.UTF8.GetBytes(stringToSign.ToString()));
 
             var kha = new HMACSHA256(DeriveSigningKey(awsSecretKey, Region, dateStamp, Service));
-            // compute the final signature for the request, place into the result and return to the 
-            // user to be embedded in the request as needed
             var signature = kha.ComputeHash(Encoding.UTF8.GetBytes(stringToSign.ToString()));
+
             var signatureString = ToHexString(signature, true);
             Console.WriteLine("\nSignature:\n{0}", signatureString);
 

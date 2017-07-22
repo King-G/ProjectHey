@@ -57,20 +57,19 @@ namespace ProjectHeyMobile.Views.Rootpages
                 {
                     await FacebookViewModel.SetFacebookUserProfileAsync(accessToken);
 
+                    //GET CREDENTIALS
                     CognitoAWSCredentials credentials
                         = new CognitoAWSCredentials(ProjectHeyAuthentication.AWSIdentityPool, ProjectHeyAuthentication.AWSRegionEndpoint);
 
                     credentials.AddLogin("graph.facebook.com", accessToken);
-                    var identity = credentials.GetIdentityId();
 
+                    credentials.ClearCredentials();
                     ImmutableCredentials ic = credentials.GetCredentials();
+
                     ProjectHeyAuthentication.AWSAccessKey = ic.AccessKey;
                     ProjectHeyAuthentication.AWSSecretKey = ic.SecretKey;
 
-                    //=======
-                    //S4Signing....
 
-                    //=======
                     App.LoadUser(FacebookViewModel.FacebookModel);
                     App.Current.MainPage = new NavigationPage(new RootPage());
                 }
