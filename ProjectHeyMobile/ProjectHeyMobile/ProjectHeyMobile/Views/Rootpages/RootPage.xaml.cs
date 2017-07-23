@@ -29,10 +29,13 @@ namespace ProjectHeyMobile.Views.Rootpages
         }
         protected override void OnAppearing()
         {
-            base.OnAppearing();
             if (!ProjectHeyAuthentication.IsLoggedIn)
             {
                 PopUpLogin();
+            }
+            else
+            {
+                base.OnAppearing();
             }
         }
         public void PopUpLogin()
