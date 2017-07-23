@@ -23,13 +23,13 @@ namespace ProjectHeyMobile.Authentication
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
              //<<Custom Authorization>>>
-            string signature = GetSignature(request);
-            string timeSigned = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss");
-            request.Headers.Authorization = new AuthenticationHeaderValue("Authorization", signature);
-            request.Headers.Add(AWS4SignerBase.X_Amz_Content_SHA256, AWS4SignerBase.EMPTY_BODY_SHA256);
-            request.Headers.Add("X-Amz-Date", timeSigned);
+            //string signature = GetSignature(request);
+            //string timeSigned = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss");
+            //request.Headers.Authorization = new AuthenticationHeaderValue("Authorization", signature);
+            //request.Headers.Add(AWS4SignerBase.X_Amz_Content_SHA256, AWS4SignerBase.EMPTY_BODY_SHA256);
+            //request.Headers.Add("X-Amz-Date", timeSigned);
             // SET BREAKPOINT OTHERWISE IT KEEPS LOADING, Let's fix 1 problem at the time.
-            return await base.SendAsync(request, cancellationToken); 
+            return await base.SendAsync(request, cancellationToken).ConfigureAwait(false); 
         }
         private string GetSignature(HttpRequestMessage request)
         {

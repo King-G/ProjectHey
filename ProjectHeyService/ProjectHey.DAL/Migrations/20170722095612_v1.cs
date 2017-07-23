@@ -56,10 +56,12 @@ namespace ProjectHey.DAL.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ActivityDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CityID = table.Column<string>(nullable: true),
+                    CityName = table.Column<string>(nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Email = table.Column<string>(maxLength: 320, nullable: true),
-                    FacebookId = table.Column<int>(nullable: false),
-                    FacebookToken = table.Column<int>(nullable: false),
+                    FacebookId = table.Column<string>(nullable: false),
+                    FacebookToken = table.Column<string>(nullable: false),
                     Firstname = table.Column<string>(maxLength: 50, nullable: false),
                     Gender = table.Column<int>(nullable: false),
                     IsBanned = table.Column<bool>(nullable: false),
@@ -103,12 +105,10 @@ namespace ProjectHey.DAL.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Language = table.Column<int>(nullable: false),
-                    MaximumConversations = table.Column<int>(nullable: false),
-                    MaximumNotifications = table.Column<int>(nullable: false),
+                    MaximumConnections = table.Column<int>(nullable: false),
                     Radius = table.Column<int>(nullable: false),
                     Sound = table.Column<bool>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    Vibrate = table.Column<bool>(nullable: false)
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -126,7 +126,8 @@ namespace ProjectHey.DAL.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<int>(nullable: false),
-                    BlockedUserId = table.Column<int>(nullable: false)
+                    BlockedUserId = table.Column<int>(nullable: false),
+                    IsHidden = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -531,7 +532,6 @@ namespace ProjectHey.DAL.Migrations
 
             migrationBuilder.Sql(@"ALTER TABLE [dbo].[User] ADD [Location] geography NULL");
             migrationBuilder.Sql(@"ALTER TABLE [dbo].[Advertisement] ADD [Location] geography NULL");
-
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

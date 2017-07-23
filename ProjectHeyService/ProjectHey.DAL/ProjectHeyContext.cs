@@ -350,6 +350,12 @@ namespace ProjectHey.DAL
                     .IsRequired()
                     .HasMaxLength(50);
             modelBuilder.Entity<User>()
+                    .Property(x => x.FacebookId)
+                    .IsRequired();
+            modelBuilder.Entity<User>()
+                    .Property(x => x.FacebookToken)
+                    .IsRequired();
+            modelBuilder.Entity<User>()
                     .Property(x => x.CreationDate)
                     .HasColumnType("datetime2")
                     .IsRequired();

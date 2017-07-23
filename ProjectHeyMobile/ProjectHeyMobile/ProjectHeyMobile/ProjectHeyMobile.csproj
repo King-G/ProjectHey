@@ -111,8 +111,6 @@
     </Compile>
     <Compile Include="Authentication\AuthenticatedHttpClientHandler.cs" />
     <Compile Include="Authentication\FacebookModel.cs" />
-    <Compile Include="Authentication\FacebookServices.cs" />
-    <Compile Include="Authentication\FacebookViewModel.cs" />
     <Compile Include="Authentication\ProjectHeyAuthentication.cs" />
     <Compile Include="Authentication\Signers\AWS4SignerBase.cs" />
     <Compile Include="Authentication\Signers\AWS4SignerForAuthorizationHeader.cs" />
@@ -148,12 +146,7 @@
     <Compile Include="Views\Chatpages\MessageView.xaml.cs">
       <DependentUpon>MessageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Rootpages\LoginPage.xaml.cs">
-      <DependentUpon>LoginPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Rootpages\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Views\Rootpages\CustomAuthenticatorPage.cs" />
     <Compile Include="Views\Settingspages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
@@ -216,6 +209,9 @@
     <Compile Include="ViewModels\ConnectionViewModel.cs" />
     <Compile Include="Views\Utilitypages\HeyFeaturesPage.xaml.cs">
       <DependentUpon>HeyFeaturesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Utilitypages\LoadingPage.xaml.cs">
+      <DependentUpon>LoadingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Utilitypages\ReportPage.xaml.cs">
       <DependentUpon>ReportPage.xaml</DependentUpon>
@@ -382,13 +378,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Rootpages\LoginPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\Rootpages\MainPage.xaml">
+    <EmbeddedResource Include="Views\Utilitypages\LoadingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

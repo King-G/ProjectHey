@@ -9,7 +9,7 @@ using ProjectHey.DOMAIN.Enums;
 namespace ProjectHey.DAL.Migrations
 {
     [DbContext(typeof(ProjectHeyContext))]
-    [Migration("20170720142516_v1")]
+    [Migration("20170722095612_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,17 +65,13 @@ namespace ProjectHey.DAL.Migrations
 
                     b.Property<int>("Language");
 
-                    b.Property<int>("MaximumConversations");
-
-                    b.Property<int>("MaximumNotifications");
+                    b.Property<int>("MaximumConnections");
 
                     b.Property<int>("Radius");
 
                     b.Property<bool>("Sound");
 
                     b.Property<int>("UserId");
-
-                    b.Property<bool>("Vibrate");
 
                     b.HasKey("Id");
 
@@ -90,6 +86,8 @@ namespace ProjectHey.DAL.Migrations
                     b.Property<int>("UserId");
 
                     b.Property<int>("BlockedUserId");
+
+                    b.Property<bool>("IsHidden");
 
                     b.HasKey("UserId", "BlockedUserId");
 
@@ -293,15 +291,21 @@ namespace ProjectHey.DAL.Migrations
                     b.Property<DateTime>("ActivityDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("CityID");
+
+                    b.Property<string>("CityName");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasMaxLength(320);
 
-                    b.Property<int>("FacebookId");
+                    b.Property<string>("FacebookId")
+                        .IsRequired();
 
-                    b.Property<int>("FacebookToken");
+                    b.Property<string>("FacebookToken")
+                        .IsRequired();
 
                     b.Property<string>("Firstname")
                         .IsRequired()

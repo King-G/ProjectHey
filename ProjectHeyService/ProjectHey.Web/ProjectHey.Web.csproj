@@ -113,7 +113,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CSS\loading.css" />
+    <Content Include="IMG\cb6072312fe0004dacf1f3261c0e69ea.gif" />
+    <Content Include="IMG\giphy-downsized.gif" />
+    <Content Include="IMG\giphy.gif" />
+    <Content Include="IMG\HeyLoading.gif" />
+    <Content Include="IMG\heyloadingdance.gif" />
+    <Content Include="IMG\load2.gif" />
     <Content Include="Index.html" />
+    <Content Include="LoadingPage.html" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

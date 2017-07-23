@@ -21,12 +21,12 @@ namespace ProjectHeyMobile.Views.Mainpages
         }
         public EveryonePage()
         {
-            List<CategoryViewModel> categories = new List<CategoryViewModel>();
-            foreach (UserCategory usercategory in App.Main.User.UserCategory)
-            {
-                categories.Add(new CategoryViewModel(usercategory.Category));
-            }
-            CategoriesViewModel = new CategoriesViewModel(categories);
+            //List<CategoryViewModel> categories = new List<CategoryViewModel>();
+            //foreach (UserCategory usercategory in App.Main.User.UserCategory)
+            //{
+            //    categories.Add(new CategoryViewModel(usercategory.Category));
+            //}
+            CategoriesViewModel = new CategoriesViewModel();
             InitializeComponent();
 
         }

@@ -9,10 +9,12 @@ namespace ProjectHey.DOMAIN
     {
         public int Id { get; set; }
 
-        public int FacebookId { get; set; }
+        public string FacebookId { get; set; }
 
-        public int FacebookToken { get; set; }
+        public string FacebookToken { get; set; }
 
+        public string CityID { get; set; }
+        public string CityName { get; set; }
         public string Username { get; set; }
 
         public string ResetUsername()
