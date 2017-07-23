@@ -27,9 +27,8 @@ namespace ProjectHeyMobile
                   },
           DataSchemes = new[]
                   {
-                        "com.xamarin.traditional.standard.samples.oauth.providers.android",
-                        "com.googleusercontent.apps.1093596514437-d3rpjj7clslhdg3uv365qpodsl5tq4fn",
-                        "fb1889013594699403",
+                        "http://127.0.0.1",
+                        "https://127.0.0.1",
                         "https://localhost/path",
                         "http://localhost/path",
                         "https://localhost",
