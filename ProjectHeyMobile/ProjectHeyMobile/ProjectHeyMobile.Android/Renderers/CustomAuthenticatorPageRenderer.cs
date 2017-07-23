@@ -52,7 +52,7 @@ namespace ProjectHeyMobile.Droid.Renderers
            
             loginActivity.StartActivity(ui_object);
             
-            return;
+            //return;
         }
 
 

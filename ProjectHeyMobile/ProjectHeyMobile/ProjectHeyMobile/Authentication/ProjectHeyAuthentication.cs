@@ -48,7 +48,7 @@ namespace ProjectHeyMobile.Authentication
         #region OAuthSettings
         public static Uri AuthorizationEndpoint = new Uri("https://m.facebook.com/dialog/oauth");
         public static Uri TokenEndpoint = new Uri("https://m.facebook.com/dialog/oauth/token");
-        public static Uri RedirectionEndpoint = new Uri("https://www.facebook.com/connect/login_success.html");        
+        public static Uri RedirectionEndpoint = new Uri("http://m.facebook.com/connect/login_success.html");        
         public static Uri ApiEndpoint = new Uri("https://graph.facebook.com/v2.10/");
 
         public static string ClientId = "139025613314996";

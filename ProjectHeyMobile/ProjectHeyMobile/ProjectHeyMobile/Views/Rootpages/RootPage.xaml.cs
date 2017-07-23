@@ -44,7 +44,7 @@ namespace ProjectHeyMobile.Views.Rootpages
                 ProjectHeyAuthentication.RedirectionEndpoint,
                 ProjectHeyAuthentication.TokenEndpoint,
                 getUsernameAsync: null,
-                isUsingNativeUI: true
+                isUsingNativeUI: false
             );
 
             authenticator.Completed += OnAuthCompleted;
@@ -52,7 +52,7 @@ namespace ProjectHeyMobile.Views.Rootpages
 
             ProjectHeyAuthentication.Authenticator = authenticator;
 
-            CustomAuthenticatorPage authenticationPage = new CustomAuthenticatorPage();
+            CustomAuthenticatorPage authenticationPage = new CustomAuthenticatorPage() { Authenticator = authenticator };
             App.Current.MainPage.Navigation.PushAsync(authenticationPage);
             //Xamarin.Auth.Presenters.OAuthLoginPresenter presenter = null;
             //presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
@@ -63,11 +63,11 @@ namespace ProjectHeyMobile.Views.Rootpages
         {
             var authenticator = sender as OAuth2Authenticator;
 
-            //if (authenticator != null)
-            //{
-            //    authenticator.Completed -= OnAuthCompleted;
-            //    authenticator.Error -= OnAuthError;
-            //}
+            if (authenticator != null)
+            {
+                authenticator.Completed -= OnAuthCompleted;
+                authenticator.Error -= OnAuthError;
+            }
 
             if (e.IsAuthenticated)
             {
@@ -109,12 +109,12 @@ namespace ProjectHeyMobile.Views.Rootpages
 
             var authenticator = sender as OAuth2Authenticator;
 
-            //if (authenticator != null)
-            //{
-            //    authenticator.Completed -= OnAuthCompleted;
-            //    authenticator.Error -= OnAuthError;
+            if (authenticator != null)
+            {
+                authenticator.Completed -= OnAuthCompleted;
+                authenticator.Error -= OnAuthError;
 
-            //}
+            }
 
             App.Current.MainPage.DisplayAlert("Dammit... Obviously something went wrong...", e.Message, "It happens...");
         }
