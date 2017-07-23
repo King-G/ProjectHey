@@ -37,6 +37,19 @@ namespace ProjectHeyMobile.Droid
             color_xamarin_blue = new global::Android.Graphics.Color(0x34, 0x98, 0xdb);
             global::Xamarin.Auth.CustomTabsConfiguration.ToolbarColor = color_xamarin_blue;
 
+            // ActivityFlags for tweaking closing of CustomTabs
+            // please report findings!
+            global::Xamarin.Auth.CustomTabsConfiguration.
+               ActivityFlags =
+                    global::Android.Content.ActivityFlags.NoHistory
+                    |
+                    global::Android.Content.ActivityFlags.SingleTop
+                    |
+                    global::Android.Content.ActivityFlags.NewTask
+                    ;
+
+            global::Xamarin.Auth.CustomTabsConfiguration.IsWarmUpUsed = true;
+            global::Xamarin.Auth.CustomTabsConfiguration.IsPrefetchUsed = true;
 
             LoadApplication(new App());
         }

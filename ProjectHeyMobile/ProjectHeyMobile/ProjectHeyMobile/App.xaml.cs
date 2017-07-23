@@ -31,7 +31,7 @@ namespace ProjectHeyMobile
 
             if (CrossConnectivity.Current.IsConnected)
             {
-                MainPage = new NavigationPage(new RootPage());
+                MainPage = new NavigationPage(new StartPage());
             }
             else
             {

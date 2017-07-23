@@ -34,6 +34,7 @@ namespace ProjectHeyMobile
                         "http://localhost/path",
                         "https://localhost",
                         "http://localhost",
+                        "https://www.facebook.com/connect/login_success.html",
                         "fb139025613314996", //Projecthey fb id
                         "xamarin-auth",
               /*
@@ -73,7 +74,12 @@ namespace ProjectHeyMobile
             // load redirect_url Page
             ProjectHeyAuthentication.Authenticator.OnPageLoading(uri);
 
+
             this.Finish();
+
+            return;
+
         }
+
     }
 }

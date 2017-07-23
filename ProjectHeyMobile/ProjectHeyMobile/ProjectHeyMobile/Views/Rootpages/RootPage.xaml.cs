@@ -15,113 +15,113 @@ namespace ProjectHeyMobile.Views.Rootpages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RootPage : MasterDetailPage
     {
-        Account account;
-        AccountStore store;
+        //Account account;
+        //AccountStore store;
         public RootPage()
         {
             InitializeComponent();
 
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
-            store = AccountStore.Create();
-            account = store.FindAccountsForService(ProjectHeyAuthentication.ServiceId).FirstOrDefault();
-            this.BindingContext = this;
+            //store = AccountStore.Create();
+            //account = store.FindAccountsForService(ProjectHeyAuthentication.ServiceId).FirstOrDefault();
+            //this.BindingContext = this;
 
         }
-        protected override void OnAppearing()
-        {
-            if (!ProjectHeyAuthentication.IsLoggedIn)
-            {
-                PopUpLogin();
-            }
-            else
-            {
-                base.OnAppearing();
-            }
-        }
-        public void PopUpLogin()
-        {
-            OAuth2Authenticator authenticator = new OAuth2Authenticator
-            (
-                clientId: ProjectHeyAuthentication.ClientId,
-                //clientSecret: ProjectHeyAuthentication.ClientSecret,
-                scope: ProjectHeyAuthentication.Scope,
-                authorizeUrl: ProjectHeyAuthentication.AuthorizationEndpoint,
-                redirectUrl: ProjectHeyAuthentication.RedirectionEndpoint,
-                //accessTokenUrl: ProjectHeyAuthentication.TokenEndpoint,
-                getUsernameAsync: null,
-                isUsingNativeUI: true
-            );
+        //protected override void OnAppearing()
+        //{
+        //    if (!ProjectHeyAuthentication.IsLoggedIn)
+        //    {
+        //        PopUpLogin();
+        //    }
+        //    else
+        //    {
+        //        base.OnAppearing();
+        //    }
+        //}
+        //public void PopUpLogin()
+        //{
+        //    OAuth2Authenticator authenticator = new OAuth2Authenticator
+        //    (
+        //        clientId: ProjectHeyAuthentication.ClientId,
+        //        //clientSecret: ProjectHeyAuthentication.ClientSecret,
+        //        scope: ProjectHeyAuthentication.Scope,
+        //        authorizeUrl: ProjectHeyAuthentication.AuthorizationEndpoint,
+        //        redirectUrl: ProjectHeyAuthentication.RedirectionEndpoint,
+        //        //accessTokenUrl: ProjectHeyAuthentication.TokenEndpoint,
+        //        getUsernameAsync: null,
+        //        isUsingNativeUI: true
+        //    );
 
-            authenticator.Completed += OnAuthCompleted;
-            authenticator.Error += OnAuthError;
+        //    authenticator.Completed += OnAuthCompleted;
+        //    authenticator.Error += OnAuthError;
 
-            ProjectHeyAuthentication.Authenticator = authenticator;
+        //    ProjectHeyAuthentication.Authenticator = authenticator;
 
-            //CustomAuthenticatorPage customauthenticationPage = new CustomAuthenticatorPage() { Authenticator = authenticator };
-            //AuthenticatorPage authenticationPage = new AuthenticatorPage() { Authenticator = authenticator };
-            //App.Current.MainPage.Navigation.PushAsync(customauthenticationPage);
-            Xamarin.Auth.Presenters.OAuthLoginPresenter presenter = null;
-            presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
-            presenter.Login(authenticator);
-        }
+        //    //CustomAuthenticatorPage customauthenticationPage = new CustomAuthenticatorPage() { Authenticator = authenticator };
+        //    //AuthenticatorPage authenticationPage = new AuthenticatorPage() { Authenticator = authenticator };
+        //    //App.Current.MainPage.Navigation.PushAsync(customauthenticationPage);
+        //    Xamarin.Auth.Presenters.OAuthLoginPresenter presenter = null;
+        //    presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
+        //    presenter.Login(authenticator);
+        //}
 
-        async void OnAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
-        {
-            var authenticator = sender as OAuth2Authenticator;
+        //async void OnAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
+        //{
+        //    var authenticator = sender as OAuth2Authenticator;
 
-            if (authenticator != null)
-            {
-                authenticator.Completed -= OnAuthCompleted;
-                authenticator.Error -= OnAuthError;
-            }
+        //    if (authenticator != null)
+        //    {
+        //        authenticator.Completed -= OnAuthCompleted;
+        //        authenticator.Error -= OnAuthError;
+        //    }
 
-            if (e.IsAuthenticated)
-            {
-                if (account != null)
-                    store.Delete(account, ProjectHeyAuthentication.ServiceId);
+        //    if (e.IsAuthenticated)
+        //    {
+        //        if (account != null)
+        //            store.Delete(account, ProjectHeyAuthentication.ServiceId);
                 
-                account = e.Account;
-                store.Save(account, ProjectHeyAuthentication.ServiceId);
+        //        account = e.Account;
+        //        store.Save(account, ProjectHeyAuthentication.ServiceId);
 
-                ProjectHeyAuthentication.FacebookToken = account.Properties["access_token"];
-                //App.FacebookModel = await GetProfile();
-                //await App.Main.LoadUser(App.FacebookModel);
-                //App.Current.MainPage = new NavigationPage(new RootPage());
+        //        ProjectHeyAuthentication.FacebookToken = account.Properties["access_token"];
+        //        //App.FacebookModel = await GetProfile();
+        //        //await App.Main.LoadUser(App.FacebookModel);
+        //        //App.Current.MainPage = new NavigationPage(new RootPage());
 
-                //GET CREDENTIALS
-                //CognitoAWSCredentials credentials
-                //    = new CognitoAWSCredentials(ProjectHeyAuthentication.AWSIdentityPool, ProjectHeyAuthentication.AWSRegionEndpoint);
+        //        //GET CREDENTIALS
+        //        //CognitoAWSCredentials credentials
+        //        //    = new CognitoAWSCredentials(ProjectHeyAuthentication.AWSIdentityPool, ProjectHeyAuthentication.AWSRegionEndpoint);
 
-                //credentials.AddLogin("graph.facebook.com", accessToken);
+        //        //credentials.AddLogin("graph.facebook.com", accessToken);
 
-                //credentials.ClearCredentials();
-                //ImmutableCredentials ic = credentials.GetCredentials();
+        //        //credentials.ClearCredentials();
+        //        //ImmutableCredentials ic = credentials.GetCredentials();
 
-                //ProjectHeyAuthentication.AWSAccessKey = ic.AccessKey;
-                //ProjectHeyAuthentication.AWSSecretKey = ic.SecretKey;
+        //        //ProjectHeyAuthentication.AWSAccessKey = ic.AccessKey;
+        //        //ProjectHeyAuthentication.AWSSecretKey = ic.SecretKey;
 
-            }
-            else
-            {
-                await App.Current.MainPage.DisplayAlert("Dammit...", "Authentication Failed", "I'll report it");
+        //    }
+        //    else
+        //    {
+        //        await App.Current.MainPage.DisplayAlert("Dammit...", "Authentication Failed", "I'll report it");
 
-            }
-        }
+        //    }
+        //}
 
-        void OnAuthError(object sender, AuthenticatorErrorEventArgs e)
-        {
+        //void OnAuthError(object sender, AuthenticatorErrorEventArgs e)
+        //{
 
-            var authenticator = sender as OAuth2Authenticator;
+        //    var authenticator = sender as OAuth2Authenticator;
 
-            if (authenticator != null)
-            {
-                authenticator.Completed -= OnAuthCompleted;
-                authenticator.Error -= OnAuthError;
+        //    if (authenticator != null)
+        //    {
+        //        authenticator.Completed -= OnAuthCompleted;
+        //        authenticator.Error -= OnAuthError;
 
-            }
+        //    }
 
-            App.Current.MainPage.DisplayAlert("Dammit... Obviously something went wrong...", e.Message, "It happens...");
-        }
+        //    App.Current.MainPage.DisplayAlert("Dammit... Obviously something went wrong...", e.Message, "It happens...");
+        //}
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var item = e.SelectedItem as RootPageMenuItem;
@@ -137,48 +137,48 @@ namespace ProjectHeyMobile.Views.Rootpages
             MasterPage.ListView.SelectedItem = null;
         }
 
-        async Task<FacebookModel> GetProfile()
-        {
-            try
-            {
-                //#region WHILE WE WAIT FOR  AUTH0 TO GET THEIR SHIT TOGETHER
-                //FacebookModel facebookModel = new FacebookModel()
-                //{
-                //    name = "Karim Gabsi",
-                //    family_name = "Gabsi",
-                //    given_name = "Karim",
-                //    email = "gabsikarim@gmail.com",
-                //    age_range = new AgeRange() { min = 21 },
-                //    gender = "male",
-                //    birthday = "01/16/1991",
-                //    location = new Location() { id = "114521328558541", name = "Kortrijk" }
+        //async Task<FacebookModel> GetProfile()
+        //{
+        //    try
+        //    {
+        //        //#region WHILE WE WAIT FOR  AUTH0 TO GET THEIR SHIT TOGETHER
+        //        //FacebookModel facebookModel = new FacebookModel()
+        //        //{
+        //        //    name = "Karim Gabsi",
+        //        //    family_name = "Gabsi",
+        //        //    given_name = "Karim",
+        //        //    email = "gabsikarim@gmail.com",
+        //        //    age_range = new AgeRange() { min = 21 },
+        //        //    gender = "male",
+        //        //    birthday = "01/16/1991",
+        //        //    location = new Location() { id = "114521328558541", name = "Kortrijk" }
 
-                //};
+        //        //};
 
-                //return facebookModel;
-                //#endregion
-
-
-                var request = new OAuth2Request("GET", ProjectHeyAuthentication.ApiEndpoint, null, account);
-
-                var response = await request.GetResponseAsync();
-                var responseData = await response.GetResponseTextAsync();
-
-                FacebookModel facebookModel = JsonConvert.DeserializeObject<FacebookModel>(responseData);
-
-                return facebookModel;
-                //var imageRequest = new OAuth2Request("GET", new Uri(imageUrl), null, account);
-                //var stream = await (await imageRequest.GetResponseAsync()).GetResponseStreamAsync();
-                //profileImage.Source = ImageSource.FromStream(() => stream);
+        //        //return facebookModel;
+        //        //#endregion
 
 
-            }
-            catch (Exception exception)
-            {
-                await App.Current.MainPage.DisplayAlert("Oops", "Get data failure: " + exception.Message + "\r\nHas the access token expired?", "ok");
-                return null;
-            }
-        }
+        //        var request = new OAuth2Request("GET", ProjectHeyAuthentication.ApiEndpoint, null, account);
+
+        //        var response = await request.GetResponseAsync();
+        //        var responseData = await response.GetResponseTextAsync();
+
+        //        FacebookModel facebookModel = JsonConvert.DeserializeObject<FacebookModel>(responseData);
+
+        //        return facebookModel;
+        //        //var imageRequest = new OAuth2Request("GET", new Uri(imageUrl), null, account);
+        //        //var stream = await (await imageRequest.GetResponseAsync()).GetResponseStreamAsync();
+        //        //profileImage.Source = ImageSource.FromStream(() => stream);
+
+
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        await App.Current.MainPage.DisplayAlert("Oops", "Get data failure: " + exception.Message + "\r\nHas the access token expired?", "ok");
+        //        return null;
+        //    }
+        //}
 
         #region TOKEN REFRESH
         //async void RefreshButtonClicked(object sender, EventArgs e)
