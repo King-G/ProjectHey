@@ -15,35 +15,53 @@ using ProjectHeyMobile.Authentication;
 
 namespace ProjectHeyMobile
 {
-    //=================================================================
     [Activity(Label = "ActivityCustomUrlSchemeInterceptor", NoHistory = true, LaunchMode = LaunchMode.SingleTop)]
-    // Walthrough Step 4
-    //      Intercepting/Catching/Detecting [redirect] url change 
-    //      App Linking / Deep linking - custom url schemes
-    //      
-    // 
     [
-        IntentFilter
-        (
-            actions: new[] { Intent.ActionView },
-            Categories = new[]
-                    {
+      IntentFilter
+      (
+          actions: new[] { Intent.ActionView },
+          Categories = new[]
+                  {
                         Intent.CategoryDefault,
                         Intent.CategoryBrowsable
-                    },
-            DataSchemes = new[]
-                    {
-                        "https://www.facebook.com/connect/login_success.html",
-                        "http://www.facebook.com/connect/login_success.html",
-                        "https://m.facebook.com/connect/login_success.html",
-                        "http://m.facebook.com/connect/login_success.html",
-                        "fb139025613314996://localhost/path",
-                        "fb139025613314996://authorize",
-                    },
-            //DataHost = "localhost",
-            DataPath = "/oauth2redirect"
-        )
-    ]
+                  },
+          DataSchemes = new[]
+                  {
+                        "com.xamarin.traditional.standard.samples.oauth.providers.android",
+                        "com.googleusercontent.apps.1093596514437-d3rpjj7clslhdg3uv365qpodsl5tq4fn",
+                        "fb1889013594699403",
+                        "https://localhost/path",
+                        "http://localhost/path",
+                        "https://localhost",
+                        "http://localhost",
+                        "fb139025613314996", //Projecthey fb id
+                        "xamarin-auth",
+              /*
+              "urn:ietf:wg:oauth:2.0:oob",
+              "urn:ietf:wg:oauth:2.0:oob.auto",
+              "http://localhost:PORT",
+              "https://localhost:PORT",
+              "http://127.0.0.1:PORT",
+              "https://127.0.0.1:PORT",              
+              "http://[::1]:PORT", 
+              "https://[::1]:PORT", 
+              */
+                  },
+          //DataHost = "localhost",
+          DataHosts = new[]
+                  {
+                        "localhost",
+                        "authorize",                // Facebook in fb1889013594699403://authorize 
+          },
+          DataPaths = new[]
+                  {
+                        "/",                        // Facebook
+						"/oauth2redirect",          // Google
+                        "/oauth2redirectpath",      // MeetUp
+          },
+          AutoVerify = true
+      )
+  ]
     public class ActivityCustomUrlSchemeInterceptor : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -55,7 +73,7 @@ namespace ProjectHeyMobile
             // load redirect_url Page
             ProjectHeyAuthentication.Authenticator.OnPageLoading(uri);
 
-            Finish();
+            this.Finish();
         }
     }
 }

@@ -38,7 +38,6 @@ namespace ProjectHeyMobile.Views.Rootpages
         {
             return;
         }
-
         public void Authentication_Error(object sender, AuthenticatorErrorEventArgs e)
         {
             return;
@@ -46,7 +45,6 @@ namespace ProjectHeyMobile.Views.Rootpages
 
         public void Authentication_BrowsingCompleted(object sender, EventArgs e)
         {
-
             return;
         }
 

@@ -47,10 +47,12 @@ namespace ProjectHeyMobile.Droid.Renderers
             Authenticator.Completed += Authentication_Completed;
             Authenticator.Error += Authentication_Error;
 
-            loginActivity = this.Context as global::Android.App.Activity;
+            loginActivity = this.Context as Activity;
+            
             ui_object = Authenticator.GetUI(loginActivity);
            
-            loginActivity.StartActivity(ui_object);
+            //loginActivity.StartActivity(ui_object);
+            loginActivity.StartActivityForResult(ui_object, 0);
             
             //return;
         }
@@ -59,6 +61,7 @@ namespace ProjectHeyMobile.Droid.Renderers
         protected void Authentication_Completed(object sender, AuthenticatorCompletedEventArgs e)
         {
             authenticator_page.Authentication_Completed(sender, e);
+            loginActivity.FinishActivity(0);
             return;
         }
 

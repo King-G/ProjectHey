@@ -44,9 +44,9 @@ namespace ProjectHeyMobile.Views.Rootpages
                 scope: ProjectHeyAuthentication.Scope,
                 authorizeUrl: ProjectHeyAuthentication.AuthorizationEndpoint,
                 redirectUrl: ProjectHeyAuthentication.RedirectionEndpoint,
-                //accessTokenUrl : ProjectHeyAuthentication.TokenEndpoint,
+                //accessTokenUrl: ProjectHeyAuthentication.TokenEndpoint,
                 getUsernameAsync: null,
-                isUsingNativeUI: false
+                isUsingNativeUI: true
             );
 
             authenticator.Completed += OnAuthCompleted;
@@ -55,11 +55,11 @@ namespace ProjectHeyMobile.Views.Rootpages
             ProjectHeyAuthentication.Authenticator = authenticator;
 
             //CustomAuthenticatorPage customauthenticationPage = new CustomAuthenticatorPage() { Authenticator = authenticator };
-            AuthenticatorPage authenticationPage = new AuthenticatorPage() { Authenticator = authenticator };
-            App.Current.MainPage.Navigation.PushModalAsync(authenticationPage);
-            //Xamarin.Auth.Presenters.OAuthLoginPresenter presenter = null;
-            //presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
-            //presenter.Login(authenticator);
+            //AuthenticatorPage authenticationPage = new AuthenticatorPage() { Authenticator = authenticator };
+            //App.Current.MainPage.Navigation.PushAsync(customauthenticationPage);
+            Xamarin.Auth.Presenters.OAuthLoginPresenter presenter = null;
+            presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
+            presenter.Login(authenticator);
         }
 
         async void OnAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
@@ -76,10 +76,9 @@ namespace ProjectHeyMobile.Views.Rootpages
             {
                 if (account != null)
                     store.Delete(account, ProjectHeyAuthentication.ServiceId);
-
+                
                 account = e.Account;
                 store.Save(account, ProjectHeyAuthentication.ServiceId);
-
 
                 ProjectHeyAuthentication.FacebookToken = account.Properties["access_token"];
                 //App.FacebookModel = await GetProfile();

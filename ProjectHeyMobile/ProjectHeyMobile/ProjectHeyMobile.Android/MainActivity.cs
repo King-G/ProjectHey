@@ -23,7 +23,6 @@ namespace ProjectHeyMobile.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
             global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, bundle);
 
-
             global::Xamarin.Auth.CustomTabsConfiguration.ActionLabel = null;
             global::Xamarin.Auth.CustomTabsConfiguration.MenuItemTitle = null;
             global::Xamarin.Auth.CustomTabsConfiguration.AreAnimationsUsed = true;
