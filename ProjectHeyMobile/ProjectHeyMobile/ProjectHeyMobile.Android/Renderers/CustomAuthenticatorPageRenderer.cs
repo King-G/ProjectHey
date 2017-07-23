@@ -25,7 +25,7 @@ using ProjectHeyMobile.Droid.Renderers;
 namespace ProjectHeyMobile.Droid.Renderers
 {
     [global::Android.Runtime.Preserve(AllMembers = true)]
-    public class CustomAuthenticatorPageRenderer : Xamarin.Forms.Platform.Android.PageRenderer
+    public class CustomAuthenticatorPageRenderer : PageRenderer
     {
         protected Xamarin.Auth.Authenticator Authenticator = null;
         protected CustomAuthenticatorPage authenticator_page = null;
@@ -59,7 +59,6 @@ namespace ProjectHeyMobile.Droid.Renderers
         protected void Authentication_Completed(object sender, AuthenticatorCompletedEventArgs e)
         {
             authenticator_page.Authentication_Completed(sender, e);
-            loginActivity.StopService(ui_object);
             return;
         }
 
@@ -75,5 +74,6 @@ namespace ProjectHeyMobile.Droid.Renderers
             authenticator_page.Authentication_BrowsingCompleted(sender, e);
             return;
         }
+
     }
 }

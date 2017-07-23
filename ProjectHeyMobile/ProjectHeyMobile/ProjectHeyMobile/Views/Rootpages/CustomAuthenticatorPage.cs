@@ -36,37 +36,11 @@ namespace ProjectHeyMobile.Views.Rootpages
 
         public void Authentication_Completed(object sender, AuthenticatorCompletedEventArgs e)
         {
-#if DEBUG
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"IsAuthenticated = {e.IsAuthenticated}");
-            sb.AppendLine($"Account.User    = {e.Account.Username}");
-            sb.AppendLine($"access_token      = {e.Account.Properties["access_token"]}");
-
-            DisplayAlert
-                (
-                    "Completed",
-                    sb.ToString(),
-                    "Close"
-                );
-#endif
-
             return;
         }
 
         public void Authentication_Error(object sender, AuthenticatorErrorEventArgs e)
         {
-#if DEBUG
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"Message   = {e.Message}");
-
-            DisplayAlert
-                (
-                    "Error",
-                    sb.ToString(),
-                    "Close"
-                );
-#endif
-
             return;
         }
 

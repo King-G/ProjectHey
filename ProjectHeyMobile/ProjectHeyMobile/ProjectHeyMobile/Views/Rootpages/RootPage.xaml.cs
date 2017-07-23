@@ -24,6 +24,8 @@ namespace ProjectHeyMobile.Views.Rootpages
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
             store = AccountStore.Create();
             account = store.FindAccountsForService(ProjectHeyAuthentication.ServiceId).FirstOrDefault();
+            this.BindingContext = this;
+
         }
         protected override void OnAppearing()
         {
@@ -37,12 +39,12 @@ namespace ProjectHeyMobile.Views.Rootpages
         {
             OAuth2Authenticator authenticator = new OAuth2Authenticator
             (
-                ProjectHeyAuthentication.ClientId,
-                ProjectHeyAuthentication.ClientSecret,
-                ProjectHeyAuthentication.Scope,
-                ProjectHeyAuthentication.AuthorizationEndpoint,
-                ProjectHeyAuthentication.RedirectionEndpoint,
-                ProjectHeyAuthentication.TokenEndpoint,
+                clientId: ProjectHeyAuthentication.ClientId,
+                //clientSecret: ProjectHeyAuthentication.ClientSecret,
+                scope: ProjectHeyAuthentication.Scope,
+                authorizeUrl: ProjectHeyAuthentication.AuthorizationEndpoint,
+                redirectUrl: ProjectHeyAuthentication.RedirectionEndpoint,
+                //accessTokenUrl : ProjectHeyAuthentication.TokenEndpoint,
                 getUsernameAsync: null,
                 isUsingNativeUI: false
             );
@@ -52,8 +54,9 @@ namespace ProjectHeyMobile.Views.Rootpages
 
             ProjectHeyAuthentication.Authenticator = authenticator;
 
-            CustomAuthenticatorPage authenticationPage = new CustomAuthenticatorPage() { Authenticator = authenticator };
-            App.Current.MainPage.Navigation.PushAsync(authenticationPage);
+            //CustomAuthenticatorPage customauthenticationPage = new CustomAuthenticatorPage() { Authenticator = authenticator };
+            AuthenticatorPage authenticationPage = new AuthenticatorPage() { Authenticator = authenticator };
+            App.Current.MainPage.Navigation.PushModalAsync(authenticationPage);
             //Xamarin.Auth.Presenters.OAuthLoginPresenter presenter = null;
             //presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
             //presenter.Login(authenticator);
@@ -79,7 +82,6 @@ namespace ProjectHeyMobile.Views.Rootpages
 
 
                 ProjectHeyAuthentication.FacebookToken = account.Properties["access_token"];
-
                 //App.FacebookModel = await GetProfile();
                 //await App.Main.LoadUser(App.FacebookModel);
                 //App.Current.MainPage = new NavigationPage(new RootPage());

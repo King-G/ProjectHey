@@ -219,6 +219,7 @@
     <Compile Include="Renderers\CustomProgressBarRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Xamarin.Auth\ActivityCustomUrlSchemeInterceptor.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\fontawesome.ttf" />

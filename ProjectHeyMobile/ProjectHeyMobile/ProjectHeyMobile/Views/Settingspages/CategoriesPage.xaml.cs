@@ -43,7 +43,7 @@ namespace ProjectHeyMobile.Views.Settingspages
             base.OnAppearing();
         }
 
-        private async void CategoriesListView_Refreshing(object sender, System.EventArgs e)
+        private void CategoriesListView_Refreshing(object sender, System.EventArgs e)
         {
             CategoriesListView.IsRefreshing = true;
             //try

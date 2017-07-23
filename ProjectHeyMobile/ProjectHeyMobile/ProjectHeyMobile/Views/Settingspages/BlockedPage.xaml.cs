@@ -43,7 +43,7 @@ namespace ProjectHeyMobile.Views.Settingspages
             base.OnAppearing();
         }
 
-        private async void BlockedListView_Refreshing(object sender, System.EventArgs e)
+        private void BlockedListView_Refreshing(object sender, System.EventArgs e)
         {
             BlockedListView.IsRefreshing = true;
             //try
