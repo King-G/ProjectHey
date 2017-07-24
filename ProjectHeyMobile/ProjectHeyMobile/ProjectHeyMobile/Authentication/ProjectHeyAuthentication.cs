@@ -10,14 +10,12 @@ using System.ComponentModel;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Xamarin.Auth;
 using Xamarin.Forms;
 
 namespace ProjectHeyMobile.Authentication
 {
     public class ProjectHeyAuthentication
     {
-        public const string FacebookAppId = "139025613314996";
 
         public static bool IsLoggedIn
         {
@@ -28,7 +26,13 @@ namespace ProjectHeyMobile.Authentication
         }
 
         #region AWSSettings
+        //public static string ProjectHeyAPIEndpoint = "https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api";
+        public static string ProjectHeyAPIEndpoint = "http://10.0.2.2:5000/api";
 
+        //public static string ProjectHeyChatEndpoint = "http://projecthey.eu-west-2.elasticbeanstalk.com/";
+        public static string ProjectHeyChatEndpoint = "http://10.0.2.2/signalR";
+        public static string ProjectHeyChatHub = "ChatHub";
+        
         public static string AWSAccessKey { get; set; }
         public static string AWSSecretKey { get; set; }
 
@@ -38,15 +42,13 @@ namespace ProjectHeyMobile.Authentication
 
         #endregion
 
-        #region OAuthorization
+        #region FacebookSettings
+        public const string FacebookAppId = "139025613314996";
         public const string ServiceId = "Hey.";
         public const string ScopeFields = "first_name,last_name,birthday,about,gender,hometown,public_key,location,books{id,name},friends{id,first_name,last_name},email,movies{id,name},events{id,name},sports,albums{id,name},games{id,name},likes{id,name},music{id,name},relationship_status";
         public const string Scope = "public_profile+user_friends+email+user_about_me+user_actions.books+user_actions.news+user_relationships+user_birthday+user_events+user_games_activity+user_status+user_relationship_details+user_hometown+user_likes+user_actions.music+user_religion_politics+user_location+user_actions.video+user_education_history";
         public static string FacebookToken { get; set; }
-        public static OAuth2Authenticator Authenticator { get; set; }
-        #endregion
 
-        #region OAuthSettings
         //public static Uri AuthorizationEndpoint = new Uri("https://m.facebook.com/dialog/oauth/");
         public static Uri AuthorizationEndpoint = new Uri("https://www.facebook.com/v2.10/dialog/oauth");
 
@@ -54,7 +56,7 @@ namespace ProjectHeyMobile.Authentication
         //public static Uri RedirectionEndpoint = new Uri("fb139025613314996://authorize");
         public static Uri RedirectionEndpointHTTPS = new Uri("https://www.facebook.com/connect/login_success.html");
         public static Uri RedirectionEndpointHTTP = new Uri("https://www.facebook.com/connect/login_success.html");
-        public static Uri ApiEndpoint = new Uri("https://graph.facebook.com/v2.10");
+        public static Uri FacebookAPIEndpoint = new Uri("https://graph.facebook.com/v2.10");
 
         public static string ClientId = "139025613314996";
         public static string ClientSecret = "e1295b0564b487e4130b9101d0018d46";

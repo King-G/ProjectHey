@@ -43,6 +43,7 @@ namespace ProjectHeyMobile.ViewModels
         {
             try
             {
+                AddMessage(messageVM);
                 //await _chatServices.Send(new ChatMessage { Name = "MobileUser", Message = messageVM.Message.Body }, _Channel);
             }
             catch (System.Exception exception)

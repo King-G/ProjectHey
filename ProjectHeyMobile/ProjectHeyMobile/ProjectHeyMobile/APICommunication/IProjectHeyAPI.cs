@@ -7,8 +7,8 @@ namespace ProjectHeyMobile.APICommunication
 {
     public interface IProjectHeyAPI
     {
-        [Get("/users/getbyfacebookid/{id}")]
-        Task<string> UserGetByFacebookId(string id);
+        [Get("/users/getbyfacebookid/{facebookId}")]
+        Task<string> UserGetByFacebookId(string facebookId);
 
         [Get("/users/getbyid/{id}")]
         Task<string> UserGetById(int id);

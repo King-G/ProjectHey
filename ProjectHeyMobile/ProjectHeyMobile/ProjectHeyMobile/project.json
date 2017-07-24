@@ -2,6 +2,7 @@
   "supports": {},
   "dependencies": {
     "AWSSDK.CognitoIdentity": "3.3.2.13",
+    "Microsoft.AspNet.SignalR.Client": "2.2.2",
     "Microsoft.Bcl": "1.1.10",
     "Microsoft.Bcl.Build": "1.0.21",
     "Microsoft.NETCore.Portable.Compatibility": "1.0.2",
@@ -14,8 +15,6 @@
     "System.Security.Cryptography.X509Certificates": "4.3.0",
     "Xam.Plugin.Connectivity": "3.0.1",
     "Xam.Plugin.Geolocator": "4.0.1",
-    "Xamarin.Auth": "1.5.0.3",
-    "Xamarin.Auth.XamarinForms": "1.5.0.3",
     "Xamarin.Forms": "2.3.5.256-pre6"
   },
   "frameworks": {

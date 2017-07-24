@@ -53,8 +53,32 @@ namespace ProjectHey.DAL
         public async Task<User> GetSimplifiedByIdAsync(int id)
         {
             return await projectHeyContext.User.AsNoTracking()
-                 .FirstOrDefaultAsync(x => x.Id == id);
+                 .SingleOrDefaultAsync(x => x.Id == id);
             
+        }
+        public async Task<User> GetByFacebookId(string facebookId)
+        {
+            User user = await projectHeyContext.User.AsNoTracking()
+                .Include(x => x.Feedback)
+                .Include(x => x.Appsetting)
+                .Include(x => x.ReportedUsers)
+                .Include(x => x.BlockedUsers)
+                .Include(x => x.Connections)
+                .Include(x => x.UserCategory)
+                .Include(x => x.Advertisement)
+                .Include(x => x.WatchedAdvertisement)
+                .SingleOrDefaultAsync(x => x.FacebookId == facebookId);
+
+            if (user != null)
+            {
+                user.Location = await GeneralDB.GetLocation(projectHeyContext, "user", user.Id);
+                foreach (Advertisement a in user.Advertisement) //Neccesary? Do we need the location? yes if we aint gonna request, no if we do.
+                {
+                    a.Location = await GeneralDB.GetLocation(projectHeyContext, "advertisement", a.Id);
+                }
+            }
+
+            return user;
         }
         public async Task<User> GetByIdAsync(int id)
         {
@@ -67,7 +91,7 @@ namespace ProjectHey.DAL
                 .Include(x => x.UserCategory)
                 .Include(x => x.Advertisement)
                 .Include(x => x.WatchedAdvertisement)
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .SingleOrDefaultAsync(x => x.Id == id);
 
             if (user != null)
             {

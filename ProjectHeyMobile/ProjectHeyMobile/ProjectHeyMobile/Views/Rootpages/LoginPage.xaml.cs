@@ -84,7 +84,29 @@ namespace ProjectHeyMobile.Views.Rootpages
                         if (ungrantedPermissions.Count == 0)
                         {
                             ProjectHeyAuthentication.FacebookToken = token;
-                            await App.Current.MainPage.Navigation.PopToRootAsync(false);
+                            await App.Main.LoadUser(facebookModel);
+                            if (App.Main.User != null)
+                            {
+                                await App.ChatServices.ConnectHeyUser(App.Main.User.Id);
+                                //GET CREDENTIALS
+                                //CognitoAWSCredentials credentials
+                                //    = new CognitoAWSCredentials(ProjectHeyAuthentication.AWSIdentityPool, ProjectHeyAuthentication.AWSRegionEndpoint);
+
+                                //credentials.AddLogin("graph.facebook.com", accessToken);
+
+                                //credentials.ClearCredentials();
+                                //ImmutableCredentials ic = credentials.GetCredentials();
+
+                                //ProjectHeyAuthentication.AWSAccessKey = ic.AccessKey;
+                                //ProjectHeyAuthentication.AWSSecretKey = ic.SecretKey;
+                                await App.Current.MainPage.Navigation.PopToRootAsync(false);
+                            }
+                            else
+                            {
+                                string userNotLoadedMessage = "User couldn't be loaded...";
+                                Exception userNotLoadedException = new Exception(userNotLoadedMessage);
+                                await App.Current.MainPage.Navigation.PushAsync(new ErrorPage(userNotLoadedException));
+                            }
                         }
                         else
                         {

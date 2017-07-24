@@ -7,6 +7,7 @@ namespace ProjectHey.DOMAIN.Contracts
     {
         Task<User> GetByUsernameAsync(string username);
         Task<User> GetSimplifiedByIdAsync(int id);
+        Task<User> GetByFacebookId(string facebookId);
         Task<IEnumerable<User>> GetByLocationAsync(User requestor, int skip, int take);
 
     }

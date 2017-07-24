@@ -11,15 +11,15 @@ namespace ProjectHey.Web.signalR
 {
     public class ChatHub : Hub
     {
-        public void Send(string name, string message, string roomname)
+        public void Send(string name, string message, string roomName)
         {
-            Clients.Group(roomname).OnMessageReceived(name, message);
+            Clients.Group(roomName).OnMessageReceived(name, message);
         }
 
-        public override Task OnConnected()
+        public async Task ConnectHeyUser(int id)
         {
             var projectHeyAPI = RestService.For<IProjectHeyAPI>("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api");
-            var response = projectHeyAPI.GetSignalRUserById(Convert.ToInt32(Context.User.Identity.Name)).Result;
+            var response = await projectHeyAPI.GetSignalRUserById(id);
 
             //RetreiveUser
             SignalRUser signalRUser = JsonConvert.DeserializeObject<APISingleResponse<SignalRUser>>(response).Value;
@@ -27,16 +27,15 @@ namespace ProjectHey.Web.signalR
             // If user does not exist in database, disconnect user.
             if (signalRUser == null)
             {
-                return base.OnDisconnected(true);
+                await base.OnDisconnected(true);
             }
             else
             {
                 // Add to each assigned group.
                 foreach (var item in signalRUser.Rooms)
                 {
-                    Groups.Add(Context.ConnectionId, item.SignalRConversationRoom.RoomName);
+                    await Groups.Add(Context.ConnectionId, item.SignalRConversationRoom.RoomName);
                 }
-                return base.OnConnected();
             }
         }
         

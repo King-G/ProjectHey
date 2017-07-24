@@ -29,6 +29,19 @@ namespace ProjectHey.APIGateway.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> GetByFacebookId(string facebookId)
+        {
+            try
+            {
+                User user = await userManager.GetByFacebookId(facebookId);
+                return Ok(Json(user));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetUserNameById(int id)

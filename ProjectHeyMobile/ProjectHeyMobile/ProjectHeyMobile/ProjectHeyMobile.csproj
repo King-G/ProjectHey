@@ -118,6 +118,9 @@
     <Compile Include="Authentication\Signers\AWS4SignerBase.cs" />
     <Compile Include="Authentication\Signers\AWS4SignerForAuthorizationHeader.cs" />
     <Compile Include="Authentication\Util\HttpHelpers.cs" />
+    <Compile Include="ChatCommunication\ChatMessage.cs" />
+    <Compile Include="ChatCommunication\ChatServices.cs" />
+    <Compile Include="ChatCommunication\IChatServices.cs" />
     <Compile Include="Utils\IntEnumConverter.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="ViewModels\AdvertisementCategoryViewModel.cs" />
@@ -223,9 +226,6 @@
     </Compile>
     <Compile Include="Views\Utilitypages\ReportPage.xaml.cs">
       <DependentUpon>ReportPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Utilitypages\WelcomePage.xaml.cs">
-      <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -376,12 +376,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Chatpages\ChannelSearchPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\Utilitypages\WelcomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

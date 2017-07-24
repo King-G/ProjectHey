@@ -49,7 +49,7 @@ namespace ProjectHeyMobile.ViewModels
             }
             catch (Exception exception)
             {
-                await App.Current.MainPage.Navigation.PushAsync(new ErrorPage(exception));
+                await App.Current.MainPage.Navigation.PushModalAsync(new ErrorPage(exception));
             }
         }
 
@@ -59,9 +59,8 @@ namespace ProjectHeyMobile.ViewModels
             try
             {
                 User user = await FacebookModelToUser(facebookModel);
-                var projectHeyAPI = RestService.For<IProjectHeyAPI>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api") });
+                var projectHeyAPI = RestService.For<IProjectHeyAPI>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri(ProjectHeyAuthentication.ProjectHeyAPIEndpoint) });
                 var response = await projectHeyAPI.CreateUser(user);
-                //var response = await projectHeyAPI.UserGetById(2);
 
                 if (response == null)
                 {
@@ -69,19 +68,21 @@ namespace ProjectHeyMobile.ViewModels
                 }
                 else
                 {
-                    return JsonConvert.DeserializeObject<APISingleResponse<User>>(response).Value;
+                    user = JsonConvert.DeserializeObject<APISingleResponse<User>>(response).Value;
+                    return user;
                 }
             }
             catch (Exception exception)
             {
-                throw exception;
+                await App.Current.MainPage.Navigation.PushAsync(new ErrorPage(exception));
+                return null;
             }
 
 
         }
         private async Task<User> GetUserByFacebookId(string user_id)
         {
-            var projectHeyAPI = RestService.For<IProjectHeyAPI>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api") });
+            var projectHeyAPI = RestService.For<IProjectHeyAPI>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri(ProjectHeyAuthentication.ProjectHeyAPIEndpoint) });
             var response = await projectHeyAPI.UserGetByFacebookId(user_id);
 
             if (response == null)
@@ -97,7 +98,7 @@ namespace ProjectHeyMobile.ViewModels
         private async Task<User> SyncUser(User user, FacebookModel facebookModel)
         {
             user = await FacebookModelToUser(facebookModel, user);
-            var projectHeyAPI = RestService.For<IProjectHeyAPI>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api") });
+            var projectHeyAPI = RestService.For<IProjectHeyAPI>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri(ProjectHeyAuthentication.ProjectHeyAPIEndpoint) });
             var response = await projectHeyAPI.SyncUser(user);
 
             if (response == null)
@@ -117,20 +118,18 @@ namespace ProjectHeyMobile.ViewModels
                 user = new User();
             }
 
-            //TO DO -> User properties in DB
             user.FacebookId = facebookModel.id;
             user.FacebookToken = ProjectHeyAuthentication.FacebookToken;
+            user.Firstname = facebookModel.first_name;
+            user.Lastname = facebookModel.last_name;
+            user.Email = facebookModel.email;
 
             if (facebookModel.location != null)
             {
                 user.CityID = facebookModel.location.id;
-                user.CityID = facebookModel.location.name;
+                user.CityName = facebookModel.location.name;
             }
 
-            user.Email = facebookModel.email;
-            //user.Firstname = facebookModel.given_name;
-            //user.Lastname = facebookModel.family_name;
-            //user.ProfilePictureURL = facebookModel.picture;
 
             var myPostion = await App.GetPosition();
             if (myPostion != null)

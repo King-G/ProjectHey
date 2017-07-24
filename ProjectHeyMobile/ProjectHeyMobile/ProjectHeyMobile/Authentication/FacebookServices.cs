@@ -14,7 +14,7 @@ namespace ProjectHeyMobile.Authentication
         public async Task<FacebookModel> GetFacebookProfileAsync(string accessToken)
         {
             var requestUrl =
-                ProjectHeyAuthentication.ApiEndpoint +
+                ProjectHeyAuthentication.FacebookAPIEndpoint +
                 "/me?" +
                 "fields=" + ProjectHeyAuthentication.ScopeFields +
                 "&access_token=" + accessToken;
@@ -32,7 +32,7 @@ namespace ProjectHeyMobile.Authentication
         public async Task<FacebookPermissions> GetPermissions(FacebookModel facebookmodel, string accessToken)
         {
             var requestUrl =
-                ProjectHeyAuthentication.ApiEndpoint +
+                ProjectHeyAuthentication.FacebookAPIEndpoint +
                 "/" + facebookmodel.id +
                 "/permissions?access_token=" + accessToken;
 

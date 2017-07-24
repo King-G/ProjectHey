@@ -16,6 +16,9 @@ namespace ProjectHey.BLL
         public async Task<User> CreateAsync(User entity)
         {
             entity.Username = entity.ResetUsername();
+            entity.CreationDate = DateTime.Now;
+            entity.ActivityDate = DateTime.Now;
+            entity.Appsetting = new AppSetting();
             entity.Appsetting = entity.Appsetting.GetDefaultAppSettings();
             entity.SignalRUser = new SignalRUser();
 
@@ -44,6 +47,10 @@ namespace ProjectHey.BLL
         public async Task<User> GetSimplifiedByIdAsync(int id)
         {
             return await userDB.GetSimplifiedByIdAsync(id);
+        }
+        public async Task<User> GetByFacebookId(string facebookId)
+        {
+            return await userDB.GetByFacebookId(facebookId);
         }
         public async Task<User> GetByIdAsync(int id)
         {
