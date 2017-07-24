@@ -32,7 +32,7 @@ namespace ProjectHeyMobile.ViewModels
         {
             try
             {
-                User user = await GetUserByFacebookId(FacebookModel.user_id);
+                User user = await GetUserByFacebookId(FacebookModel.id);
                 if (user == null)
                 {
                     //First time user
@@ -118,7 +118,7 @@ namespace ProjectHeyMobile.ViewModels
             }
 
             //TO DO -> User properties in DB
-            user.FacebookId = facebookModel.user_id;
+            user.FacebookId = facebookModel.id;
             user.FacebookToken = ProjectHeyAuthentication.FacebookToken;
 
             if (facebookModel.location != null)
@@ -128,9 +128,9 @@ namespace ProjectHeyMobile.ViewModels
             }
 
             user.Email = facebookModel.email;
-            user.Firstname = facebookModel.given_name;
-            user.Lastname = facebookModel.family_name;
-            user.ProfilePictureURL = facebookModel.picture;
+            //user.Firstname = facebookModel.given_name;
+            //user.Lastname = facebookModel.family_name;
+            //user.ProfilePictureURL = facebookModel.picture;
 
             var myPostion = await App.GetPosition();
             if (myPostion != null)

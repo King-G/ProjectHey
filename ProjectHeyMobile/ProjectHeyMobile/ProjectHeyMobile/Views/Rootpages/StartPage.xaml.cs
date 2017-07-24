@@ -34,7 +34,8 @@ namespace ProjectHeyMobile.Views.Rootpages
 
         private void ButtonFacebook_Clicked(object sender, EventArgs e)
         {
-            PopUpLogin();
+            App.Current.MainPage.Navigation.PushAsync(new LoginPage());
+            //PopUpLogin();
         }
         protected override void OnAppearing()
         {
@@ -71,7 +72,7 @@ namespace ProjectHeyMobile.Views.Rootpages
                 //clientSecret: ProjectHeyAuthentication.ClientSecret,
                 scope: ProjectHeyAuthentication.Scope,
                 authorizeUrl: ProjectHeyAuthentication.AuthorizationEndpoint,
-                redirectUrl: ProjectHeyAuthentication.RedirectionEndpoint,
+                redirectUrl: ProjectHeyAuthentication.RedirectionEndpointHTTPS,
                 //accessTokenUrl: ProjectHeyAuthentication.TokenEndpoint,
                 getUsernameAsync: null,
                 isUsingNativeUI: true

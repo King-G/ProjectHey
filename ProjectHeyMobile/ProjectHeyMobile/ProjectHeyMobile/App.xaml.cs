@@ -40,20 +40,6 @@ namespace ProjectHeyMobile
             }
         }
 
-        public void SaveToken(string token)
-        {
-            ProjectHeyAuthentication.FacebookToken = token;
-
-            // broadcast a message that authentication was successful
-            MessagingCenter.Send<App>(this, "Authenticated");
-        }
-        public Action SuccessfulLoginAction
-        {
-            get
-            {
-                return new Action(() => MainPage = new NavigationPage(new RootPage()));
-            }
-        }
         protected override void OnStart()
         {
             
