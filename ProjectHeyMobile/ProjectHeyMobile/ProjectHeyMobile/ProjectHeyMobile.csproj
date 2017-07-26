@@ -45,9 +45,6 @@
     <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\AppSetting.cs">
       <Link>Domain\AppSetting.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Blocked.cs">
-      <Link>Domain\Blocked.cs</Link>
-    </Compile>
     <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Category.cs">
       <Link>Domain\Category.cs</Link>
     </Compile>
@@ -78,20 +75,17 @@
     <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Reported.cs">
       <Link>Domain\Reported.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\SignalRConnection.cs">
-      <Link>Domain\SignalRConnection.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\SignalRConversationRoom.cs">
-      <Link>Domain\SignalRConversationRoom.cs</Link>
-    </Compile>
     <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\SignalRMessage.cs">
       <Link>Domain\SignalRMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\SignalRRoom.cs">
+      <Link>Domain\SignalRRoom.cs</Link>
     </Compile>
     <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\SignalRUser.cs">
       <Link>Domain\SignalRUser.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\SignalRUserConversationRoom.cs">
-      <Link>Domain\SignalRUserConversationRoom.cs</Link>
+    <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\SignalRUserRoom.cs">
+      <Link>Domain\SignalRUserRoom.cs</Link>
     </Compile>
     <Compile Include="..\..\..\ProjectHeyService\ProjectHey.DOMAIN\Structs\Location.cs">
       <Link>Domain\Structs\Location.cs</Link>

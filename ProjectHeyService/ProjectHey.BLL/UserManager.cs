@@ -12,8 +12,9 @@ namespace ProjectHey.BLL
     public class UserManager : IUser
     {
         private readonly ConnectionManager connectionManager = new ConnectionManager();
+        private readonly SignalRRoomManager signalRRoomManager = new SignalRRoomManager();
+
         private readonly UserDB userDB = new UserDB();
-        private readonly SignalRRoomDB signalRRoomDB = new SignalRRoomDB();
         public async Task<User> CreateAsync(User entity)
         {
             entity.Username = entity.ResetUsername();
@@ -25,10 +26,45 @@ namespace ProjectHey.BLL
 
             return await userDB.CreateAsync(entity);
         }
-        //public async Task<Connection> CreateConnectionForUser(User userId)
-        //{
-        //    //User chosenOne = GetUsersByLocationAsync()
-        //}
+        public async Task<Connection> CreateConnectionForUser(User requestor)
+        {
+            IEnumerable<User> potentials = await GetUsersByLocationAsync(requestor, 0, 1);
+            User chosenOne = potentials.FirstOrDefault();
+
+            if (chosenOne != null)
+            {
+                //Create a chatroom for the connections
+                SignalRRoom connectionRoom = new SignalRRoom();
+                connectionRoom = await signalRRoomManager.CreateAsync(connectionRoom);
+
+                //User sends connection request
+                Connection userRequest = new Connection()
+                {
+                    User = requestor,
+                    UserConnection = chosenOne,
+                    SignalRRoom = connectionRoom
+                };
+
+                //User automatically accepts connection request
+                Connection userRequestAccepted = new Connection()
+                {
+                    User = chosenOne,
+                    UserConnection = requestor,
+                    SignalRRoom = connectionRoom
+                };
+
+                userRequest = await connectionManager.CreateAsync(userRequest);
+                userRequestAccepted = await connectionManager.CreateAsync(userRequestAccepted);
+
+                return userRequest;
+            }
+            else
+            {
+                //Exception noUserFoundException = new Exception("No user found within radius, expand the range in your appsettings");
+                //throw noUserFoundException;
+                return null;
+            }
+        }
         public async Task<IEnumerable<User>> CreateRangeAsync(List<User> entities)
         {
             return await userDB.CreateRangeAsync(entities);

@@ -42,7 +42,19 @@ namespace ProjectHey.APIGateway.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        [HttpGet]
+        public async Task<IActionResult> CreateConnectionForUser(User requestor)
+        {
+            try
+            {
+                Connection connection = await userManager.CreateConnectionForUser(requestor);
+                return Ok(Json(connection));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpGet]
         public async Task<IActionResult> GetUserNameById(int id)
         {

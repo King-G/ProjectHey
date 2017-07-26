@@ -21,12 +21,15 @@ namespace ProjectHeyMobile.Views.Settingspages
         }
         public BlockedPage()
         {
-            List<BlockedViewModel> blockeds = new List<BlockedViewModel>();
-            foreach (Blocked block in App.Main.User.BlockedUsers)
+            List<BlockedViewModel> connections = new List<BlockedViewModel>();
+            foreach (Connection connection in App.Main.User.Connections)
             {
-                blockeds.Add(new BlockedViewModel(block));
+                if (connection.IsBlocked)
+                {
+                    connections.Add(new BlockedViewModel(connection));
+                }
             }
-            BlockedsViewModel = new BlockedsViewModel(blockeds);
+            BlockedsViewModel = new BlockedsViewModel(connections);
             InitializeComponent();
 
         }

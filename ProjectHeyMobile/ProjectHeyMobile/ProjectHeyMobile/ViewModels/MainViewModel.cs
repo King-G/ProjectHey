@@ -80,10 +80,10 @@ namespace ProjectHeyMobile.ViewModels
 
 
         }
-        private async Task<User> GetUserByFacebookId(string user_id)
+        private async Task<User> GetUserByFacebookId(string facebookId)
         {
             var projectHeyAPI = RestService.For<IProjectHeyAPI>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri(ProjectHeyAuthentication.ProjectHeyAPIEndpoint) });
-            var response = await projectHeyAPI.UserGetByFacebookId(user_id);
+            var response = await projectHeyAPI.UserGetByFacebookId(facebookId);
 
             if (response == null)
             {

@@ -114,7 +114,7 @@ namespace ProjectHey.DAL
             requestor.Location.Longitude,
             requestor.Location.Latitude,
             requestor.Appsetting.Radius)
-            .Where(x => !x.Connections.Any(y => y.UserId == requestor.Id && y.IsBlocked == false))
+            .Where(x => !x.Connections.Any(y => y.UserId == requestor.Id))
             .Skip(skip)
             .Take(take)
             .ToListAsync();

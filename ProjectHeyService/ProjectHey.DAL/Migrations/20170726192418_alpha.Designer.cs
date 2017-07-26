@@ -9,8 +9,8 @@ using ProjectHey.DOMAIN.Enums;
 namespace ProjectHey.DAL.Migrations
 {
     [DbContext(typeof(ProjectHeyContext))]
-    [Migration("20170722095612_v1")]
-    partial class v1
+    [Migration("20170726192418_alpha")]
+    partial class alpha
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,23 +81,6 @@ namespace ProjectHey.DAL.Migrations
                     b.ToTable("AppSetting");
                 });
 
-            modelBuilder.Entity("ProjectHey.DOMAIN.Blocked", b =>
-                {
-                    b.Property<int>("UserId");
-
-                    b.Property<int>("BlockedUserId");
-
-                    b.Property<bool>("IsHidden");
-
-                    b.HasKey("UserId", "BlockedUserId");
-
-                    b.HasIndex("BlockedUserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Blocked");
-                });
-
             modelBuilder.Entity("ProjectHey.DOMAIN.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -105,31 +88,47 @@ namespace ProjectHey.DAL.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50);
+                        .HasMaxLength(200);
+
+                    b.Property<int>("SignalRRoomId");
+
+                    b.Property<int>("TotalSignalRUsers");
+
+                    b.Property<int>("TotalUsers");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
                         .IsUnique();
 
+                    b.HasIndex("SignalRRoomId");
+
                     b.ToTable("Category");
                 });
 
             modelBuilder.Entity("ProjectHey.DOMAIN.Connection", b =>
                 {
-                    b.Property<int>("UserOneId");
+                    b.Property<int>("UserId");
 
-                    b.Property<int>("UserTwoId");
+                    b.Property<int>("UserConnectionId");
 
-                    b.Property<string>("CustomUsername");
+                    b.Property<string>("GivenUsername");
+
+                    b.Property<bool>("IsBlocked");
+
+                    b.Property<bool>("IsHidden");
 
                     b.Property<double>("Progress");
 
-                    b.HasKey("UserOneId", "UserTwoId");
+                    b.Property<int>("SignalRRoomId");
 
-                    b.HasIndex("UserOneId");
+                    b.HasKey("UserId", "UserConnectionId");
 
-                    b.HasIndex("UserTwoId");
+                    b.HasIndex("SignalRRoomId");
+
+                    b.HasIndex("UserConnectionId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Connection");
                 });
@@ -193,41 +192,6 @@ namespace ProjectHey.DAL.Migrations
                     b.ToTable("Reported");
                 });
 
-            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRConnection", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Connected");
-
-                    b.Property<int>("SignalRUserId");
-
-                    b.Property<string>("UserAgent");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SignalRUserId");
-
-                    b.ToTable("SignalRConnection");
-                });
-
-            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRConversationRoom", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("RoomName")
-                        .IsRequired()
-                        .HasMaxLength(150);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoomName")
-                        .IsUnique();
-
-                    b.ToTable("SignalRConversationRoom");
-                });
-
             modelBuilder.Entity("ProjectHey.DOMAIN.SignalRMessage", b =>
                 {
                     b.Property<int>("Id")
@@ -240,23 +204,41 @@ namespace ProjectHey.DAL.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SignalRConversationRoomId");
+                    b.Property<int>("SignalRRoomId");
 
                     b.Property<int>("SignalRUserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SignalRConversationRoomId");
+                    b.HasIndex("SignalRRoomId");
 
                     b.HasIndex("SignalRUserId");
 
                     b.ToTable("SignalRMessage");
                 });
 
+            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRRoom", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Password");
+
+                    b.Property<string>("Roomname")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SignalRRoom");
+                });
+
             modelBuilder.Entity("ProjectHey.DOMAIN.SignalRUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("IsConnected");
 
                     b.Property<int>("UserId");
 
@@ -268,19 +250,19 @@ namespace ProjectHey.DAL.Migrations
                     b.ToTable("SignalRUser");
                 });
 
-            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRUserConversationRoom", b =>
+            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRUserRoom", b =>
                 {
                     b.Property<int>("SignalRUserId");
 
-                    b.Property<int>("SignalRConversationRoomId");
+                    b.Property<int>("SignalRRoomId");
 
-                    b.HasKey("SignalRUserId", "SignalRConversationRoomId");
+                    b.HasKey("SignalRUserId", "SignalRRoomId");
 
-                    b.HasIndex("SignalRConversationRoomId");
+                    b.HasIndex("SignalRRoomId");
 
                     b.HasIndex("SignalRUserId");
 
-                    b.ToTable("SignalRUserConversationRoom");
+                    b.ToTable("SignalRUserRoom");
                 });
 
             modelBuilder.Entity("ProjectHey.DOMAIN.User", b =>
@@ -329,6 +311,9 @@ namespace ProjectHey.DAL.Migrations
                         .HasMaxLength(32);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FacebookId")
+                        .IsUnique();
 
                     b.ToTable("User");
                 });
@@ -402,26 +387,28 @@ namespace ProjectHey.DAL.Migrations
                         .HasForeignKey("ProjectHey.DOMAIN.AppSetting", "UserId");
                 });
 
-            modelBuilder.Entity("ProjectHey.DOMAIN.Blocked", b =>
+            modelBuilder.Entity("ProjectHey.DOMAIN.Category", b =>
                 {
-                    b.HasOne("ProjectHey.DOMAIN.User", "BlockedUser")
+                    b.HasOne("ProjectHey.DOMAIN.SignalRRoom", "SignalRRoom")
                         .WithMany()
-                        .HasForeignKey("BlockedUserId");
-
-                    b.HasOne("ProjectHey.DOMAIN.User", "User")
-                        .WithMany("BlockedUsers")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("SignalRRoomId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ProjectHey.DOMAIN.Connection", b =>
                 {
-                    b.HasOne("ProjectHey.DOMAIN.User", "UserOne")
-                        .WithMany("Connections")
-                        .HasForeignKey("UserOneId");
-
-                    b.HasOne("ProjectHey.DOMAIN.User", "UserTwo")
+                    b.HasOne("ProjectHey.DOMAIN.SignalRRoom", "SignalRRoom")
                         .WithMany()
-                        .HasForeignKey("UserTwoId");
+                        .HasForeignKey("SignalRRoomId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ProjectHey.DOMAIN.User", "UserConnection")
+                        .WithMany()
+                        .HasForeignKey("UserConnectionId");
+
+                    b.HasOne("ProjectHey.DOMAIN.User", "User")
+                        .WithMany("Connections")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("ProjectHey.DOMAIN.Feedback", b =>
@@ -448,19 +435,11 @@ namespace ProjectHey.DAL.Migrations
                         .HasForeignKey("ReporterUserId");
                 });
 
-            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRConnection", b =>
-                {
-                    b.HasOne("ProjectHey.DOMAIN.SignalRUser", "SignalRUser")
-                        .WithMany("Connections")
-                        .HasForeignKey("SignalRUserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("ProjectHey.DOMAIN.SignalRMessage", b =>
                 {
-                    b.HasOne("ProjectHey.DOMAIN.SignalRConversationRoom", "SignalRConversationRoom")
+                    b.HasOne("ProjectHey.DOMAIN.SignalRRoom", "SignalRRoom")
                         .WithMany("Messages")
-                        .HasForeignKey("SignalRConversationRoomId")
+                        .HasForeignKey("SignalRRoomId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ProjectHey.DOMAIN.SignalRUser", "SignalRUser")
@@ -476,11 +455,11 @@ namespace ProjectHey.DAL.Migrations
                         .HasForeignKey("ProjectHey.DOMAIN.SignalRUser", "UserId");
                 });
 
-            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRUserConversationRoom", b =>
+            modelBuilder.Entity("ProjectHey.DOMAIN.SignalRUserRoom", b =>
                 {
-                    b.HasOne("ProjectHey.DOMAIN.SignalRConversationRoom", "SignalRConversationRoom")
+                    b.HasOne("ProjectHey.DOMAIN.SignalRRoom", "SignalRRoom")
                         .WithMany("Users")
-                        .HasForeignKey("SignalRConversationRoomId");
+                        .HasForeignKey("SignalRRoomId");
 
                     b.HasOne("ProjectHey.DOMAIN.SignalRUser", "SignalRUser")
                         .WithMany("Rooms")

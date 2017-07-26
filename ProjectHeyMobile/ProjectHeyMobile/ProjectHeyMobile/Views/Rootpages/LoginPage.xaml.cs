@@ -87,7 +87,7 @@ namespace ProjectHeyMobile.Views.Rootpages
                             await App.Main.LoadUser(facebookModel);
                             if (App.Main.User != null)
                             {
-                                await App.ChatServices.ConnectHeyUser(App.Main.User.Id);
+                                //await App.ChatServices.ConnectHeyUser(App.Main.User.Id);
                                 //GET CREDENTIALS
                                 //CognitoAWSCredentials credentials
                                 //    = new CognitoAWSCredentials(ProjectHeyAuthentication.AWSIdentityPool, ProjectHeyAuthentication.AWSRegionEndpoint);
