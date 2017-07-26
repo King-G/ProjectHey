@@ -13,8 +13,8 @@ namespace ProjectHey.DOMAIN
         public int SignalRUserId { get; set; }
         public SignalRUser SignalRUser { get; set; }
 
-        public int SignalRConversationRoomId { get; set; }
-        public SignalRConversationRoom SignalRConversationRoom{ get; set; }
+        public int SignalRRoomId { get; set; }
+        public SignalRRoom SignalRRoom{ get; set; }
 
     }
 }

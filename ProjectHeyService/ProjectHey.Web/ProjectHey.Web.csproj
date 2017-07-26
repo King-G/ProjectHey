@@ -123,6 +123,7 @@
     <Content Include="Index.html" />
     <Content Include="LoadingPage.html" />
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -151,9 +152,6 @@
     </Compile>
     <Compile Include="..\ProjectHey.DOMAIN\AppSetting.cs">
       <Link>Domain\AppSetting.cs</Link>
-    </Compile>
-    <Compile Include="..\ProjectHey.DOMAIN\Blocked.cs">
-      <Link>Domain\Blocked.cs</Link>
     </Compile>
     <Compile Include="..\ProjectHey.DOMAIN\Category.cs">
       <Link>Domain\Category.cs</Link>
@@ -185,20 +183,17 @@
     <Compile Include="..\ProjectHey.DOMAIN\Reported.cs">
       <Link>Domain\Reported.cs</Link>
     </Compile>
-    <Compile Include="..\ProjectHey.DOMAIN\SignalRConnection.cs">
-      <Link>Domain\SignalRConnection.cs</Link>
-    </Compile>
-    <Compile Include="..\ProjectHey.DOMAIN\SignalRConversationRoom.cs">
-      <Link>Domain\SignalRConversationRoom.cs</Link>
-    </Compile>
     <Compile Include="..\ProjectHey.DOMAIN\SignalRMessage.cs">
       <Link>Domain\SignalRMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\SignalRRoom.cs">
+      <Link>Domain\SignalRRoom.cs</Link>
     </Compile>
     <Compile Include="..\ProjectHey.DOMAIN\SignalRUser.cs">
       <Link>Domain\SignalRUser.cs</Link>
     </Compile>
-    <Compile Include="..\ProjectHey.DOMAIN\SignalRUserConversationRoom.cs">
-      <Link>Domain\SignalRUserConversationRoom.cs</Link>
+    <Compile Include="..\ProjectHey.DOMAIN\SignalRUserRoom.cs">
+      <Link>Domain\SignalRUserRoom.cs</Link>
     </Compile>
     <Compile Include="..\ProjectHey.DOMAIN\Structs\Location.cs">
       <Link>Domain\Structs\Location.cs</Link>
@@ -232,13 +227,12 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>14868</DevelopmentServerPort>
+          <DevelopmentServerPort>9000</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:14868/</IISUrl>
+          <IISUrl>http://localhost:7000/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>http://127.0.0.1:9999</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

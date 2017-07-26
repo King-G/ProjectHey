@@ -34,7 +34,7 @@ namespace ProjectHey.Web.signalR
                 // Add to each assigned group.
                 foreach (var item in signalRUser.Rooms)
                 {
-                    await Groups.Add(Context.ConnectionId, item.SignalRConversationRoom.RoomName);
+                    await Groups.Add(Context.ConnectionId, item.SignalRRoom.Roomname);
                 }
             }
         }
@@ -47,22 +47,22 @@ namespace ProjectHey.Web.signalR
             var responseRoom = projectHeyAPI.GetSignalRRoomByName(roomName).Result;
 
             SignalRUser signalRUser = JsonConvert.DeserializeObject<APISingleResponse<SignalRUser>>(responseUser).Value;
-            SignalRConversationRoom room = JsonConvert.DeserializeObject<APISingleResponse<SignalRConversationRoom>>(responseRoom).Value;
+            SignalRRoom room = JsonConvert.DeserializeObject<APISingleResponse<SignalRRoom>>(responseRoom).Value;
 
             if (room == null)
             {
-                room = new SignalRConversationRoom()
+                room = new SignalRRoom()
                 {
-                    RoomName = roomName,
+                    Roomname = roomName,
                 };
             }
-            room.Users.Add(new SignalRUserConversationRoom()
+            room.Users.Add(new SignalRUserRoom()
             {
                 SignalRUser = signalRUser,
-                SignalRConversationRoom = room
+                SignalRRoom = room
             });
 
-            var creationresponse = projectHeyAPI.CreateSignalRConversationRoom(room).Result;
+            var creationresponse = projectHeyAPI.CreateSignalRRoom(room).Result;
             await Groups.Add(Context.ConnectionId, roomName);
 
         }
@@ -74,15 +74,16 @@ namespace ProjectHey.Web.signalR
             var responseRoom = projectHeyAPI.GetSignalRRoomByName(roomName).Result;
 
             SignalRUser signalRUser = JsonConvert.DeserializeObject<APISingleResponse<SignalRUser>>(responseUser).Value;
-            SignalRConversationRoom room = JsonConvert.DeserializeObject<APISingleResponse<SignalRConversationRoom>>(responseRoom).Value;
+            SignalRRoom room = JsonConvert.DeserializeObject<APISingleResponse<SignalRRoom>>(responseRoom).Value;
 
             if (room != null)
             {
-                SignalRUserConversationRoom userroom = new SignalRUserConversationRoom();
-                userroom.SignalRConversationRoom = room;
-                userroom.SignalRUser = signalRUser;
-
-                var deletion = projectHeyAPI.DeleteSignalRUserConversationRoom(userroom).Result;
+                SignalRUserRoom userroom = new SignalRUserRoom()
+                {
+                    SignalRRoom = room,
+                    SignalRUser = signalRUser
+                };
+                var deletion = projectHeyAPI.DeleteSignalRUserRoom(userroom).Result;
                 await Groups.Remove(Context.ConnectionId, roomName);
             }
         }

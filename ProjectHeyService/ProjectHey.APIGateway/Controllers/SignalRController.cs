@@ -34,8 +34,8 @@ namespace ProjectHey.APIGateway.Controllers
         {
             try
             {
-                SignalRConversationRoomManager signalRUserConversationRoomManager = new SignalRConversationRoomManager();
-                SignalRConversationRoom room = await signalRUserConversationRoomManager.GetByNameAsync(roomname);
+                SignalRRoomManager signalRUserConversationRoomManager = new SignalRRoomManager();
+                SignalRRoom room = await signalRUserConversationRoomManager.GetByNameAsync(roomname);
                 return Ok(Json(room));
             }
             catch (Exception ex)
@@ -59,11 +59,11 @@ namespace ProjectHey.APIGateway.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateSignalRConversationRoom(SignalRConversationRoom signalRConversationRoom)
+        public async Task<IActionResult> CreateSignalRConversationRoom(SignalRRoom signalRConversationRoom)
         {
             try
             {
-                SignalRConversationRoomManager signalConversationRoomManager = new SignalRConversationRoomManager();
+                SignalRRoomManager signalConversationRoomManager = new SignalRRoomManager();
                 signalRConversationRoom = await signalConversationRoomManager.CreateAsync(signalRConversationRoom);
                 return Ok(Json(signalRConversationRoom));
             }
@@ -73,11 +73,11 @@ namespace ProjectHey.APIGateway.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> DeleteSignalRUserConversationRoom(SignalRUserConversationRoom signalRUserConversationRoom)
+        public async Task<IActionResult> DeleteSignalRUserConversationRoom(SignalRUserRoom signalRUserConversationRoom)
         {
             try
             {
-                SignalRUserConversationRoomManager signalRUserConversationRoomManager = new SignalRUserConversationRoomManager();
+                SignalRUserRoomManager signalRUserConversationRoomManager = new SignalRUserRoomManager();
                 await signalRUserConversationRoomManager.DeleteAsync(signalRUserConversationRoom);
                 return Ok(Json(signalRUserConversationRoom));
             }

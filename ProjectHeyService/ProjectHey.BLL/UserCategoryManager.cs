@@ -47,5 +47,10 @@ namespace ProjectHey.BLL
         {
             return await userCategoryDB.UpdateAsync(entity);
         }
+
+        public async Task<IEnumerable<UserCategory>> GetAllByIdAsync(int userId)
+        {
+            return await userCategoryDB.GetAllByIdAsync(userId);
+        }
     }
 }

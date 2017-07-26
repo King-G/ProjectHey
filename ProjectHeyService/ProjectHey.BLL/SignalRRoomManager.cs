@@ -9,21 +9,21 @@ using ProjectHey.DAL;
 
 namespace ProjectHey.BLL
 {
-    public class SignalRConversationRoomManager : ISignalRConversationRoom
+    public class SignalRRoomManager : ISignalRRoom
     {
-        private readonly SignalRConversationRoomDB signalRConversationRoomDB = new SignalRConversationRoomDB();
+        private readonly SignalRRoomDB signalRConversationRoomDB = new SignalRRoomDB();
 
-        public async Task<SignalRConversationRoom> CreateAsync(SignalRConversationRoom entity)
+        public async Task<SignalRRoom> CreateAsync(SignalRRoom entity)
         {
             return await signalRConversationRoomDB.CreateAsync(entity);
         }
 
-        public async Task<IEnumerable<SignalRConversationRoom>> CreateRangeAsync(List<SignalRConversationRoom> entities)
+        public async Task<IEnumerable<SignalRRoom>> CreateRangeAsync(List<SignalRRoom> entities)
         {
             return await signalRConversationRoomDB.CreateRangeAsync(entities);
         }
 
-        public async Task<SignalRConversationRoom> DeleteAsync(SignalRConversationRoom entity)
+        public async Task<SignalRRoom> DeleteAsync(SignalRRoom entity)
         {
             return await signalRConversationRoomDB.DeleteAsync(entity);
         }
@@ -33,20 +33,20 @@ namespace ProjectHey.BLL
             return await signalRConversationRoomDB.GetTotalCountAsync();
         }
 
-        public async Task<IEnumerable<SignalRConversationRoom>> GetAsync(int skip, int take)
+        public async Task<IEnumerable<SignalRRoom>> GetAsync(int skip, int take)
         {
             return await signalRConversationRoomDB.GetAsync(skip, take);
         }
-        public async Task<SignalRConversationRoom> GetByNameAsync(string roomname)
+        public async Task<SignalRRoom> GetByNameAsync(string roomname)
         {
             return await signalRConversationRoomDB.GetByNameAsync(roomname);
         }
-        public async Task<SignalRConversationRoom> GetByIdAsync(int id)
+        public async Task<SignalRRoom> GetByIdAsync(int id)
         {
             return await signalRConversationRoomDB.GetByIdAsync(id);
         }
 
-        public async Task<SignalRConversationRoom> UpdateAsync(SignalRConversationRoom entity)
+        public async Task<SignalRRoom> UpdateAsync(SignalRRoom entity)
         {
             return await signalRConversationRoomDB.UpdateAsync(entity);
         }

@@ -11,8 +11,9 @@ namespace ProjectHey.BLL
 {
     public class UserManager : IUser
     {
+        private readonly ConnectionManager connectionManager = new ConnectionManager();
         private readonly UserDB userDB = new UserDB();
-
+        private readonly SignalRRoomDB signalRRoomDB = new SignalRRoomDB();
         public async Task<User> CreateAsync(User entity)
         {
             entity.Username = entity.ResetUsername();
@@ -24,7 +25,10 @@ namespace ProjectHey.BLL
 
             return await userDB.CreateAsync(entity);
         }
-
+        //public async Task<Connection> CreateConnectionForUser(User userId)
+        //{
+        //    //User chosenOne = GetUsersByLocationAsync()
+        //}
         public async Task<IEnumerable<User>> CreateRangeAsync(List<User> entities)
         {
             return await userDB.CreateRangeAsync(entities);
@@ -56,9 +60,9 @@ namespace ProjectHey.BLL
         {
             return await userDB.GetByIdAsync(id);
         }
-        public async Task<IEnumerable<User>> GetByLocationAsync(User requestor, int skip, int take)
+        public async Task<IEnumerable<User>> GetUsersByLocationAsync(User requestor, int skip, int take)
         {
-            return await userDB.GetByLocationAsync(requestor, skip, take);
+            return await userDB.GetUsersByLocationAsync(requestor, skip, take);
         }
         public async Task<User> GetByUsernameAsync(string username)
         {

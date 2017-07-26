@@ -19,11 +19,11 @@ namespace ProjectHey.Web.ProjectHeyAPI
         [Post("/signalr/createsignalruser")]
         Task<string> CreateSignalRUser([Body(BodySerializationMethod.UrlEncoded)]SignalRUser signalRUser);
 
-        [Post("/signalr/createsignalrconversationroom")]
-        Task<string> CreateSignalRConversationRoom([Body(BodySerializationMethod.UrlEncoded)]SignalRConversationRoom signalRConversationRoom);
+        [Post("/signalr/createsignalrroom")]
+        Task<string> CreateSignalRRoom([Body(BodySerializationMethod.UrlEncoded)]SignalRRoom signalRRoom);
 
-        [Post("/signalr/deletesignalruserconversationroom")]
-        Task<string> DeleteSignalRUserConversationRoom([Body(BodySerializationMethod.UrlEncoded)]SignalRUserConversationRoom signalRUserConversationRoom);
+        [Post("/signalr/deletesignalruserroom")]
+        Task<string> DeleteSignalRUserRoom([Body(BodySerializationMethod.UrlEncoded)]SignalRUserRoom signalRUserRoom);
 
     }
 }

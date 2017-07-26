@@ -50,15 +50,15 @@ namespace ProjectHey.BLL
             List<Connection> presentableconnection = new List<Connection>();
             foreach (Connection connection in connections)
             {
-                if (connection.UserTwoId == id)
+                if (connection.UserConnectionId == id)
                 {
-                    User helper =  await userManager.GetSimplifiedByIdAsync(connection.UserOneId);
+                    User helper =  await userManager.GetSimplifiedByIdAsync(connection.UserId);
 
-                    connection.UserOne = connection.UserTwo;
-                    connection.UserOneId = connection.UserTwoId;
+                    connection.User = connection.UserConnection;
+                    connection.UserId = connection.UserConnectionId;
 
-                    connection.UserTwoId = helper.Id;
-                    connection.UserTwo = helper;
+                    connection.UserConnectionId = helper.Id;
+                    connection.UserConnection = helper;
                 }
                 presentableconnection.Add(connection);
 

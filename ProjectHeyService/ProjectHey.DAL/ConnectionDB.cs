@@ -29,7 +29,7 @@ namespace ProjectHey.DAL
 
         public async Task<Connection> DeleteAsync(Connection entity)
         {
-            projectHeyContext.Connection.Remove(projectHeyContext.Connection.Single(x => x.UserOneId == entity.UserOneId && x.UserTwoId == entity.UserTwoId));
+            projectHeyContext.Connection.Remove(projectHeyContext.Connection.Single(x => x.UserId == entity.UserId && x.UserConnectionId == entity.UserConnectionId));
             await projectHeyContext.SaveChangesAsync();
             return entity;
         }
@@ -41,17 +41,17 @@ namespace ProjectHey.DAL
 
         public async Task<IEnumerable<Connection>> GetAsync(int skip, int take)
         {
-            return await projectHeyContext.Connection.AsNoTracking().OrderBy(x => x.UserOneId).Skip(skip).Take(take).ToListAsync();
+            return await projectHeyContext.Connection.AsNoTracking().OrderBy(x => x.UserId).Skip(skip).Take(take).ToListAsync();
         }
         public async Task<IEnumerable<Connection>> GetByIdAsync(int id, int skip, int take)
         {
-            return await projectHeyContext.Connection.AsNoTracking().Where(x => x.UserOneId == id).OrderBy(x => x.UserOneId).Skip(skip).Take(take).ToListAsync();
+            return await projectHeyContext.Connection.AsNoTracking().Where(x => x.UserId == id).OrderBy(x => x.UserId).Skip(skip).Take(take).ToListAsync();
         }
         public async Task<IEnumerable<Connection>> GetAllByIdAsync(int id)
         {
             return await projectHeyContext.Connection.AsNoTracking()
-                .Include(x => x.UserTwo)
-                .Where(x => x.UserOneId == id).OrderBy(x => x.UserOneId)
+                .Include(x => x.UserConnection)
+                .Where(x => x.UserId == id).OrderBy(x => x.UserId)
                 .ToListAsync();
         }
         public Task<Connection> GetByIdAsync(int id)
@@ -65,6 +65,11 @@ namespace ProjectHey.DAL
             projectHeyContext.Entry<Connection>(entity).State = EntityState.Modified;
             await projectHeyContext.SaveChangesAsync();
             return entity;
+        }
+
+        public Task<Connection> CreateConnectionForUser(User requestor)
+        {
+            throw new NotImplementedException();
         }
     }
 }

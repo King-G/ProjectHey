@@ -36,15 +36,13 @@ namespace ProjectHey.DAL
         public DbSet<Report> Report { get; set; }
         public DbSet<Advertisement> Advertisement { get; set; }
         public DbSet<AdvertisementCategory> AdvertisementCategory { get; set; }
-        public DbSet<Blocked> Blocked { get; set; }
         public DbSet<UserCategory> UserCategory { get; set; }
 
         //<<<<<SignalR>>>>>
         public DbSet<SignalRUser> SignalRUser { get; set; }
-        public DbSet<SignalRConnection> SignalRConnection { get; set; }
-        public DbSet<SignalRConversationRoom> SignalRConversationRoom { get; set; }
+        public DbSet<SignalRRoom> SignalRRoom { get; set; }
         public DbSet<SignalRMessage> SignalRMessage { get; set; }
-        public DbSet<SignalRUserConversationRoom> SignalRUserConversationRoom { get; set; }
+        public DbSet<SignalRUserRoom> SignalRUserRoom { get; set; }
         //<<<<<END SignalR>>>>>
 
         //<<<<<Special Intersection Tables>>>>>
@@ -63,6 +61,9 @@ namespace ProjectHey.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //migrationBuilder.Sql(@"ALTER TABLE [dbo].[User] ADD [Location] geography NULL");
+            //migrationBuilder.Sql(@"ALTER TABLE [dbo].[Advertisement] ADD [Location] geography NULL");
+
             #region Ignored Properties
             modelBuilder.Entity<User>().Ignore(x => x.Location);
             modelBuilder.Entity<Advertisement>().Ignore(x => x.Location); 
@@ -78,9 +79,7 @@ namespace ProjectHey.DAL
                 .HasKey(x => x.Id);
             modelBuilder.Entity<SignalRUser>()
                 .HasKey(x => x.Id);
-            modelBuilder.Entity<SignalRConnection>()
-                .HasKey(x => x.Id);
-            modelBuilder.Entity<SignalRConversationRoom>()
+            modelBuilder.Entity<SignalRRoom>()
                 .HasKey(x => x.Id);
             modelBuilder.Entity<SignalRMessage>()
                 .HasKey(x => x.Id);
@@ -108,136 +107,6 @@ namespace ProjectHey.DAL
                 .HasForeignKey<SignalRUser>(x => x.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
             //<<<<One-To-One Relationships>>>> 
-            #endregion
-
-            #region UNIQUE KEYS
-            //<<<<UNIQUE>>>>
-            modelBuilder.Entity<Category>()
-                .HasIndex(x => x.Name).IsUnique();
-            modelBuilder.Entity<SignalRConversationRoom>()
-                .HasIndex(x => x.RoomName).IsUnique();
-            //<<<<END UNIQUE>>>> 
-            #endregion
-
-            #region Generated Values
-            //<<<<GENERATED VALUES>>>>
-            modelBuilder.Entity<UserAdvertisement>()
-                .Property(x => x.Id)
-                .ValueGeneratedOnAdd();
-            //<<<<END GENERATED VALUES>>>> 
-            #endregion
-
-            #region Many-To-Many Relationships
-            //<<<<<Many-To-Many relationships>>>>>
-            //Blocked
-            modelBuilder.Entity<Blocked>()
-                .HasKey(x => new { x.UserId, x.BlockedUserId });
-
-            modelBuilder.Entity<Blocked>()
-                .HasOne(pt => pt.User)
-                .WithMany(p => p.BlockedUsers)
-                .HasForeignKey(pt => pt.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Blocked>()
-                .HasOne(pt => pt.BlockedUser)
-                .WithMany()
-                .HasForeignKey(pt => pt.BlockedUserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<SignalRUserConversationRoom>()
-                .HasKey(x => new { x.SignalRUserId, x.SignalRConversationRoomId });
-
-            modelBuilder.Entity<SignalRUserConversationRoom>()
-                .HasOne(pt => pt.SignalRUser)
-                .WithMany(p => p.Rooms)
-                .HasForeignKey(pt => pt.SignalRUserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<SignalRUserConversationRoom>()
-                .HasOne(pt => pt.SignalRConversationRoom)
-                .WithMany(p => p.Users)
-                .HasForeignKey(pt => pt.SignalRConversationRoomId)
-                .OnDelete(DeleteBehavior.Restrict);
-            //Reported
-            modelBuilder.Entity<Reported>()
-                .HasKey(x => new { x.ReporterUserId, x.ReportedUserId });
-
-            modelBuilder.Entity<Reported>()
-                .HasOne(pt => pt.ReporterUser)
-                .WithMany(p => p.ReportedUsers)
-                .HasForeignKey(pt => pt.ReporterUserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Reported>()
-                .HasOne(pt => pt.ReportedUser)
-                .WithMany()
-                .HasForeignKey(pt => pt.ReportedUserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            //Connection
-            modelBuilder.Entity<Connection>()
-                .HasKey(x => new { x.UserOneId, x.UserTwoId });
-
-            modelBuilder.Entity<Connection>()
-                .HasOne(pt => pt.UserOne)
-                .WithMany(p => p.Connections)
-                .HasForeignKey(pt => pt.UserOneId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Connection>()
-                .HasOne(pt => pt.UserTwo)
-                .WithMany()
-                .HasForeignKey(pt => pt.UserTwoId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-
-            //User Categories
-            modelBuilder.Entity<UserCategory>()
-                .HasKey(x => new { x.UserId, x.CategoryId });
-
-            modelBuilder.Entity<UserCategory>()
-                .HasOne(pt => pt.User)
-                .WithMany(p => p.UserCategory)
-                .HasForeignKey(pt => pt.UserId);
-
-            modelBuilder.Entity<UserCategory>()
-                .HasOne(pt => pt.Category)
-                .WithMany(t => t.UserCategory)
-                .HasForeignKey(pt => pt.CategoryId);
-
-            //Advertisement Categories
-            modelBuilder.Entity<AdvertisementCategory>()
-                .HasKey(x => new { x.AdvertisementId, x.CategoryId });
-
-            modelBuilder.Entity<AdvertisementCategory>()
-                .HasOne(pt => pt.Advertisement)
-                .WithMany(p => p.AdvertisementCategory)
-                .HasForeignKey(pt => pt.AdvertisementId);
-
-            modelBuilder.Entity<AdvertisementCategory>()
-                .HasOne(pt => pt.Category)
-                .WithMany(t => t.AdvertisementCategory)
-                .HasForeignKey(pt => pt.CategoryId);
-
-            //User advertisements
-            modelBuilder.Entity<UserAdvertisement>()
-                .HasKey(x => new { x.Id, x.UserId, x.AdvertisementId });
-
-            modelBuilder.Entity<UserAdvertisement>()
-                .HasOne(pt => pt.User)
-                .WithMany(p => p.WatchedAdvertisement)
-                .HasForeignKey(pt => pt.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-
-            modelBuilder.Entity<UserAdvertisement>()
-                .HasOne(pt => pt.Advertisement)
-                .WithMany(p => p.WatchedAdvertisement)
-                .HasForeignKey(pt => pt.AdvertisementId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            //<<<<<END Many-To-Many relationships>>>>>> 
             #endregion
 
             #region REQUIRED AND/OR MAXLENGTH
@@ -281,11 +150,17 @@ namespace ProjectHey.DAL
             modelBuilder.Entity<Category>()
                     .Property(x => x.Name)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(200);
             #endregion
             #region Connection
             modelBuilder.Entity<Connection>()
                     .Property(x => x.Progress)
+                    .IsRequired();
+            modelBuilder.Entity<Connection>()
+                    .Property(x => x.IsHidden)
+                    .IsRequired();
+            modelBuilder.Entity<Connection>()
+                    .Property(x => x.IsBlocked)
                     .IsRequired();
             #endregion
             #region Feedback
@@ -306,6 +181,11 @@ namespace ProjectHey.DAL
                     .Property(x => x.UserId)
                     .IsRequired();
             #endregion
+            #region SignalRUser
+            modelBuilder.Entity<SignalRUser>()
+                    .Property(x => x.IsConnected)
+                    .IsRequired();
+            #endregion
             #region SignalRMessage
             modelBuilder.Entity<SignalRMessage>()
                     .Property(x => x.Body)
@@ -317,8 +197,8 @@ namespace ProjectHey.DAL
                     .IsRequired();
             #endregion
             #region SignalRConversationRoom
-            modelBuilder.Entity<SignalRConversationRoom>()
-                    .Property(x => x.RoomName)
+            modelBuilder.Entity<SignalRRoom>()
+                    .Property(x => x.Roomname)
                     .IsRequired()
                     .HasMaxLength(150);
             #endregion
@@ -389,6 +269,121 @@ namespace ProjectHey.DAL
                     .IsRequired();
             #endregion
             //<<<<END REQUIRED AND/OR MAXLENGTH>>>> 
+            #endregion
+
+            #region UNIQUE KEYS
+            //<<<<UNIQUE>>>>
+            modelBuilder.Entity<Category>()
+                .HasIndex(x => x.Name).IsUnique();
+            modelBuilder.Entity<User>()
+                .HasIndex(x => x.FacebookId).IsUnique();
+            //<<<<END UNIQUE>>>> 
+            #endregion
+
+            #region Generated Values
+            //<<<<GENERATED VALUES>>>>
+            modelBuilder.Entity<UserAdvertisement>()
+                .Property(x => x.Id)
+                .ValueGeneratedOnAdd();
+            //<<<<END GENERATED VALUES>>>> 
+            #endregion
+
+            #region Many-To-Many Relationships
+            //<<<<<Many-To-Many relationships>>>>>
+            //Blocked
+            modelBuilder.Entity<SignalRUserRoom>()
+                .HasKey(x => new { x.SignalRUserId, x.SignalRRoomId });
+
+            modelBuilder.Entity<SignalRUserRoom>()
+                .HasOne(pt => pt.SignalRUser)
+                .WithMany(p => p.Rooms)
+                .HasForeignKey(pt => pt.SignalRUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<SignalRUserRoom>()
+                .HasOne(pt => pt.SignalRRoom)
+                .WithMany(p => p.Users)
+                .HasForeignKey(pt => pt.SignalRRoomId)
+                .OnDelete(DeleteBehavior.Restrict);
+            //Reported
+            modelBuilder.Entity<Reported>()
+                .HasKey(x => new { x.ReporterUserId, x.ReportedUserId });
+
+            modelBuilder.Entity<Reported>()
+                .HasOne(pt => pt.ReporterUser)
+                .WithMany(p => p.ReportedUsers)
+                .HasForeignKey(pt => pt.ReporterUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Reported>()
+                .HasOne(pt => pt.ReportedUser)
+                .WithMany()
+                .HasForeignKey(pt => pt.ReportedUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            //Connection
+            modelBuilder.Entity<Connection>()
+                .HasKey(x => new { x.UserId, x.UserConnectionId });
+
+            modelBuilder.Entity<Connection>()
+                .HasOne(pt => pt.User)
+                .WithMany(p => p.Connections)
+                .HasForeignKey(pt => pt.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Connection>()
+                .HasOne(pt => pt.UserConnection)
+                .WithMany()
+                .HasForeignKey(pt => pt.UserConnectionId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            //User Categories
+            modelBuilder.Entity<UserCategory>()
+                .HasKey(x => new { x.UserId, x.CategoryId });
+
+            modelBuilder.Entity<UserCategory>()
+                .HasOne(pt => pt.User)
+                .WithMany(p => p.UserCategory)
+                .HasForeignKey(pt => pt.UserId);
+
+            modelBuilder.Entity<UserCategory>()
+                .HasOne(pt => pt.Category)
+                .WithMany(t => t.UserCategory)
+                .HasForeignKey(pt => pt.CategoryId);
+
+            //Advertisement Categories
+            modelBuilder.Entity<AdvertisementCategory>()
+                .HasKey(x => new { x.AdvertisementId, x.CategoryId });
+
+            modelBuilder.Entity<AdvertisementCategory>()
+                .HasOne(pt => pt.Advertisement)
+                .WithMany(p => p.AdvertisementCategory)
+                .HasForeignKey(pt => pt.AdvertisementId);
+
+            modelBuilder.Entity<AdvertisementCategory>()
+                .HasOne(pt => pt.Category)
+                .WithMany(t => t.AdvertisementCategory)
+                .HasForeignKey(pt => pt.CategoryId);
+
+            //User advertisements
+            modelBuilder.Entity<UserAdvertisement>()
+                .HasKey(x => new { x.Id, x.UserId, x.AdvertisementId });
+
+            modelBuilder.Entity<UserAdvertisement>()
+                .HasOne(pt => pt.User)
+                .WithMany(p => p.WatchedAdvertisement)
+                .HasForeignKey(pt => pt.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<UserAdvertisement>()
+                .HasOne(pt => pt.Advertisement)
+                .WithMany(p => p.WatchedAdvertisement)
+                .HasForeignKey(pt => pt.AdvertisementId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            //<<<<<END Many-To-Many relationships>>>>>> 
             #endregion
 
             #region Special No Cascade

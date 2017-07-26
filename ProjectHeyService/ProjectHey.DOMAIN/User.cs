@@ -49,9 +49,6 @@ namespace ProjectHey.DOMAIN
         //User can have multiple reported users
         public ICollection<Reported> ReportedUsers { get; set; }
 
-        //User can have multiple blocked users
-        public ICollection<Blocked> BlockedUsers { get; set; }
-
         //User can have multiple connections
         public ICollection<Connection> Connections { get; set; }
 

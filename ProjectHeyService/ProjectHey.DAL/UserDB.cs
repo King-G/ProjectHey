@@ -62,7 +62,6 @@ namespace ProjectHey.DAL
                 .Include(x => x.Feedback)
                 .Include(x => x.Appsetting)
                 .Include(x => x.ReportedUsers)
-                .Include(x => x.BlockedUsers)
                 .Include(x => x.Connections)
                 .Include(x => x.UserCategory)
                 .Include(x => x.Advertisement)
@@ -86,7 +85,6 @@ namespace ProjectHey.DAL
                 .Include(x => x.Feedback)
                 .Include(x => x.Appsetting)
                 .Include(x => x.ReportedUsers)
-                .Include(x => x.BlockedUsers)
                 .Include(x => x.Connections)
                 .Include(x => x.UserCategory)
                 .Include(x => x.Advertisement)
@@ -104,7 +102,7 @@ namespace ProjectHey.DAL
 
             return user;
         }
-        public async Task<IEnumerable<User>> GetByLocationAsync(User requestor, int skip, int take)
+        public async Task<IEnumerable<User>> GetUsersByLocationAsync(User requestor, int skip, int take)
         {
             //testing required
             return await projectHeyContext.User.AsNoTracking().FromSql(
@@ -116,13 +114,12 @@ namespace ProjectHey.DAL
             requestor.Location.Longitude,
             requestor.Location.Latitude,
             requestor.Appsetting.Radius)
-            .Where(x => 
-            !x.Connections.Any(y => y.UserOneId == requestor.Id) &&
-            !x.BlockedUsers.Any(y => y.UserId == requestor.Id))
-            .OrderBy(x => x.ActivityDate)
+            .Where(x => !x.Connections.Any(y => y.UserId == requestor.Id && y.IsBlocked == false))
             .Skip(skip)
             .Take(take)
             .ToListAsync();
+            //            .GroupJoin(/*do I use groupjoin?...*/).OrderBy(/*...*/).ThenBy(x => x.ActivityDate) //<=========
+
             //When DBGeography comes out...
             //return await projectHeyContext.User.AsNoTracking().Where(x => x.Location.Distance(currLocation) < range)
             //                .OrderBy(x => x.Location.Distance(currLocation)).Skip(skip).Take(take).ToListAsync();
@@ -146,7 +143,5 @@ namespace ProjectHey.DAL
 
             return entity;
         }
-
-
     }
 }

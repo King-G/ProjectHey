@@ -18,11 +18,19 @@ namespace ProjectHey.APIGateway
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseUrls("http://localhost:5000", "http://192.168.42.9:5000")
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
 
             host.Run();
+
+            //.UseUrls("http://localhost:5000", "http://192.168.42.9:5000")
+            //API
+            //netsh http add urlacl url=http://192.168.42.9:5000/ user=Iedereen
+            //WEB
+            //netsh http add urlacl url=http://192.168.42.9:7000/ user=Iedereen
+
         }
     }
 }

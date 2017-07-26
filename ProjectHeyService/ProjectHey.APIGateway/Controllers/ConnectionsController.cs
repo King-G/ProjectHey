@@ -43,9 +43,9 @@ namespace ProjectHey.APIGateway.Controllers
                     connectionviewModels.Add(
                         new ConnectionViewModel()
                         {
-                            UserOneId = connection.UserOneId,
-                            UserTwoId = connection.UserTwoId,
-                            Username = string.Join(string.Empty, connection.UserTwo.Username.Skip(25)),
+                            UserId = connection.UserId,
+                            UserConnectionId = connection.UserConnectionId,
+                            Username = string.Join(string.Empty, connection.UserConnection.Username.Skip(25)),
                             Progress = connection.Progress,
                         });
                 }

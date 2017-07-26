@@ -59,7 +59,7 @@ namespace ProjectHey.APIGateway.Controllers
         [HttpGet]
         public async Task<IEnumerable<User>> GetByLocation(User requestor, int skip, int take)
         {
-            return await userManager.GetByLocationAsync(requestor, skip, take);
+            return await userManager.GetUsersByLocationAsync(requestor, skip, take);
         }
 
         [HttpPost]

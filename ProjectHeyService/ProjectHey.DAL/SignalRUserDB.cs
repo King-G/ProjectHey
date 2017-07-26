@@ -42,7 +42,6 @@ namespace ProjectHey.DAL
         public async Task<IEnumerable<SignalRUser>> GetAsync(int skip, int take)
         {
             return await projectHeyContext.SignalRUser.AsNoTracking()
-                .Include(x => x.Connections)
                 .Include(x => x.Rooms)
                 .OrderBy(x => x.UserId)
                 .Skip(skip).Take(take)
@@ -52,7 +51,6 @@ namespace ProjectHey.DAL
         public async Task<SignalRUser> GetByIdAsync(int id)
         {
             return await projectHeyContext.SignalRUser.AsNoTracking()
-                .Include(x => x.Connections)
                 .Include(x => x.Rooms)
                 .FirstOrDefaultAsync(x => x.UserId == id);
         }

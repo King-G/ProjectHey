@@ -27,10 +27,10 @@ namespace ProjectHeyMobile.Authentication
 
         #region AWSSettings
         //public static string ProjectHeyAPIEndpoint = "https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api";
-        public static string ProjectHeyAPIEndpoint = "http://10.0.2.2:5000/api";
+        public static string ProjectHeyAPIEndpoint = "http://192.168.42.9:5000/api";
 
         //public static string ProjectHeyChatEndpoint = "http://projecthey.eu-west-2.elasticbeanstalk.com/";
-        public static string ProjectHeyChatEndpoint = "http://10.0.2.2/signalR";
+        public static string ProjectHeyChatEndpoint = "http://192.168.42.9:7000/projecthey.web/";
         public static string ProjectHeyChatHub = "ChatHub";
         
         public static string AWSAccessKey { get; set; }
