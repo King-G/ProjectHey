@@ -34,6 +34,9 @@ namespace ProjectHey.APIGateway.Controllers
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(facebookId))
+                    throw new NullReferenceException();
+
                 User user = await userManager.GetByFacebookId(facebookId);
                 return Ok(Json(user));
             }
@@ -47,6 +50,9 @@ namespace ProjectHey.APIGateway.Controllers
         {
             try
             {
+                if (requestor == null)
+                    throw new NullReferenceException();
+
                 Connection connection = await userManager.CreateConnectionForUser(requestor);
                 return Ok(Json(connection));
             }
@@ -69,9 +75,21 @@ namespace ProjectHey.APIGateway.Controllers
             }
         }
         [HttpGet]
-        public async Task<IEnumerable<User>> GetByLocation(User requestor, int skip, int take)
+        public async Task<IActionResult> GetByLocation(User requestor, int skip, int take)
         {
-            return await userManager.GetUsersByLocationAsync(requestor, skip, take);
+            try
+            {
+                if (requestor == null)
+                    throw new NullReferenceException();
+
+                IEnumerable<User> users = await userManager.GetUsersByLocationAsync(requestor, skip, take);
+                return Ok(Json(users));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
@@ -81,6 +99,9 @@ namespace ProjectHey.APIGateway.Controllers
         {
             try
             {
+                if (user == null)
+                    throw new NullReferenceException();
+
                 user = await userManager.CreateAsync(user);
                 return Ok(Json(user));
             }
@@ -96,6 +117,9 @@ namespace ProjectHey.APIGateway.Controllers
         {
             try
             {
+                if (user == null)
+                    throw new NullReferenceException();
+
                 user = await userManager.UpdateAsync(user);
                 return Ok(Json(user));
             }
