@@ -9,6 +9,7 @@ namespace ProjectHeyMobile.ViewModels
 {
     public class ChatViewModel : BaseViewModel
     {
+        public SignalRRoom SignalRRoom { get; set; }
         public ObservableCollection<MessageViewModel> Messages { get; set; }
         private MessageViewModel _SelectedMessage;
 
@@ -23,13 +24,17 @@ namespace ProjectHeyMobile.ViewModels
         public ICommand SendMessageCommand { get; private set; }
         public ICommand JoinChannelCommand { get; private set; }
 
-        public ChatViewModel(): this(new List<MessageViewModel>())
+        public ChatViewModel(SignalRRoom signalRRoom)
         {
+            SignalRRoom = signalRRoom;
 
-        }
-        public ChatViewModel(List<MessageViewModel> messages)
-        {
+            List<MessageViewModel> messages = new List<MessageViewModel>();
+            foreach (SignalRMessage signalRMessage in signalRRoom.Messages)
+            {
+                messages.Add(new MessageViewModel(signalRMessage));
+            }
             Messages = new ObservableCollection<MessageViewModel>(messages);
+
             AddMessageCommand = new Command<MessageViewModel>(x => AddMessage(x));
             SelectMessageCommand = new Command<MessageViewModel>(x => SelectMessage(x));
             SendMessageCommand = new Command<MessageViewModel>(async x => await SendMessage(x));
@@ -44,7 +49,7 @@ namespace ProjectHeyMobile.ViewModels
             try
             {
                 AddMessage(messageVM);
-                //await _chatServices.Send(new ChatMessage { Name = "MobileUser", Message = messageVM.Message.Body }, _Channel);
+                await App.ChatServices.Send(messageVM.Message);
             }
             catch (System.Exception exception)
             {

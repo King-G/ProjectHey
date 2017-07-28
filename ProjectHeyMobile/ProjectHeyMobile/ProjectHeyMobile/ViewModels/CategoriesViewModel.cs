@@ -94,14 +94,15 @@ namespace ProjectHeyMobile.ViewModels
 
             SelectedCategory = null;
         }
-        private async Task SelectChannel(CategoryViewModel category)
+        private async Task SelectChannel(CategoryViewModel categoryVM)
         {
-            if (category == null)
+            if (categoryVM == null)
                 return;
 
             SelectedCategory = null;
 
-            await App.Main.PageService.PushAsync(new ChatPage());
+            ChatViewModel chatVM = new ChatViewModel(categoryVM.Category.SignalRRoom);
+            await App.Main.PageService.PushAsync(new ChatPage(chatVM));
 
         }
     }

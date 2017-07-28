@@ -8,7 +8,7 @@ namespace ProjectHey.DOMAIN
 
         public string Body { get; set; }
 
-        public DateTime CreationDate { get; set; } = DateTime.Now;
+        public DateTime CreationDate { get; set; }
 
         public int SignalRUserId { get; set; }
         public SignalRUser SignalRUser { get; set; }

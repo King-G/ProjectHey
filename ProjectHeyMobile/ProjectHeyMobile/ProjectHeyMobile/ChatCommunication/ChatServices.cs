@@ -15,7 +15,8 @@ namespace ProjectHeyMobile.ChatCommunication
         private readonly HubConnection _connection;
         private readonly IHubProxy _proxy;
 
-        public event EventHandler<ChatMessage> OnMessageReceived;
+        public event EventHandler<SignalRMessage> OnMessageReceived;
+        public event EventHandler<int> OnRequestToReconnect;
 
         public ChatServices()
         {
@@ -25,16 +26,22 @@ namespace ProjectHeyMobile.ChatCommunication
 
         #region IChatServices implementation
 
-        public async Task ConnectHeyUser(int id)
+        public async Task ConnectHeyUser(SignalRUser signalRUser)
         {
             try
             {
                 await _connection.Start();
-                await _proxy.Invoke("ConnectHeyUser", id);
-                _proxy.On("OnMessageReceived", (string name, string message) =>
+                await _proxy.Invoke("ConnectHeyUser", signalRUser);
+                _proxy.On("OnMessageReceived", (SignalRMessage signalRMessage) =>
                 {
                     if (OnMessageReceived != null)
-                        OnMessageReceived(this, new ChatMessage() { Name = name, Message = message });
+                        OnMessageReceived(this, signalRMessage);
+
+                });
+                _proxy.On("OnRequestToReconnect", (int userId) =>
+                {
+                    if (OnRequestToReconnect != null)
+                        OnRequestToReconnect(this, userId);
 
                 });
             }
@@ -46,18 +53,18 @@ namespace ProjectHeyMobile.ChatCommunication
 
         }
 
-        public async Task Send(ChatMessage message, string roomName)
+        public async Task Send(SignalRMessage signalRMessage)
         {
-            await _proxy.Invoke("Send", message.Name, message.Message, roomName);
+            await _proxy.Invoke("Send", signalRMessage);
         }
 
-        public async Task JoinRoom(string roomName)
+        public async Task JoinRoom(int userid, int roomid)
         {
-            await _proxy.Invoke("JoinRoom", roomName);
+            await _proxy.Invoke("JoinRoom", userid, roomid);
         }
-        public async Task LeaveRoom(string roomName)
+        public async Task LeaveRoom(int userid, int roomid)
         {
-            await _proxy.Invoke("LeaveRoom", roomName);
+            await _proxy.Invoke("LeaveRoom", userid, roomid);
         }
 
         #endregion

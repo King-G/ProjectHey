@@ -22,8 +22,8 @@ namespace ProjectHeyMobile.Views.Mainpages
 
         private async void Anyone_Clicked(object sender, EventArgs e)
         {
-            ChatViewModel messagesViewModel = new ChatViewModel();
-            await App.Main.PageService.PushAsync(new ChatPage(messagesViewModel));
+            ChatViewModel chatVM = new ChatViewModel(App.Main.User.FacebookCity.SignalRRoom);
+            await App.Main.PageService.PushAsync(new ChatPage(chatVM));
         }
     }
 }

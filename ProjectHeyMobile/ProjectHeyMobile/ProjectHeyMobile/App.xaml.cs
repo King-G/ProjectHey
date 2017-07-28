@@ -1,6 +1,7 @@
 ﻿using Plugin.Connectivity;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
+using ProjectHey.DOMAIN;
 using ProjectHeyMobile.Authentication;
 using ProjectHeyMobile.ChatCommunication;
 using ProjectHeyMobile.ViewModels;
@@ -26,6 +27,7 @@ namespace ProjectHeyMobile
             if (CrossConnectivity.Current.IsConnected)
             {
                 ChatServices.OnMessageReceived += ChatServices_OnMessageReceived;
+                ChatServices.OnRequestToReconnect += ChatServices_OnRequestToReconnect;
                 MainPage = new NavigationPage(new StartPage());
             }
             else
@@ -35,9 +37,17 @@ namespace ProjectHeyMobile
             }
         }
 
-        private void ChatServices_OnMessageReceived(object sender, ChatMessage e)
+        private void ChatServices_OnRequestToReconnect(object sender, int e)
         {
-            App.Current.MainPage.DisplayAlert(e.Name, e.Message, "Aight");
+            if (e == App.Main.User.Id)
+            {
+                ChatServices.ConnectHeyUser(App.Main.User.SignalRUser);
+            }
+        }
+
+        private void ChatServices_OnMessageReceived(object sender, SignalRMessage e)
+        {
+            App.Current.MainPage.DisplayAlert(e.SignalRUser.User.Username, e.Body, "Reply");
         }
 
         protected override void OnStart()

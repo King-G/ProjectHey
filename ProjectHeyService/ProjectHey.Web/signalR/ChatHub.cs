@@ -6,24 +6,22 @@ using Refit;
 using ProjectHey.Web.ProjectHeyAPI;
 using Newtonsoft.Json;
 using ProjectHey.DOMAIN;
+using System.Net.Http;
 
 namespace ProjectHey.Web.signalR
 {
     public class ChatHub : Hub
     {
-        public void Send(string name, string message, string roomName)
+        public void Send(SignalRMessage signalRMessage)
         {
-            Clients.Group(roomName).OnMessageReceived(name, message);
+            Clients.Group(signalRMessage.SignalRRoomId.ToString()).OnMessageReceived(signalRMessage);
         }
-
-        public async Task ConnectHeyUser(int id)
+        public void RequestToReconnectToUserId(int userId)
         {
-            var projectHeyAPI = RestService.For<IProjectHeyAPI>("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api");
-            var response = await projectHeyAPI.GetSignalRUserById(id);
-
-            //RetreiveUser
-            SignalRUser signalRUser = JsonConvert.DeserializeObject<APISingleResponse<SignalRUser>>(response).Value;
-
+            Clients.Group("ChatNotifications").OnRequestToReconnect(userId);
+        }
+        public async Task ConnectHeyUser(SignalRUser signalRUser)
+        {
             // If user does not exist in database, disconnect user.
             if (signalRUser == null)
             {
@@ -31,62 +29,51 @@ namespace ProjectHey.Web.signalR
             }
             else
             {
+                await Groups.Add(Context.ConnectionId, "ChatNotifications");
                 // Add to each assigned group.
                 foreach (var item in signalRUser.Rooms)
                 {
-                    await Groups.Add(Context.ConnectionId, item.SignalRRoom.Roomname);
+                    await Groups.Add(Context.ConnectionId, item.SignalRRoomId.ToString());
                 }
             }
         }
         
-        public async Task JoinRoom(string roomName)
+        public async Task JoinRoom(int userid, int roomid)
         {
-            var projectHeyAPI = RestService.For<IProjectHeyAPI>("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api");
+            var projectHeyAPI = RestService.For<IProjectHeyAPISignalR>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri(ProjectHeyAuthentication.ProjectHeyAPIEndpoint) });
 
-            var responseUser = projectHeyAPI.GetSignalRUserById(Convert.ToInt32(Context.User.Identity.Name)).Result;
-            var responseRoom = projectHeyAPI.GetSignalRRoomByName(roomName).Result;
+            var responseUserRoom = projectHeyAPI.GetByUserAndRoomId(userid, roomid).Result;
+            SignalRUserRoom signalRUserRoom = JsonConvert.DeserializeObject<APISingleResponse<SignalRUserRoom>>(responseUserRoom).Value;
 
-            SignalRUser signalRUser = JsonConvert.DeserializeObject<APISingleResponse<SignalRUser>>(responseUser).Value;
-            SignalRRoom room = JsonConvert.DeserializeObject<APISingleResponse<SignalRRoom>>(responseRoom).Value;
-
-            if (room == null)
+            if (signalRUserRoom == null)
             {
-                room = new SignalRRoom()
+                signalRUserRoom = new SignalRUserRoom()
                 {
-                    Roomname = roomName,
+                    SignalRUserId = userid,
+                    SignalRRoomId = roomid
                 };
+                var responseCreateUserRoom = projectHeyAPI.CreateSignalRUserRoom(signalRUserRoom).Result;
+                signalRUserRoom = JsonConvert.DeserializeObject<APISingleResponse<SignalRUserRoom>>(responseCreateUserRoom).Value;
             }
-            room.Users.Add(new SignalRUserRoom()
-            {
-                SignalRUser = signalRUser,
-                SignalRRoom = room
-            });
-
-            var creationresponse = projectHeyAPI.CreateSignalRRoom(room).Result;
-            await Groups.Add(Context.ConnectionId, roomName);
+            
+            await Groups.Add(Context.ConnectionId, signalRUserRoom.SignalRRoomId.ToString());
 
         }
-        public async Task LeaveRoom(string roomName)
+        public async Task LeaveRoom(int userid, int roomid)
         {
-            var projectHeyAPI = RestService.For<IProjectHeyAPI>("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api");
+            var projectHeyAPI = RestService.For<IProjectHeyAPISignalR>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri(ProjectHeyAuthentication.ProjectHeyAPIEndpoint) });
 
-            var responseUser = projectHeyAPI.GetSignalRUserById(Convert.ToInt32(Context.User.Identity.Name)).Result;
-            var responseRoom = projectHeyAPI.GetSignalRRoomByName(roomName).Result;
+            var responseUserRoom = projectHeyAPI.GetByUserAndRoomId(userid, roomid).Result;
+            SignalRUserRoom signalRUserRoom = JsonConvert.DeserializeObject<APISingleResponse<SignalRUserRoom>>(responseUserRoom).Value;
 
-            SignalRUser signalRUser = JsonConvert.DeserializeObject<APISingleResponse<SignalRUser>>(responseUser).Value;
-            SignalRRoom room = JsonConvert.DeserializeObject<APISingleResponse<SignalRRoom>>(responseRoom).Value;
-
-            if (room != null)
+            if (signalRUserRoom != null)
             {
-                SignalRUserRoom userroom = new SignalRUserRoom()
-                {
-                    SignalRRoom = room,
-                    SignalRUser = signalRUser
-                };
-                var deletion = projectHeyAPI.DeleteSignalRUserRoom(userroom).Result;
-                await Groups.Remove(Context.ConnectionId, roomName);
+                var deletion = projectHeyAPI.DeleteSignalRUserRoom(signalRUserRoom).Result;
+                await Groups.Remove(Context.ConnectionId, signalRUserRoom.SignalRRoomId.ToString());
             }
         }
+
+
 
     }
 }

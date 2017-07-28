@@ -13,8 +13,8 @@ namespace ProjectHey.DOMAIN
 
         public string FacebookToken { get; set; }
 
-        public string CityID { get; set; }
-        public string CityName { get; set; }
+        public FacebookCity FacebookCity { get; set; }
+
         public string Username { get; set; }
 
         public string ResetUsername()

@@ -87,8 +87,9 @@ namespace ProjectHeyMobile.ViewModels
 
             SelectedConnection = null;
 
-            //Get Messages
-            App.Main.PageService.PushAsync(new ChatPage());
+
+            ChatViewModel chatVM = new ChatViewModel(connection.SignalRRoom);
+            App.Main.PageService.PushAsync(new ChatPage(chatVM));
 
         }
     }

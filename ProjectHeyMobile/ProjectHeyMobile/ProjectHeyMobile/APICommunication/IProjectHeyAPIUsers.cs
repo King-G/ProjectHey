@@ -20,9 +20,6 @@ namespace ProjectHeyMobile.APICommunication
 
         [Get("/users/getbyfacebookid/?facebookid={facebookId}")]
         Task<string> GetByFacebookId(string facebookId);
-
-        
-
-        
+       
     }
 }

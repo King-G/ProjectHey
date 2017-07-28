@@ -31,6 +31,7 @@ namespace ProjectHey.DAL
         }
         public DbSet<User> User { get; set; }
         public DbSet<AppSetting> AppSetting { get; set; }
+        public DbSet<FacebookCity> FacebookCity { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
         public DbSet<Report> Report { get; set; }

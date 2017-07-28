@@ -69,8 +69,8 @@ namespace ProjectHey.APIGateway.Controllers
         {
             try
             {
-                SignalRRoomManager signalRUserConversationRoomManager = new SignalRRoomManager();
-                SignalRRoom room = await signalRUserConversationRoomManager.GetByIdAsync(id);
+                SignalRRoomManager signalRRoomManager = new SignalRRoomManager();
+                SignalRRoom room = await signalRRoomManager.GetByIdAsync(id);
                 return Ok(Json(room));
             }
             catch (Exception ex)
@@ -98,6 +98,21 @@ namespace ProjectHey.APIGateway.Controllers
         #endregion
 
         #region SignalRUserRoom Endpoints
+        [HttpGet]
+        public async Task<IActionResult> GetByUserAndRoomId(int userid, int roomid)
+        {
+            try
+            {
+                SignalRUserRoomManager signalRUserRoomManager = new SignalRUserRoomManager();
+                SignalRUserRoom room = await signalRUserRoomManager.GetByUserAndRoomIdAsync(userid, roomid);
+                return Ok(Json(room));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateSignalRUserRoom([FromBody]SignalRUserRoom signalRUserRoom)
         {

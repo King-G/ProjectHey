@@ -43,6 +43,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AWSSDK.CognitoIdentity, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.CognitoIdentity.3.3.2.13\lib\net45\AWSSDK.CognitoIdentity.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.Core.3.3.17\lib\net45\AWSSDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.SecurityToken, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.SecurityToken.3.3.2.3\lib\net45\AWSSDK.SecurityToken.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
@@ -174,6 +183,9 @@
     <Compile Include="..\ProjectHey.DOMAIN\Enums\ReportType.cs">
       <Link>Domain\Enums\ReportType.cs</Link>
     </Compile>
+    <Compile Include="..\ProjectHey.DOMAIN\FacebookCity.cs">
+      <Link>Domain\FacebookCity.cs</Link>
+    </Compile>
     <Compile Include="..\ProjectHey.DOMAIN\Feedback.cs">
       <Link>Domain\Feedback.cs</Link>
     </Compile>
@@ -209,10 +221,19 @@
     </Compile>
     <Compile Include="ProjectHeyAPI\APIMultiResponse.cs" />
     <Compile Include="ProjectHeyAPI\APISingleResponse.cs" />
-    <Compile Include="ProjectHeyAPI\IProjectHeyAPI.cs" />
+    <Compile Include="ProjectHeyAPI\AuthenticatedHttpClientHandler.cs" />
+    <Compile Include="ProjectHeyAPI\ProjectHeyAuthentication.cs" />
+    <Compile Include="ProjectHeyAPI\IProjectHeyAPISignalR.cs" />
+    <Compile Include="ProjectHeyAPI\Signers\AWS4SignerBase.cs" />
+    <Compile Include="ProjectHeyAPI\Signers\AWS4SignerForAuthorizationHeader.cs" />
+    <Compile Include="ProjectHeyAPI\Signers\HttpHelpers.cs" />
     <Compile Include="signalR\ChatHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\AWSSDK.CognitoIdentity.3.3.2.13\analyzers\dotnet\cs\AWSSDK.CognitoIdentity.CodeAnalysis.dll" />
+    <Analyzer Include="..\packages\AWSSDK.SecurityToken.3.3.2.3\analyzers\dotnet\cs\AWSSDK.SecurityToken.CodeAnalysis.dll" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

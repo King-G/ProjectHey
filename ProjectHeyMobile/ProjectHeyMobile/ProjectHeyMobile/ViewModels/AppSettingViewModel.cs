@@ -40,7 +40,6 @@ namespace ProjectHeyMobile.ViewModels
             {
                 await App.Main.PageService.PushAsync(new ErrorPage(exception));
             }
-
         }
         public AppSetting AppSetting
         {

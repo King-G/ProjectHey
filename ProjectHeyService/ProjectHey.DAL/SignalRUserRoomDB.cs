@@ -47,7 +47,12 @@ namespace ProjectHey.DAL
         public async Task<SignalRUserRoom> GetByIdAsync(int id) //never gonna be used.
         {
             return await projectHeyContext.SignalRUserRoom.AsNoTracking()
-                .FirstOrDefaultAsync(x => x.SignalRUserId == id);
+                .SingleOrDefaultAsync(x => x.SignalRUserId == id);
+        }
+        public async Task<SignalRUserRoom> GetByUserAndRoomIdAsync(int userId, int roomId) //this instead
+        {
+            return await projectHeyContext.SignalRUserRoom.AsNoTracking()
+                .SingleOrDefaultAsync(x => x.SignalRUserId == userId && x.SignalRRoomId == roomId);
         }
         public async Task<SignalRUserRoom> UpdateAsync(SignalRUserRoom entity)
         {
@@ -56,5 +61,7 @@ namespace ProjectHey.DAL
             await projectHeyContext.SaveChangesAsync();
             return entity;
         }
+
+        
     }
 }

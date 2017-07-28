@@ -9,10 +9,11 @@ namespace ProjectHeyMobile.ChatCommunication
 {
     public interface IChatServices
     {
-        Task ConnectHeyUser(int id);
-        Task Send(ChatMessage message, string roomName);
-        Task JoinRoom(string roomName);
-        Task LeaveRoom(string roomName);
-        event EventHandler<ChatMessage> OnMessageReceived;
+        Task ConnectHeyUser(SignalRUser signalRUser);
+        Task Send(SignalRMessage signalRMessage);
+        Task JoinRoom(int userid, int roomid);
+        Task LeaveRoom(int userid, int roomid);
+        event EventHandler<SignalRMessage> OnMessageReceived;
+        event EventHandler<int> OnRequestToReconnect;
     }
 }

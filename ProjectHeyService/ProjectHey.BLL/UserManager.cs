@@ -13,6 +13,7 @@ namespace ProjectHey.BLL
     {
         private readonly ConnectionManager connectionManager = new ConnectionManager();
         private readonly SignalRRoomManager signalRRoomManager = new SignalRRoomManager();
+        private readonly FacebookCityManager facebookCityManager = new FacebookCityManager();
 
         private readonly UserDB userDB = new UserDB();
         public async Task<User> CreateAsync(User entity)
@@ -23,6 +24,25 @@ namespace ProjectHey.BLL
             entity.Appsetting = new AppSetting();
             entity.Appsetting = entity.Appsetting.GetDefaultAppSettings();
             entity.SignalRUser = new SignalRUser();
+
+            if (entity.FacebookCity != null) //If user has a facebookcity assigned.
+            {
+                FacebookCity existingFacebookCity = await facebookCityManager.GetByCityIdAsync(entity.FacebookCity.CityId);
+
+                if (existingFacebookCity == null)
+                {
+                    if (entity.FacebookCity.SignalRRoom == null) //Does the facebookcity have a signalRRoom?
+                    {
+                        SignalRRoom cityRoom = new SignalRRoom()
+                        {
+                            Roomname = entity.FacebookCity.CityName
+                        };
+
+                        entity.FacebookCity.SignalRRoom = cityRoom;
+                    }
+                }             
+            }
+            
 
             return await userDB.CreateAsync(entity);
         }
@@ -84,10 +104,6 @@ namespace ProjectHey.BLL
         {
             return await userDB.GetAsync(skip, take);
         }
-        public async Task<User> GetSimplifiedByIdAsync(int id)
-        {
-            return await userDB.GetSimplifiedByIdAsync(id);
-        }
         public async Task<User> GetByFacebookId(string facebookId)
         {
             return await userDB.GetByFacebookId(facebookId);
@@ -107,6 +123,23 @@ namespace ProjectHey.BLL
         public async Task<User> UpdateAsync(User entity)
         {
             entity.ActivityDate = DateTime.Now;
+            if (entity.FacebookCity != null) //If user has a facebookcity assigned.
+            {
+                FacebookCity existingFacebookCity = await facebookCityManager.GetByCityIdAsync(entity.FacebookCity.CityId);
+
+                if (existingFacebookCity == null)
+                {
+                    if (entity.FacebookCity.SignalRRoom == null) //Does the facebookcity have a signalRRoom?
+                    {
+                        SignalRRoom cityRoom = new SignalRRoom()
+                        {
+                            Roomname = entity.FacebookCity.CityName
+                        };
+
+                        entity.FacebookCity.SignalRRoom = cityRoom;
+                    }
+                }
+            }
             return await userDB.UpdateAsync(entity);
         }
 

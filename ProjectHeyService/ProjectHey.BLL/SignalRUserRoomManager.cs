@@ -37,14 +37,18 @@ namespace ProjectHey.BLL
             return await signalRUserRoomDB.GetAsync(skip, take);
         }
 
-        public async Task<SignalRUserRoom> GetByIdAsync(int id)
+        public async Task<SignalRUserRoom> GetByIdAsync(int id) //never gonna be used
         {
             return await signalRUserRoomDB.GetByIdAsync(id);
         }
-
+        public async Task<SignalRUserRoom> GetByUserAndRoomIdAsync(int userId, int roomId) //this instead
+        {
+            return await signalRUserRoomDB.GetByUserAndRoomIdAsync(userId, roomId);
+        }
         public async Task<SignalRUserRoom> UpdateAsync(SignalRUserRoom entity)
         {
             return await signalRUserRoomDB.UpdateAsync(entity);
         }
+
     }
 }

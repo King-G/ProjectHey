@@ -22,10 +22,6 @@ namespace ProjectHeyMobile.Views.Chatpages
             get { return (BindingContext as ChatViewModel); }
             set { BindingContext = value; }
         }
-        public ChatPage() : this(new ChatViewModel())
-        {
-         
-        }
         public ChatPage(ChatViewModel chatVM)
         {
             ChatViewModel = chatVM;
@@ -36,15 +32,15 @@ namespace ProjectHeyMobile.Views.Chatpages
 
         private void Entry_Completed(object sender, EventArgs e)
         {
-            //Message message = new Message()
-            //{
-            //    CreationDate = DateTime.Now,
-            //    UserSenderId = App.Main.User.Id,
-            //    UserReceiverId = 2,
-            //    Body = ((Entry)sender).Text
-            //};
+            SignalRMessage signalRMessage = new SignalRMessage()
+            {
+                CreationDate = DateTime.Now,
+                SignalRUserId = App.Main.User.SignalRUser.Id,
+                SignalRRoomId = ChatViewModel.SignalRRoom.Id,
+                Body = ((Entry)sender).Text
+            };
 
-            ChatViewModel.SendMessageCommand.Execute(new MessageViewModel(((Entry)sender).Text));
+            ChatViewModel.SendMessageCommand.Execute(new MessageViewModel(signalRMessage));
 
             ((Entry)sender).Text = string.Empty;
         }
