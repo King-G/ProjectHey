@@ -20,15 +20,15 @@ namespace ProjectHeyMobile.APICommunication
         Task<string> GetConnectionsViewModelsByUserId(int id);
 
         [Post("/appsettings/update")]
-        Task<string> AppSettingsUpdate([Body(BodySerializationMethod.UrlEncoded)]AppSettingViewModel appsettings);
+        Task<string> AppSettingsUpdate([Body]AppSetting appsetting);
 
         [Post("/users/create")]
-        Task<string> CreateUser ([Body(BodySerializationMethod.UrlEncoded)]User user);
+        Task<string> CreateUser ([Body]User user);
 
         [Post("/users/createconnectionforuser")]
-        Task<string> CreateConnectionForUser([Body(BodySerializationMethod.UrlEncoded)]User requestor);
+        Task<string> CreateConnectionForUser([Body]User requestor);
 
         [Post("/users/update")]
-        Task<string> SyncUser([Body(BodySerializationMethod.UrlEncoded)]User user);
+        Task<string> SyncUser([Body]User user);
     }
 }

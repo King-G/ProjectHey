@@ -106,6 +106,7 @@ namespace ProjectHey.BLL
         }
         public async Task<User> UpdateAsync(User entity)
         {
+            entity.ActivityDate = DateTime.Now;
             return await userDB.UpdateAsync(entity);
         }
 

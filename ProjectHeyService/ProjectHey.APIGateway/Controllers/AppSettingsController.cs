@@ -18,11 +18,11 @@ namespace ProjectHey.APIGateway.Controllers
         AppSettingManager appSettingManager = new AppSettingManager();
 
         [HttpPost]
-        public async Task<IActionResult> Update(AppSetting appsettings)
+        public async Task<IActionResult> Update([FromBody]AppSetting appsetting)
         {
             try
             {
-                AppSetting appsetting = await appSettingManager.UpdateAsync(appsettings);
+                appsetting = await appSettingManager.UpdateAsync(appsetting);
                 return Ok(Json(appsetting));
             }
             catch (Exception ex)

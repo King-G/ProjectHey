@@ -26,47 +26,28 @@
                     Grid.Row="0" Grid.Column="1"/>
 
             <Label Text="{Binding 
-                        Source={x:Reference sliderMaximumNotifications}, 
+                        Source={x:Reference sliderMaximumConnections}, 
                         Path=Value,
-                        StringFormat='Max. Notifications: {0}'}"
+                        StringFormat='Maximum &#10;Connections: {0}'}"
                    Style="{StaticResource appsettingstextStyle}" 
                    Grid.Row="1" Grid.Column="0" />
-            <Slider x:Name="sliderMaximumNotifications" 
-                    Value="{Binding AppSetting.MaximumNotifications}"
-                    ValueChanged="sliderMaximumNotifications_ValueChanged"
+            <Slider x:Name="sliderMaximumConnections" 
+                    Value="{Binding AppSetting.MaximumConnections}"
+                    ValueChanged="sliderMaximumConnections_ValueChanged"
                     Minimum="0"
                     Maximum="30"
                     Grid.Row="1" Grid.Column="1" />
 
-            <Label Text="{Binding 
-                        Source={x:Reference sliderMaximumConversations}, 
-                        Path=Value,
-                        StringFormat='Max. Conversation: {0}'}"
-                   Style="{StaticResource appsettingstextStyle}" 
+            <Label Text="Language" Style="{StaticResource appsettingstextStyle}" 
                    Grid.Row="2" Grid.Column="0" />
-            <Slider x:Name="sliderMaximumConversations"
-                    Value="{Binding AppSetting.MaximumConversations}"
-                    ValueChanged="sliderMaximumConversations_ValueChanged"
-                    Minimum="0"
-                    Maximum="20" 
+            <Picker ItemsSource="{Binding Languages}" SelectedIndex="{Binding AppSetting.Language, Converter=IntEnum}" 
                     Grid.Row="2" Grid.Column="1" />
 
-            <Label Text="Language" Style="{StaticResource appsettingstextStyle}" 
-                   Grid.Row="3" Grid.Column="0" />
-            <Picker ItemsSource="{Binding Languages}" SelectedIndex="{Binding AppSetting.Language, Converter=IntEnum}" 
-                    Grid.Row="3" Grid.Column="1" />
-
             <Label Text="Sound" Style="{StaticResource appsettingstextStyle}" 
-                   Grid.Row="4" Grid.Column="0"/>
+                   Grid.Row="3" Grid.Column="0"/>
             <Switch IsToggled="{Binding AppSetting.Sound}" 
                     HorizontalOptions="Start" VerticalOptions="Center"
-                    Grid.Row="4" Grid.Column="1" />
-
-            <Label Text="Vibrate" Style="{StaticResource appsettingstextStyle}" 
-                   Grid.Row="5" Grid.Column="0" />
-            <Switch IsToggled="{Binding AppSetting.Vibrate}" 
-                    HorizontalOptions="Start" VerticalOptions="Center"
-                    Grid.Row="5" Grid.Column="1" />
+                    Grid.Row="3" Grid.Column="1" />
             
         </Grid>
     </ContentPage.Content>

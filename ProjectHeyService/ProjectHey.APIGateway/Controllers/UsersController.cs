@@ -75,7 +75,7 @@ namespace ProjectHey.APIGateway.Controllers
             }
         }
         [HttpGet]
-        public async Task<IActionResult> GetByLocation(User requestor, int skip, int take)
+        public async Task<IActionResult> GetByLocation([FromBody]User requestor, int skip, int take)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace ProjectHey.APIGateway.Controllers
         [HttpPost]
         //[ValidateModel]
         //localhost:5000/api/users/create?Id=0&firstname=test&....
-        public async Task<IActionResult> Create(User user)
+        public async Task<IActionResult> Create([FromBody]User user)
         {
             try
             {
@@ -111,9 +111,9 @@ namespace ProjectHey.APIGateway.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost]       
         //[ValidateModel]
-        public async Task<IActionResult> Update(User user)
+        public async Task<IActionResult> Update([FromBody]User user)
         {
             try
             {

@@ -30,20 +30,14 @@ namespace ProjectHeyMobile.Views.Settingspages
 
         protected override void OnDisappearing()
         {
-            //await App.Main.SaveChangesAsync();
+            AppSettingViewModel.SaveChangesCommand.Execute(null);
             base.OnDisappearing();
         }
 
-        private void sliderMaximumConversations_ValueChanged(object sender, ValueChangedEventArgs e)
+        private void sliderMaximumConnections_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            sliderMaximumConversations.Value = sliderStepByValue(e.NewValue, 1.0);
+            sliderMaximumConnections.Value = sliderStepByValue(e.NewValue, 1.0);
         }
-
-        private void sliderMaximumNotifications_ValueChanged(object sender, ValueChangedEventArgs e)
-        {
-            sliderMaximumNotifications.Value = sliderStepByValue(e.NewValue, 1.0);
-        }
-
         private void sliderRadius_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             sliderRadius.Value = sliderStepByValue(e.NewValue, 100.0);
@@ -54,5 +48,7 @@ namespace ProjectHeyMobile.Views.Settingspages
             var newStep = Math.Round(value / stepvalue);
             return (newStep * stepvalue);
         }
+
+
     }
 }

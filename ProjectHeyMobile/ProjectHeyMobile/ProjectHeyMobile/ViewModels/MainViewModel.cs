@@ -58,7 +58,7 @@ namespace ProjectHeyMobile.ViewModels
 
             try
             {
-                User user = await FacebookModelToUser(facebookModel);
+                User user = await FacebookModelToUser(facebookModel, new User());
                 var projectHeyAPI = RestService.For<IProjectHeyAPI>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri(ProjectHeyAuthentication.ProjectHeyAPIEndpoint) });
                 var response = await projectHeyAPI.CreateUser(user);
 
@@ -111,13 +111,8 @@ namespace ProjectHeyMobile.ViewModels
             }
         }
 
-        private async Task<User> FacebookModelToUser(FacebookModel facebookModel, User user = null)
+        private async Task<User> FacebookModelToUser(FacebookModel facebookModel, User user)
         {
-            if (user == null)
-            {
-                user = new User();
-            }
-
             user.FacebookId = facebookModel.id;
             user.FacebookToken = ProjectHeyAuthentication.FacebookToken;
             user.Firstname = facebookModel.first_name;

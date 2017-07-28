@@ -1,4 +1,5 @@
 ﻿using ProjectHeyMobile.Views.Settingspages;
+using ProjectHeyMobile.Views.Utilitypages;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,31 +15,80 @@ namespace ProjectHeyMobile.Views.Menupages
         }
         private async void Profile_Clicked(object sender, EventArgs e)
         {
-            await App.Main.PageService.PushAsync(new ProfilePage());
+            try
+            {
+                await App.Main.PageService.PushAsync(new ProfilePage());
+            }
+            catch (Exception exception)
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new ErrorPage(exception));
+            }
         }
         private async void AppSetting_Clicked(object sender, EventArgs e)
         {
-            await App.Main.PageService.PushAsync(new AppSettingPage());
+            try
+            {
+                await App.Main.PageService.PushAsync(new AppSettingPage());
+            }
+            catch (Exception exception)
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new ErrorPage(exception));
+            }
         }
         private async void Categories_Clicked(object sender, EventArgs e)
         {
-            await App.Main.PageService.PushAsync(new CategoriesPage());
+            try
+            {
+                await App.Main.PageService.PushAsync(new CategoriesPage());
+            }
+            catch (Exception exception)
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new ErrorPage(exception));
+            }
         }
         private async void Blocked_Clicked(object sender, EventArgs e)
         {
-            await App.Main.PageService.PushAsync(new BlockedPage());
+            try
+            {
+                await App.Main.PageService.PushAsync(new BlockedPage());
+            }
+            catch (Exception exception)
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new ErrorPage(exception));
+            }
         }
         private async void About_Clicked(object sender, EventArgs e)
         {
-            await App.Main.PageService.PushAsync(new AboutPage());
+            try
+            {
+                await App.Main.PageService.PushAsync(new AboutPage());
+            }
+            catch (Exception exception)
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new ErrorPage(exception));
+            }
         }
         private async void Feedback_Clicked(object sender, EventArgs e)
         {
-            await App.Main.PageService.PushAsync(new FeedbackPage());
+            try
+            {
+                await App.Main.PageService.PushAsync(new FeedbackPage());
+            }
+            catch (Exception exception)
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new ErrorPage(exception));
+            }
         }
         private async void Share_Clicked(object sender, EventArgs e)
         {
-            await App.Main.PageService.PushAsync(new SharePage());
+            try
+            {
+                await App.Main.PageService.PushAsync(new SharePage());
+            }
+            catch (Exception exception)
+            {
+                await App.Current.MainPage.Navigation.PushAsync(new ErrorPage(exception));
+            }
         }
     }
 }
