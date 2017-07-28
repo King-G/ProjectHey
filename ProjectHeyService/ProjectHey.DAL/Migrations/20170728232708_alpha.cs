@@ -38,32 +38,6 @@ namespace ProjectHey.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ActivityDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CityID = table.Column<string>(nullable: true),
-                    CityName = table.Column<string>(nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Email = table.Column<string>(maxLength: 320, nullable: true),
-                    FacebookId = table.Column<string>(nullable: false),
-                    FacebookToken = table.Column<string>(nullable: false),
-                    Firstname = table.Column<string>(maxLength: 50, nullable: false),
-                    Gender = table.Column<int>(nullable: false),
-                    IsBanned = table.Column<bool>(nullable: false),
-                    IsHidden = table.Column<bool>(nullable: false),
-                    Lastname = table.Column<string>(maxLength: 50, nullable: false),
-                    ProfilePictureURL = table.Column<string>(maxLength: 2000, nullable: true),
-                    Username = table.Column<string>(maxLength: 32, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
                 {
@@ -83,6 +57,58 @@ namespace ProjectHey.DAL.Migrations
                         principalTable: "SignalRRoom",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FacebookCity",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CityId = table.Column<string>(nullable: false),
+                    CityName = table.Column<string>(nullable: false),
+                    SignalRRoomId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FacebookCity", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FacebookCity_SignalRRoom_SignalRRoomId",
+                        column: x => x.SignalRRoomId,
+                        principalTable: "SignalRRoom",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ActivityDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Email = table.Column<string>(maxLength: 320, nullable: true),
+                    FacebookCityId = table.Column<int>(nullable: true),
+                    FacebookId = table.Column<string>(nullable: false),
+                    FacebookToken = table.Column<string>(nullable: false),
+                    Firstname = table.Column<string>(maxLength: 50, nullable: false),
+                    Gender = table.Column<int>(nullable: false),
+                    IsBanned = table.Column<bool>(nullable: false),
+                    IsHidden = table.Column<bool>(nullable: false),
+                    Lastname = table.Column<string>(maxLength: 50, nullable: false),
+                    ProfilePictureURL = table.Column<string>(maxLength: 2000, nullable: true),
+                    Username = table.Column<string>(maxLength: 32, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_User_FacebookCity_FacebookCityId",
+                        column: x => x.FacebookCityId,
+                        principalTable: "FacebookCity",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -423,6 +449,17 @@ namespace ProjectHey.DAL.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_FacebookCity_CityId",
+                table: "FacebookCity",
+                column: "CityId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FacebookCity_SignalRRoomId",
+                table: "FacebookCity",
+                column: "SignalRRoomId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Feedback_UserId",
                 table: "Feedback",
                 column: "UserId");
@@ -469,6 +506,11 @@ namespace ProjectHey.DAL.Migrations
                 column: "SignalRUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_User_FacebookCityId",
+                table: "User",
+                column: "FacebookCityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_User_FacebookId",
                 table: "User",
                 column: "FacebookId",
@@ -498,9 +540,6 @@ namespace ProjectHey.DAL.Migrations
                 name: "IX_UserCategory_UserId",
                 table: "UserCategory",
                 column: "UserId");
-
-            migrationBuilder.Sql(@"ALTER TABLE [dbo].[User] ADD [Location] geography NULL");
-            migrationBuilder.Sql(@"ALTER TABLE [dbo].[Advertisement] ADD [Location] geography NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -546,6 +585,9 @@ namespace ProjectHey.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "User");
+
+            migrationBuilder.DropTable(
+                name: "FacebookCity");
 
             migrationBuilder.DropTable(
                 name: "SignalRRoom");

@@ -9,7 +9,7 @@ using ProjectHey.DOMAIN.Enums;
 namespace ProjectHey.DAL.Migrations
 {
     [DbContext(typeof(ProjectHeyContext))]
-    [Migration("20170726192418_alpha")]
+    [Migration("20170728232708_alpha")]
     partial class alpha
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -131,6 +131,29 @@ namespace ProjectHey.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Connection");
+                });
+
+            modelBuilder.Entity("ProjectHey.DOMAIN.FacebookCity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CityId")
+                        .IsRequired();
+
+                    b.Property<string>("CityName")
+                        .IsRequired();
+
+                    b.Property<int>("SignalRRoomId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId")
+                        .IsUnique();
+
+                    b.HasIndex("SignalRRoomId");
+
+                    b.ToTable("FacebookCity");
                 });
 
             modelBuilder.Entity("ProjectHey.DOMAIN.Feedback", b =>
@@ -273,15 +296,13 @@ namespace ProjectHey.DAL.Migrations
                     b.Property<DateTime>("ActivityDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CityID");
-
-                    b.Property<string>("CityName");
-
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasMaxLength(320);
+
+                    b.Property<int?>("FacebookCityId");
 
                     b.Property<string>("FacebookId")
                         .IsRequired();
@@ -311,6 +332,8 @@ namespace ProjectHey.DAL.Migrations
                         .HasMaxLength(32);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FacebookCityId");
 
                     b.HasIndex("FacebookId")
                         .IsUnique();
@@ -411,6 +434,14 @@ namespace ProjectHey.DAL.Migrations
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("ProjectHey.DOMAIN.FacebookCity", b =>
+                {
+                    b.HasOne("ProjectHey.DOMAIN.SignalRRoom", "SignalRRoom")
+                        .WithMany()
+                        .HasForeignKey("SignalRRoomId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("ProjectHey.DOMAIN.Feedback", b =>
                 {
                     b.HasOne("ProjectHey.DOMAIN.User", "User")
@@ -464,6 +495,13 @@ namespace ProjectHey.DAL.Migrations
                     b.HasOne("ProjectHey.DOMAIN.SignalRUser", "SignalRUser")
                         .WithMany("Rooms")
                         .HasForeignKey("SignalRUserId");
+                });
+
+            modelBuilder.Entity("ProjectHey.DOMAIN.User", b =>
+                {
+                    b.HasOne("ProjectHey.DOMAIN.FacebookCity", "FacebookCity")
+                        .WithMany("Users")
+                        .HasForeignKey("FacebookCityId");
                 });
 
             modelBuilder.Entity("ProjectHey.DOMAIN.UserAdvertisement", b =>

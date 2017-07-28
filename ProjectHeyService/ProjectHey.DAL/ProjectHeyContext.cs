@@ -147,6 +147,14 @@ namespace ProjectHey.DAL
                     .Property(x => x.UserId)
                     .IsRequired();
             #endregion
+            #region FacebookCity
+            modelBuilder.Entity<FacebookCity>()
+                    .Property(x => x.CityId)
+                    .IsRequired();
+            modelBuilder.Entity<FacebookCity>()
+                    .Property(x => x.CityName)
+                    .IsRequired();
+            #endregion
             #region Category
             modelBuilder.Entity<Category>()
                     .Property(x => x.Name)
@@ -278,6 +286,8 @@ namespace ProjectHey.DAL
                 .HasIndex(x => x.Name).IsUnique();
             modelBuilder.Entity<User>()
                 .HasIndex(x => x.FacebookId).IsUnique();
+            modelBuilder.Entity<FacebookCity>()
+                .HasIndex(x => x.CityId).IsUnique();
             //<<<<END UNIQUE>>>> 
             #endregion
 
