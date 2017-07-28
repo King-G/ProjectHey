@@ -80,10 +80,10 @@ namespace ProjectHey.DAL
             User user =  await projectHeyContext.User.AsNoTracking()
                 .Include(x => x.Feedback)
                 .Include(x => x.Appsetting)
-                .Include(x => x.SignalRUser).ThenInclude(x => x.Rooms)
-                .Include(x => x.SignalRUser).ThenInclude(x => x.Messages)
+                .Include(x => x.FacebookCity).ThenInclude(x => x.SignalRRoom).ThenInclude(x => x.Messages)
+                .Include(x => x.SignalRUser).ThenInclude(x => x.Rooms).ThenInclude(x => x.SignalRRoom.Messages)
                 .Include(x => x.ReportedUsers)
-                .Include(x => x.Connections)
+                .Include(x => x.Connections).ThenInclude(x => x.UserConnection.Username)
                 .Include(x => x.UserCategory)
                 .Include(x => x.Advertisement)
                 .Include(x => x.WatchedAdvertisement)
@@ -125,16 +125,16 @@ namespace ProjectHey.DAL
         public async Task<User> GetByUsernameAsync(string username)
         {
             User user= await projectHeyContext.User
-                        .Include(x => x.Feedback)
-                        .Include(x => x.Appsetting)
-                        .Include(x => x.SignalRUser).ThenInclude(x => x.Rooms)
-                        .Include(x => x.SignalRUser).ThenInclude(x => x.Messages)
-                        .Include(x => x.ReportedUsers)
-                        .Include(x => x.Connections)
-                        .Include(x => x.UserCategory)
-                        .Include(x => x.Advertisement)
-                        .Include(x => x.WatchedAdvertisement)
-                        .SingleOrDefaultAsync((x => x.Username == username));
+                .Include(x => x.Feedback)
+                .Include(x => x.Appsetting)
+                .Include(x => x.FacebookCity).ThenInclude(x => x.SignalRRoom).ThenInclude(x => x.Messages)
+                .Include(x => x.SignalRUser).ThenInclude(x => x.Rooms).ThenInclude(x => x.SignalRRoom.Messages)
+                .Include(x => x.ReportedUsers)
+                .Include(x => x.Connections).ThenInclude(x => x.UserConnection.Username)
+                .Include(x => x.UserCategory)
+                .Include(x => x.Advertisement)
+                .Include(x => x.WatchedAdvertisement)
+                .SingleOrDefaultAsync((x => x.Username == username));
             user.Location = await GeneralDB.GetLocation(projectHeyContext, "user", user.Id);
 
             return user;
