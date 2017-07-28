@@ -9,20 +9,20 @@ namespace ProjectHey.APIGateway.Controllers
 {
     //[Route("api/[controller]")]
     //[ValidateModel]
-    public class AppSettingsController : Controller
+    public class FeedbacksController : Controller
     {
-        AppSettingManager appSettingManager = new AppSettingManager();
+        FeedbackManager feedbackManager = new FeedbackManager();
 
         [HttpPost]
-        public async Task<IActionResult> Update([FromBody]AppSetting appsetting)
+        public async Task<IActionResult> Create([FromBody]Feedback feedback)
         {
             try
             {
-                if (appsetting == null)
+                if (feedback == null)
                     throw new NullReferenceException();
 
-                appsetting = await appSettingManager.UpdateAsync(appsetting);
-                return Ok(Json(appsetting));
+                feedback = await feedbackManager.CreateAsync(feedback);
+                return Ok(Json(feedback));
             }
             catch (Exception ex)
             {

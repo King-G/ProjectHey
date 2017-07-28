@@ -9,20 +9,20 @@ namespace ProjectHey.APIGateway.Controllers
 {
     //[Route("api/[controller]")]
     //[ValidateModel]
-    public class AppSettingsController : Controller
+    public class ReportedController : Controller
     {
-        AppSettingManager appSettingManager = new AppSettingManager();
+        ReportedManager reportedManager = new ReportedManager();
 
         [HttpPost]
-        public async Task<IActionResult> Update([FromBody]AppSetting appsetting)
+        public async Task<IActionResult> Create([FromBody]Reported reported)
         {
             try
             {
-                if (appsetting == null)
+                if (reported == null)
                     throw new NullReferenceException();
 
-                appsetting = await appSettingManager.UpdateAsync(appsetting);
-                return Ok(Json(appsetting));
+                reported = await reportedManager.CreateAsync(reported);
+                return Ok(Json(reported));
             }
             catch (Exception ex)
             {

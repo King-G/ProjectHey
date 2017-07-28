@@ -59,8 +59,8 @@ namespace ProjectHeyMobile.ViewModels
             try
             {
                 User user = await FacebookModelToUser(facebookModel, new User());
-                var projectHeyAPI = RestService.For<IProjectHeyAPI>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri(ProjectHeyAuthentication.ProjectHeyAPIEndpoint) });
-                var response = await projectHeyAPI.CreateUser(user);
+                var projectHeyAPI = RestService.For<IProjectHeyAPIUsers>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri(ProjectHeyAuthentication.ProjectHeyAPIEndpoint) });
+                var response = await projectHeyAPI.Create(user);
 
                 if (response == null)
                 {
@@ -82,8 +82,8 @@ namespace ProjectHeyMobile.ViewModels
         }
         private async Task<User> GetUserByFacebookId(string facebookId)
         {
-            var projectHeyAPI = RestService.For<IProjectHeyAPI>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri(ProjectHeyAuthentication.ProjectHeyAPIEndpoint) });
-            var response = await projectHeyAPI.UserGetByFacebookId(facebookId);
+            var projectHeyAPI = RestService.For<IProjectHeyAPIUsers>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri(ProjectHeyAuthentication.ProjectHeyAPIEndpoint) });
+            var response = await projectHeyAPI.GetByFacebookId(facebookId);
 
             if (response == null)
             {
@@ -98,8 +98,8 @@ namespace ProjectHeyMobile.ViewModels
         private async Task<User> SyncUser(User user, FacebookModel facebookModel)
         {
             user = await FacebookModelToUser(facebookModel, user);
-            var projectHeyAPI = RestService.For<IProjectHeyAPI>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri(ProjectHeyAuthentication.ProjectHeyAPIEndpoint) });
-            var response = await projectHeyAPI.SyncUser(user);
+            var projectHeyAPI = RestService.For<IProjectHeyAPIUsers>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri(ProjectHeyAuthentication.ProjectHeyAPIEndpoint) });
+            var response = await projectHeyAPI.Update(user);
 
             if (response == null)
             {

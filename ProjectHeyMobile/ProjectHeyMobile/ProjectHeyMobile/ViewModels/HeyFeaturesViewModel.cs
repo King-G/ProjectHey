@@ -75,13 +75,11 @@ namespace ProjectHeyMobile.ViewModels
         }
         #endregion
 
-        public HeyFeaturesViewModel(ConnectionViewModel connectionViewModel)
+        public HeyFeaturesViewModel(Connection connection)
         {
-            _Connection = connectionViewModel.Connection;
+            _Connection = connection;
             //Unlock(_Connection.Progress);
             Unlock(0.81);
-
-
         }
 
         private void Unlock(double progress)

@@ -19,7 +19,10 @@ namespace ProjectHey.DAL
             await projectHeyContext.SaveChangesAsync();
             return entity;
         }
-
+        public async Task<UserCategory> CreateAndAddToRoom(UserCategory entity, bool isinroom)
+        {
+            return await CreateAsync(entity);
+        }
         public async Task<IEnumerable<UserCategory>> CreateRangeAsync(List<UserCategory> entities)
         {
             projectHeyContext.UserCategory.AddRange(entities);
@@ -61,5 +64,7 @@ namespace ProjectHey.DAL
         {
             return await projectHeyContext.UserCategory.Where(x => x.UserId == userId).ToListAsync();
         }
+
+        
     }
 }

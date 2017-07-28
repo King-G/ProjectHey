@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProjectHey.BLL;
 using ProjectHey.DOMAIN;
-//using ProjectHey.APIGateway.Attribute;
-using Newtonsoft.Json;
-using ProjectHey.APIGateway.ViewModels;
+
 
 namespace ProjectHey.APIGateway.Controllers
 {
@@ -17,6 +14,38 @@ namespace ProjectHey.APIGateway.Controllers
     {
         ConnectionManager connectionManager = new ConnectionManager();
 
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody]Connection connection)
+        {
+            try
+            {
+                if (connection == null)
+                    throw new NullReferenceException();
+
+                connection = await connectionManager.CreateAsync(connection);
+                return Ok(Json(connection));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet]
+        public async Task<IActionResult> Update([FromBody]Connection connection)
+        {
+            try
+            {
+                if (connection == null)
+                    throw new NullReferenceException();
+
+                connection = await connectionManager.UpdateAsync(connection);
+                return Ok(Json(connection));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpGet]
         public async Task<IActionResult> GetAllByUserId(int id)
         {
@@ -31,30 +60,5 @@ namespace ProjectHey.APIGateway.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetConnectionsViewModelsByUserId(int id)
-        {
-            try
-            {
-                IEnumerable<Connection> connections = await connectionManager.GetAllByIdAsync(id);
-                List<ConnectionViewModel> connectionviewModels = new List<ConnectionViewModel>();
-                foreach (Connection connection in connections)
-                {
-                    connectionviewModels.Add(
-                        new ConnectionViewModel()
-                        {
-                            UserId = connection.UserId,
-                            UserConnectionId = connection.UserConnectionId,
-                            Username = string.Join(string.Empty, connection.UserConnection.Username.Skip(25)),
-                            Progress = connection.Progress,
-                        });
-                }
-                return Ok(Json(connectionviewModels));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
     }
 }

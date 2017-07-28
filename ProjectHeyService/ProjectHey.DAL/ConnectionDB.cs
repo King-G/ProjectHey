@@ -50,8 +50,8 @@ namespace ProjectHey.DAL
         public async Task<IEnumerable<Connection>> GetAllByIdAsync(int id)
         {
             return await projectHeyContext.Connection.AsNoTracking()
-                .Include(x => x.UserConnection)
-                .Where(x => x.UserId == id).OrderBy(x => x.UserId)
+                .Include(x => x.UserConnection.Username)
+                .Where(x => x.UserId == id).OrderBy(x => x.Progress)
                 .ToListAsync();
         }
         public Task<Connection> GetByIdAsync(int id)

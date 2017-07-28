@@ -17,7 +17,27 @@ namespace ProjectHey.BLL
         {
             return await userCategoryDB.CreateAsync(entity);
         }
+        public async Task<UserCategory> CreateAndAddToRoom(UserCategory entity, bool isinroom)
+        {
+            if (isinroom)
+            {
+                SignalRUserManager signalRUserManager = new SignalRUserManager();
+                SignalRRoomManager signalRRoomManager = new SignalRRoomManager();
+                SignalRUserRoomManager signalRUserRoomManager = new SignalRUserRoomManager();
 
+                SignalRUser signalRUser = await signalRUserManager.GetByIdAsync(entity.UserId);
+                SignalRRoom signalRRoom = await signalRRoomManager.GetByIdAsync(entity.Category.SignalRRoomId);
+
+                SignalRUserRoom signalRUserRoom = new SignalRUserRoom()
+                {
+                    SignalRUser = signalRUser,
+                    SignalRRoom = signalRRoom
+                };
+
+                await signalRUserRoomManager.CreateAsync(signalRUserRoom);
+            }
+            return await userCategoryDB.CreateAndAddToRoom(entity, isinroom);
+        }
         public async Task<IEnumerable<UserCategory>> CreateRangeAsync(List<UserCategory> entities)
         {
             return await userCategoryDB.CreateRangeAsync(entities);
@@ -52,5 +72,7 @@ namespace ProjectHey.BLL
         {
             return await userCategoryDB.GetAllByIdAsync(userId);
         }
+
+        
     }
 }

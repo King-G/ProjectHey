@@ -5,16 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProjectHey.BLL;
 using ProjectHey.DOMAIN;
-//using ProjectHey.APIGateway.Attribute;
-using Newtonsoft.Json;
 
 namespace ProjectHey.APIGateway.Controllers
 {
-    //[Route("api/[controller]")]
-    //[ValidateModel]
+
     public class SignalRController : Controller
     {
 
+        #region SignalRUser Endpoints
         [HttpGet]
         public async Task<IActionResult> GetSignalRUserById(int id)
         {
@@ -29,25 +27,14 @@ namespace ProjectHey.APIGateway.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet]
-        public async Task<IActionResult> GetSignalRRoomByName(string roomname)
-        {
-            try
-            {
-                SignalRRoomManager signalRUserConversationRoomManager = new SignalRRoomManager();
-                SignalRRoom room = await signalRUserConversationRoomManager.GetByNameAsync(roomname);
-                return Ok(Json(room));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
         [HttpPost]
-        public async Task<IActionResult> CreateSignalRUser(SignalRUser signalRUser)
+        public async Task<IActionResult> CreateSignalRUser([FromBody]SignalRUser signalRUser)
         {
             try
             {
+                if (signalRUser == null)
+                    throw new NullReferenceException();
+
                 SignalRUserManager signalRUserManager = new SignalRUserManager();
                 signalRUser = await signalRUserManager.CreateAsync(signalRUser);
                 return Ok(Json(signalRUser));
@@ -57,15 +44,34 @@ namespace ProjectHey.APIGateway.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> UpdateSignalRUser([FromBody]SignalRUser signalRUser)
+        {
+            try
+            {
+                if (signalRUser == null)
+                    throw new NullReferenceException();
 
-        [HttpPost]
-        public async Task<IActionResult> CreateSignalRConversationRoom(SignalRRoom signalRConversationRoom)
+                SignalRUserManager signalRUserManager = new SignalRUserManager();
+                signalRUser = await signalRUserManager.UpdateAsync(signalRUser);
+                return Ok(Json(signalRUser));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+        #region SignalRRoom Endpoints
+        [HttpGet]
+        public async Task<IActionResult> GetSignalRRoomById(int id)
         {
             try
             {
-                SignalRRoomManager signalConversationRoomManager = new SignalRRoomManager();
-                signalRConversationRoom = await signalConversationRoomManager.CreateAsync(signalRConversationRoom);
-                return Ok(Json(signalRConversationRoom));
+                SignalRRoomManager signalRUserConversationRoomManager = new SignalRRoomManager();
+                SignalRRoom room = await signalRUserConversationRoomManager.GetByIdAsync(id);
+                return Ok(Json(room));
             }
             catch (Exception ex)
             {
@@ -73,18 +79,80 @@ namespace ProjectHey.APIGateway.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> DeleteSignalRUserConversationRoom(SignalRUserRoom signalRUserConversationRoom)
+        public async Task<IActionResult> CreateSignalRRoom([FromBody]SignalRRoom signalRRoom)
         {
             try
             {
-                SignalRUserRoomManager signalRUserConversationRoomManager = new SignalRUserRoomManager();
-                await signalRUserConversationRoomManager.DeleteAsync(signalRUserConversationRoom);
-                return Ok(Json(signalRUserConversationRoom));
+                if (signalRRoom == null)
+                    throw new NullReferenceException();
+
+                SignalRRoomManager signalRRoomManager = new SignalRRoomManager();
+                signalRRoom = await signalRRoomManager.CreateAsync(signalRRoom);
+                return Ok(Json(signalRRoom));
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+        #endregion
+
+        #region SignalRUserRoom Endpoints
+        [HttpPost]
+        public async Task<IActionResult> CreateSignalRUserRoom([FromBody]SignalRUserRoom signalRUserRoom)
+        {
+            try
+            {
+                if (signalRUserRoom == null)
+                    throw new NullReferenceException();
+
+                SignalRUserRoomManager signalRUserRoomManager = new SignalRUserRoomManager();
+                await signalRUserRoomManager.CreateAsync(signalRUserRoom);
+                return Ok(Json(signalRUserRoom));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteSignalRUserRoom([FromBody]SignalRUserRoom signalRUserRoom)
+        {
+            try
+            {
+                if (signalRUserRoom == null)
+                    throw new NullReferenceException();
+
+                SignalRUserRoomManager signalRUserRoomManager = new SignalRUserRoomManager();
+                await signalRUserRoomManager.DeleteAsync(signalRUserRoom);
+                return Ok(Json(signalRUserRoom));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+        #region SignalRMessage Endpoints
+        [HttpPost]
+        public async Task<IActionResult> CreateSignalRMessage([FromBody]SignalRMessage signalRMessage)
+        {
+            try
+            {
+                if (signalRMessage == null)
+                    throw new NullReferenceException();
+
+                SignalRMessageManager signalRMessageManager = new SignalRMessageManager();
+                signalRMessage = await signalRMessageManager.CreateAsync(signalRMessage);
+                return Ok(Json(signalRMessage));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
     }
 }

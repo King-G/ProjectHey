@@ -32,8 +32,8 @@ namespace ProjectHeyMobile.ViewModels
         {
             try
             {
-                var projectHeyAPI = RestService.For<IProjectHeyAPI>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri(ProjectHeyAuthentication.ProjectHeyAPIEndpoint) });
-                var response = await projectHeyAPI.AppSettingsUpdate(_AppSetting);
+                var projectHeyAPI = RestService.For<IProjectHeyAPIAppsettings>(new HttpClient(new AuthenticatedHttpClientHandler()) { BaseAddress = new Uri(ProjectHeyAuthentication.ProjectHeyAPIEndpoint) });
+                var response = await projectHeyAPI.Update(_AppSetting);
                 _AppSetting = JsonConvert.DeserializeObject<APISingleResponse<AppSetting>>(response).Value;
             }
             catch (Exception exception)

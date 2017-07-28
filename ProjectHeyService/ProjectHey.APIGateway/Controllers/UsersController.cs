@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProjectHey.BLL;
 using ProjectHey.DOMAIN;
-//using ProjectHey.APIGateway.Attribute;
-using Newtonsoft.Json;
 
 namespace ProjectHey.APIGateway.Controllers
 {
@@ -46,7 +43,7 @@ namespace ProjectHey.APIGateway.Controllers
             }
         }
         [HttpGet]
-        public async Task<IActionResult> CreateConnectionForUser(User requestor)
+        public async Task<IActionResult> CreateConnectionForUser([FromBody]User requestor)
         {
             try
             {
@@ -61,36 +58,36 @@ namespace ProjectHey.APIGateway.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet]
-        public async Task<IActionResult> GetUserNameById(int id)
-        {
-            try
-            {
-                User user = await userManager.GetByIdAsync(id);
-                return Ok(Json(user.Username));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-        [HttpGet]
-        public async Task<IActionResult> GetByLocation([FromBody]User requestor, int skip, int take)
-        {
-            try
-            {
-                if (requestor == null)
-                    throw new NullReferenceException();
+        //[HttpGet]
+        //public async Task<IActionResult> GetUserNameById(int id)
+        //{
+        //    try
+        //    {
+        //        User user = await userManager.GetByIdAsync(id);
+        //        return Ok(Json(user.Username));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+        //[HttpGet]
+        //public async Task<IActionResult> GetByLocation([FromBody]User requestor, int skip, int take)
+        //{
+        //    try
+        //    {
+        //        if (requestor == null)
+        //            throw new NullReferenceException();
 
-                IEnumerable<User> users = await userManager.GetUsersByLocationAsync(requestor, skip, take);
-                return Ok(Json(users));
+        //        IEnumerable<User> users = await userManager.GetUsersByLocationAsync(requestor, skip, take);
+        //        return Ok(Json(users));
 
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
         [HttpPost]
         //[ValidateModel]

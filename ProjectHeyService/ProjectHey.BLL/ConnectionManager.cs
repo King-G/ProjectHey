@@ -44,26 +44,7 @@ namespace ProjectHey.BLL
 
         public async Task<IEnumerable<Connection>> GetAllByIdAsync(int id)
         {
-            UserManager userManager = new UserManager();
-
-            IEnumerable<Connection> connections = await connectionDB.GetAllByIdAsync(id);
-            List<Connection> presentableconnection = new List<Connection>();
-            foreach (Connection connection in connections)
-            {
-                if (connection.UserConnectionId == id)
-                {
-                    User helper =  await userManager.GetSimplifiedByIdAsync(connection.UserId);
-
-                    connection.User = connection.UserConnection;
-                    connection.UserId = connection.UserConnectionId;
-
-                    connection.UserConnectionId = helper.Id;
-                    connection.UserConnection = helper;
-                }
-                presentableconnection.Add(connection);
-
-            }
-            return presentableconnection;
+            return await connectionDB.GetAllByIdAsync(id);
         }
         public async Task<Connection> GetByIdAsync(int id)
         {

@@ -6,9 +6,11 @@ using ProjectHeyMobile.APICommunication;
 using ProjectHeyMobile.ViewModels;
 using ProjectHeyMobile.Views.Chatpages;
 using Refit;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,25 +26,13 @@ namespace ProjectHeyMobile.Views.Menupages
         }
         public ConnectionPage()
         {
-            List<ConnectionViewModel> connections = new List<ConnectionViewModel>();
-            foreach (Connection connection in App.Main.User.Connections)
-            {
-                connections.Add(new ConnectionViewModel(connection));
-            }
-            ConnectionsViewModel = new ConnectionsViewModel(connections);
+            ConnectionsViewModel = new ConnectionsViewModel(App.Main.User.Connections.ToList());
             InitializeComponent();
-
         }
-        //public ConnectionPage(ConnectionsViewModel connections)
-        //{
-        //    ConnectionsViewModel = connections;
-        //    InitializeComponent();
-        //}
+
         protected override void OnAppearing()
         {
-            if(ConnectionsViewModel.Connections.Count == 0)
-                ConnectionsListView_Refreshing(this, new System.EventArgs());
-
+            ConnectionsListView_Refreshing(this, new System.EventArgs());
             base.OnAppearing();
         }
 
@@ -51,16 +41,10 @@ namespace ProjectHeyMobile.Views.Menupages
             ConnectionsListView.IsRefreshing = true;
             try
             {
-                var projectHeyAPI = RestService.For<IProjectHeyAPI>("https://qg2v8wkg9k.execute-api.eu-west-2.amazonaws.com/Prod/api");
-                var response = await projectHeyAPI.GetConnectionsViewModelsByUserId(2);
-
-                IEnumerable<ConnectionViewModel> connectionresponse = JsonConvert.DeserializeObject<APIMultiResponse<ConnectionViewModel>>(response).Value;
-
-                ConnectionsViewModel.Connections = new ObservableCollection<ConnectionViewModel>(connectionresponse);
-
+                ConnectionsViewModel.RefreshConnectionsCommand.Execute(null);
                 ConnectionsListView.IsRefreshing = false;
             }
-            catch (System.Exception exception)
+            catch (Exception exception)
             {
                 await DisplayAlert("Oops", exception.Message, "OK");
             }

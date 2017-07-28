@@ -100,6 +100,12 @@
       <Link>Domain\UserCategory.cs</Link>
     </Compile>
     <Compile Include="APICommunication\APISingleResponse.cs" />
+    <Compile Include="APICommunication\IProjectHeyAPICategories.cs" />
+    <Compile Include="APICommunication\IProjectHeyAPIAppsettings.cs" />
+    <Compile Include="APICommunication\IProjectHeyAPIUserCategories.cs" />
+    <Compile Include="APICommunication\IProjectHeyAPIReported.cs" />
+    <Compile Include="APICommunication\IProjectHeyAPIFeedbacks.cs" />
+    <Compile Include="APICommunication\IProjectHeyAPIConnections.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -201,7 +207,7 @@
     <Compile Include="Views\Mainpages\EveryonePage.xaml.cs">
       <DependentUpon>EveryonePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="APICommunication\IProjectHeyAPI.cs" />
+    <Compile Include="APICommunication\IProjectHeyAPIUsers.cs" />
     <Compile Include="APICommunication\APIMultiResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Settingspages\ProfilePage.xaml.cs">
